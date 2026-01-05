@@ -9,12 +9,21 @@ use Spatie\TranslationLoader\LanguageLine;
 
 class CategoryController extends Controller
 {
+    use \App\Traits\HttpResponses;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $categories = Category::all()->map(function ($category) {
+            return [
+                'id' => $category->id,
+                'name' => $category->name,
+                'description' => $category->description,
+            ];
+        });
+        
+        return $this->success($categories);
     }
 
     /**

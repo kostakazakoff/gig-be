@@ -93,6 +93,33 @@
             @enderror
         </div>
 
+        <!-- Price From -->
+        <div class="mb-4">
+            <label class="block text-gray-700 font-semibold mb-2">Price From</label>
+            <input type="number" name="price_from" value="{{ old('price_from') }}" step="0.01" min="0" class="w-full border rounded px-3 py-2 @error('price_from') border-red-500 @enderror">
+            @error('price_from')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <!-- Price To -->
+        <div class="mb-4">
+            <label class="block text-gray-700 font-semibold mb-2">Price To</label>
+            <input type="number" name="price_to" value="{{ old('price_to') }}" step="0.01" min="0" class="w-full border rounded px-3 py-2 @error('price_to') border-red-500 @enderror">
+            @error('price_to')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <!-- Unit -->
+        <div class="mb-6">
+            <label class="block text-gray-700 font-semibold mb-2">Unit (e.g., per hour, per day, per project)</label>
+            <input type="text" name="unit" value="{{ old('unit') }}" class="w-full border rounded px-3 py-2 @error('unit') border-red-500 @enderror" placeholder="e.g., per hour">
+            @error('unit')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
+        </div>
+
         <!-- Buttons -->
         <div class="flex gap-4">
             <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded">Create Service</button>

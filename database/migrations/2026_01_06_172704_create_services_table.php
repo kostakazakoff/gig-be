@@ -16,6 +16,9 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id');
             $table->string('translation_group');
             $table->string('translation_key');
+            $table->decimal('price_from', 10, 2)->nullable();
+            $table->decimal('price_to', 10, 2)->nullable();
+            $table->string('unit')->nullable();
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');

@@ -49,6 +49,9 @@ class ServiceController extends Controller
             'name_bg' => $request->name_bg,
             'description_en' => $request->description_en,
             'description_bg' => $request->description_bg,
+            'price_from' => $request->price_from,
+            'price_to' => $request->price_to,
+            'unit' => $request->unit,
             'image' => $request->file('image'),
         ]);
 
@@ -78,6 +81,9 @@ class ServiceController extends Controller
             'name_bg' => $request->name_bg,
             'description_en' => $request->description_en,
             'description_bg' => $request->description_bg,
+            'price_from' => $request->price_from,
+            'price_to' => $request->price_to,
+            'unit' => $request->unit,
             'image' => $request->file('image'),
         ]);
 

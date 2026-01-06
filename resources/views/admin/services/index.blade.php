@@ -23,6 +23,7 @@
                     <th class="px-6 py-3 text-left">Key</th>
                     <th class="px-6 py-3 text-left">Category</th>
                     <th class="px-6 py-3 text-left">Name (EN/BG)</th>
+                    <th class="px-6 py-3 text-left">Price</th>
                     <th class="px-6 py-3 text-left">Description</th>
                     <th class="px-6 py-3 text-center">Actions</th>
                 </tr>
@@ -44,6 +45,16 @@
                                 <div class="text-blue-600">EN: {{ $service->getTranslation('name', 'en') }}</div>
                                 <div class="text-red-600">BG: {{ $service->getTranslation('name', 'bg') }}</div>
                             </div>
+                        </td>
+                        <td class="px-6 py-3 text-sm">
+                            @if($service->price_from || $service->price_to)
+                                <div>{{ $service->price_from ? '$' . number_format($service->price_from, 2) : '-' }} - {{ $service->price_to ? '$' . number_format($service->price_to, 2) : '-' }}</div>
+                                @if($service->unit)
+                                    <div class="text-gray-500">{{ $service->unit }}</div>
+                                @endif
+                            @else
+                                <span class="text-gray-400">N/A</span>
+                            @endif
                         </td>
                         <td class="px-6 py-3 text-sm">
                             {{ Str::limit($service->getTranslation('description', 'en'), 50) }}

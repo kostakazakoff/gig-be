@@ -10,7 +10,7 @@ class Service extends Model implements HasMedia
 {
     use InteractsWithMedia;
 
-    protected $fillable = ['category_id', 'translation_group', 'translation_key'];
+    protected $fillable = ['category_id', 'translation_group', 'translation_key', 'price_from', 'price_to', 'unit'];
 
     protected $appends = ['name', 'description', 'image_src'];
 

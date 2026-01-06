@@ -9,10 +9,20 @@ class UpdateService
 {
     public function handle(Service $service, array $data): Service
     {
-        // Update category if provided
-        if (isset($data['category_id'])) {
-            $service->update(['category_id' => $data['category_id']]);
+        // Update category and price data if provided
+        $updateData = ['category_id' => $data['category_id'] ?? $service->category_id];
+        
+        if (isset($data['price_from'])) {
+            $updateData['price_from'] = $data['price_from'];
         }
+        if (isset($data['price_to'])) {
+            $updateData['price_to'] = $data['price_to'];
+        }
+        if (isset($data['unit'])) {
+            $updateData['unit'] = $data['unit'];
+        }
+        
+        $service->update($updateData);
 
         $currentKey = $service->translation_key;
 

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\TranslationLoader\LanguageLine;
 
 class Service extends Model implements HasMedia
 {
@@ -47,7 +48,7 @@ class Service extends Model implements HasMedia
      */
     public function getTranslation(string $key, string $locale = 'en'): ?string
     {
-        $line = \Spatie\TranslationLoader\LanguageLine::where([
+        $line = LanguageLine::where([
             'group' => $this->translation_group,
             'key' => "{$this->translation_key}.{$key}",
         ])->first();

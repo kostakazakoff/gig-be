@@ -23,6 +23,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/', [\App\Http\Controllers\Admin\ServiceController::class, 'store'])->name('store');
         Route::get('/{service}/edit', [\App\Http\Controllers\Admin\ServiceController::class, 'edit'])->name('edit');
         Route::put('/{service}', [\App\Http\Controllers\Admin\ServiceController::class, 'update'])->name('update');
-        Route::delete('/{id}', [\App\Http\Controllers\Admin\ServiceController::class, 'destroy'])->name('destroy');
+        Route::delete('/{service}', [\App\Http\Controllers\Admin\ServiceController::class, 'destroy'])->name('destroy');
     });
 });

@@ -65,7 +65,6 @@ class CategoryController extends Controller
 
             return redirect()->route('admin.categories.index')
                 ->with('success', 'Category created successfully');
-
         } catch (\Exception $e) {
             return back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -87,43 +86,34 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, Category $category)
     {
         try {
-            $category->update([
-                'translation_key' => $request->key,
-            ]);
+            $currentKey = $category->translation_key;
 
             // Обновяване на превод за име
-            LanguageLine::updateOrCreate(
-                [
-                    'group' => 'categories',
-                    'key' => "{$request->key}.name",
-                ],
-                [
-                    'text' => [
-                        'en' => $request->name_en,
-                        'bg' => $request->name_bg,
-                    ],
-                ]
-            );
+            $nameLine = LanguageLine::where([
+                'group' => 'categories',
+                'key' => "{$currentKey}.name",
+            ])->first();
+
+            $text = $nameLine->text;
+            $text['en'] = $request->name_en;
+            $text['bg'] = $request->name_bg;
+            $nameLine->update(['text' => $text]);
 
             // Обновяване на превод за описание
-            LanguageLine::updateOrCreate(
-                [
-                    'group' => 'categories',
-                    'key' => "{$request->key}.description",
-                ],
-                [
-                    'text' => [
-                        'en' => $request->description_en,
-                        'bg' => $request->description_bg,
-                    ],
-                ]
-            );
+            $descriptionLine = LanguageLine::where([
+                'group' => 'categories',
+                'key' => "{$currentKey}.description",
+            ])->first();
+
+            $text = $descriptionLine->text;
+            $text['en'] = $request->description_en;
+            $text['bg'] = $request->description_bg;
+            $descriptionLine->update(['text' => $text]);
 
             cache()->forget('spatie.translation-loader');
 
             return redirect()->route('admin.categories.index')
                 ->with('success', 'Category updated successfully');
-
         } catch (\Exception $e) {
             return back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -141,7 +131,6 @@ class CategoryController extends Controller
 
             return redirect()->route('admin.categories.index')
                 ->with('success', 'Category deleted successfully');
-
         } catch (\Exception $e) {
             return back()->withErrors(['error' => $e->getMessage()]);
         }

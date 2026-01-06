@@ -44,14 +44,6 @@ class CategoryController extends Controller
                 'translation_key' => $request->key,
             ]);
 
-            // Attach image if uploaded
-            if ($request->hasFile('image')) {
-                $category
-                    ->addMedia($request->file('image'))
-                    ->toMediaCollection('category_thumbs')
-                    ->nonQueued();
-            }
-
             LanguageLine::create([
                 'group' => 'categories',
                 'key' => "{$request->key}.name",
@@ -72,7 +64,13 @@ class CategoryController extends Controller
 
             cache()->forget('spatie.translation-loader');
 
-            sleep(2); // Pause to ensure consistency
+            // Attach image if uploaded
+            if ($request->hasFile('image')) {
+                $category
+                    ->addMedia($request->file('image'))
+                    ->toMediaCollection('category_thumbs')
+                    ->nonQueued();
+            }
 
             return redirect()->route('admin.categories.index')
                 ->with('success', 'Category created successfully');
@@ -97,14 +95,6 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, Category $category)
     {
         try {
-            // Update image if uploaded
-            if ($request->hasFile('image')) {
-                $category
-                    ->addMedia($request->file('image'))
-                    ->toMediaCollection('category_thumbs')
-                    ->nonQueued();
-            }
-
             $currentKey = $category->translation_key;
 
             // Обновяване на превод за име
@@ -130,6 +120,14 @@ class CategoryController extends Controller
             $descriptionLine->update(['text' => $text]);
 
             cache()->forget('spatie.translation-loader');
+            
+            // Update image if uploaded
+            if ($request->hasFile('image')) {
+                $category
+                    ->addMedia($request->file('image'))
+                    ->toMediaCollection('category_thumbs')
+                    ->nonQueued();
+            }
 
             return redirect()->route('admin.categories.index')
                 ->with('success', 'Category updated successfully');

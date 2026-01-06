@@ -6,8 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
 use App\Models\Service;
-use App\Models\Category;
 use App\Traits\HttpResponses;
+use App\AppServices\IndexServices;
+use App\AppServices\GetCategories;
 use App\AppServices\StoreService;
 use App\AppServices\UpdateService;
 use App\AppServices\DestroyService;
@@ -20,9 +21,9 @@ class ServiceController extends Controller
      * Display a listing of all services.
      * GET - връща view със таблица
      */
-    public function index()
+    public function index(IndexServices $indexServices)
     {
-        $services = Service::all();
+        $services = $indexServices->handle();
         return view('admin.services.index', compact('services'));
     }
 
@@ -30,9 +31,9 @@ class ServiceController extends Controller
      * Show the form for creating a new resource.
      * GET - връща view с форма
      */
-    public function create()
+    public function create(GetCategories $getCategories)
     {
-        $categories = Category::all();
+        $categories = $getCategories->handle();
         return view('admin.services.create', compact('categories'));
     }
 
@@ -63,9 +64,9 @@ class ServiceController extends Controller
      * Show the form for editing the specified resource.
      * GET - връща view с форма
      */
-    public function edit(Service $service)
+    public function edit(Service $service, GetCategories $getCategories)
     {
-        $categories = Category::all();
+        $categories = $getCategories->handle();
         return view('admin.services.edit', compact('service', 'categories'));
     }
 

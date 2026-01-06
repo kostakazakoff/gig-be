@@ -7,6 +7,7 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use App\Traits\HttpResponses;
+use App\AppServices\IndexCategories;
 use App\AppServices\StoreCategory;
 use App\AppServices\UpdateCategory;
 use App\AppServices\DestroyCategory;
@@ -19,9 +20,9 @@ class CategoryController extends Controller
      * Display a listing of all categories.
      * GET - връща view със таблица
      */
-    public function index()
+    public function index(IndexCategories $indexCategories)
     {
-        $categories = Category::all();
+        $categories = $indexCategories->handle();
         return view('admin.categories.index', compact('categories'));
     }
 

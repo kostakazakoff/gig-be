@@ -11,9 +11,40 @@
 
         <!-- Form Card -->
         <div class="bg-white rounded-lg shadow-md p-8">
-            <form action="{{ route('admin.categories.update', $category->id) }}" method="POST" class="space-y-6">
+            <form action="{{ route('admin.categories.update', $category->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                 @csrf
                 @method('PUT')
+
+                <!-- Image Upload Field -->
+                <div>
+                    <label for="image" class="block text-sm font-medium text-gray-700 mb-2">
+                        Category Image
+                    </label>
+                    @if ($category->hasMedia())
+                        <div class="mb-4">
+                            <p class="text-sm text-gray-600 mb-2">Current image:</p>
+                            <img src="{{ $category->getFirstMediaUrl() }}" alt="{{ $category->translation_key }}" class="max-w-xs rounded-lg" />
+                        </div>
+                    @endif
+                    <div class="flex items-center justify-center w-full">
+                        <label for="image" class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                <svg class="w-8 h-8 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                </svg>
+                                <p class="text-sm text-gray-500"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                                <p class="text-xs text-gray-500">PNG, JPG, GIF up to 5MB</p>
+                            </div>
+                            <input id="image" type="file" name="image" class="hidden" accept="image/*" />
+                        </label>
+                    </div>
+                    <div id="preview" class="mt-4 hidden">
+                        <img id="previewImage" src="" alt="Preview" class="max-w-xs rounded-lg" />
+                    </div>
+                    @error('image')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
 
                 <!-- Display Key (read-only) -->
                 <div>
@@ -127,4 +158,24 @@
         </div>
     </div>
 </div>
+
+<script>
+    const imageInput = document.getElementById('image');
+    const preview = document.getElementById('preview');
+    const previewImage = document.getElementById('previewImage');
+
+    if (imageInput) {
+        imageInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    previewImage.src = event.target.result;
+                    preview.classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+</script>
 @endsection

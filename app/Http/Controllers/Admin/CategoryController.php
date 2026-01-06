@@ -6,11 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
+use App\Traits\HttpResponses;
 use Spatie\TranslationLoader\LanguageLine;
 
 class CategoryController extends Controller
 {
-    use \App\Traits\HttpResponses;
+    use HttpResponses;
 
     /**
      * Display a listing of all categories.
@@ -42,6 +43,13 @@ class CategoryController extends Controller
                 'translation_group' => 'categories',
                 'translation_key' => $request->key,
             ]);
+
+            // Attach image if uploaded
+            // if ($request->hasFile('image')) {
+            //     $category->addMedia($request->file('image'))
+            //         ->toMediaCollection('category_images')
+            //         ->nonQueued();
+            // }
 
             LanguageLine::create([
                 'group' => 'categories',
@@ -112,6 +120,16 @@ class CategoryController extends Controller
 
             cache()->forget('spatie.translation-loader');
 
+            // Update image if uploaded
+            if ($request->hasFile('image')) {
+                dd($request->file('image'));
+                $category->clearMediaCollection();
+                $category->addMedia($request->file('image'))
+                    // ->singleFile()
+                    ->toMediaCollection('category_images')
+                    ->nonQueued();
+            }
+
             return redirect()->route('admin.categories.index')
                 ->with('success', 'Category updated successfully');
         } catch (\Exception $e) {
@@ -126,6 +144,13 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         try {
+            LanguageLine::where('group', 'categories')
+            ->whereIn('key', [
+            "{$category->translation_key}.name",
+            "{$category->translation_key}.description",
+        ])
+        ->delete();
+
             $category->delete();
             cache()->forget('spatie.translation-loader');
 

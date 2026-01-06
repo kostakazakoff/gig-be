@@ -29,6 +29,7 @@
             <table class="w-full">
                 <thead>
                     <tr class="bg-gray-100 border-b border-gray-200">
+                        <th class="px-6 py-3 text-center text-sm font-semibold text-gray-700">Image</th>
                         <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Key</th>
                         <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Name (EN)</th>
                         <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Name (BG)</th>
@@ -39,6 +40,13 @@
                 <tbody>
                     @forelse ($categories ?? [] as $category)
                         <tr class="border-b border-gray-200 hover:bg-gray-50 transition">
+                            <td class="px-6 py-4 text-center">
+                                @if ($category->hasMedia())
+                                    <img src="{{ $category->getFirstMediaUrl() }}" alt="{{ $category->translation_key }}" class="w-12 h-12 rounded object-cover" />
+                                @else
+                                    <div class="w-12 h-12 rounded bg-gray-200 flex items-center justify-center text-gray-400 text-xs">No</div>
+                                @endif
+                            </td>
                             <td class="px-6 py-4 text-sm text-gray-900 font-medium">{{ $category->translation_key }}</td>
                             <td class="px-6 py-4 text-sm text-gray-700">{{ $category->name }}</td>
                             <td class="px-6 py-4 text-sm text-gray-700">

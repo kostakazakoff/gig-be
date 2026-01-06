@@ -128,42 +128,5 @@
     </form>
 </div>
 
-<script>
-    const dropZone = document.getElementById('dropZone');
-    const imageInput = document.getElementById('imageInput');
-    const imagePreview = document.getElementById('imagePreview');
-    const dropText = document.getElementById('dropText');
-
-    dropZone.addEventListener('click', () => imageInput.click());
-
-    dropZone.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        dropZone.classList.add('border-blue-500');
-    });
-
-    dropZone.addEventListener('dragleave', () => {
-        dropZone.classList.remove('border-blue-500');
-    });
-
-    dropZone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dropZone.classList.remove('border-blue-500');
-        imageInput.files = e.dataTransfer.files;
-        handleImageSelect();
-    });
-
-    imageInput.addEventListener('change', handleImageSelect);
-
-    function handleImageSelect() {
-        if (imageInput.files.length > 0) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                imagePreview.src = e.target.result;
-                imagePreview.classList.remove('hidden');
-                dropText.classList.add('hidden');
-            };
-            reader.readAsDataURL(imageInput.files[0]);
-        }
-    }
-</script>
+{{-- Drag & drop image script is now initialized globally via resources/js/app.js --}}
 @endsection

@@ -14,25 +14,15 @@
             <form action="{{ route('admin.categories.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                 @csrf
 
-                <!-- Image Upload Field -->
+                <!-- Image Upload Field (Drag & Drop) -->
                 <div>
-                    <label for="image" class="block text-sm font-medium text-gray-700 mb-2">
-                        Category Image
-                    </label>
-                    <div class="flex items-center justify-center w-full">
-                        <label for="image" class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
-                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                <svg class="w-8 h-8 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                                </svg>
-                                <p class="text-sm text-gray-500"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                                <p class="text-xs text-gray-500">PNG, JPG, GIF up to 5MB</p>
-                            </div>
-                            <input id="image" type="file" name="image" class="hidden" accept="image/*" />
-                        </label>
-                    </div>
-                    <div id="preview" class="mt-4 hidden">
-                        <img id="previewImage" src="" alt="Preview" class="max-w-xs rounded-lg" />
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Category Image</label>
+                    <div id="dropZone" class="border-2 border-dashed border-gray-300 rounded p-6 text-center cursor-pointer hover:border-blue-500 transition">
+                        <input type="file" name="image" id="imageInput" class="hidden" accept="image/*">
+                        <div id="dropText">
+                            <p class="text-gray-500">Drag and drop an image here or click to select</p>
+                        </div>
+                        <img id="imagePreview" src="" alt="Preview" class="hidden mt-4 max-h-48 mx-auto">
                     </div>
                     @error('image')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -163,23 +153,5 @@
     </div>
 </div>
 
-<script>
-    const imageInput = document.getElementById('image');
-    const preview = document.getElementById('preview');
-    const previewImage = document.getElementById('previewImage');
-
-    if (imageInput) {
-        imageInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    previewImage.src = event.target.result;
-                    preview.classList.remove('hidden');
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    }
-</script>
+{{-- Drag & drop image script is now initialized globally via resources/js/app.js --}}
 @endsection

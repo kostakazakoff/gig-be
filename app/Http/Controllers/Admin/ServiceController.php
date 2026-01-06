@@ -43,18 +43,7 @@ class ServiceController extends Controller
      */
     public function store(StoreServiceRequest $request, StoreService $service)
     {
-        $service->handle([
-            'category_id' => $request->category_id,
-            'key' => $request->key,
-            'name_en' => $request->name_en,
-            'name_bg' => $request->name_bg,
-            'description_en' => $request->description_en,
-            'description_bg' => $request->description_bg,
-            'price_from' => $request->price_from,
-            'price_to' => $request->price_to,
-            'unit' => $request->unit,
-            'image' => $request->file('image'),
-        ]);
+        $service->handle($request->all());
 
         return redirect()->route('admin.services.index')
             ->with('success', 'Service created successfully');
@@ -76,17 +65,7 @@ class ServiceController extends Controller
      */
     public function update(UpdateServiceRequest $request, Service $service, UpdateService $updateService)
     {
-        $updateService->handle($service, [
-            'category_id' => $request->category_id,
-            'name_en' => $request->name_en,
-            'name_bg' => $request->name_bg,
-            'description_en' => $request->description_en,
-            'description_bg' => $request->description_bg,
-            'price_from' => $request->price_from,
-            'price_to' => $request->price_to,
-            'unit' => $request->unit,
-            'image' => $request->file('image'),
-        ]);
+        $updateService->handle($service, $request->all());
 
         return redirect()->route('admin.services.index')
             ->with('success', 'Service updated successfully');

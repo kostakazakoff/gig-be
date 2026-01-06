@@ -39,7 +39,6 @@ class CategoryController extends Controller
     {
         try {
             $category = Category::create([
-                'abreviation' => $request->key,
                 'translation_group' => 'categories',
                 'translation_key' => $request->key,
             ]);
@@ -89,7 +88,7 @@ class CategoryController extends Controller
     {
         try {
             $category->update([
-                'abreviation' => $request->key,
+                'translation_key' => $request->key,
             ]);
 
             // Обновяване на превод за име

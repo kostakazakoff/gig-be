@@ -29,7 +29,7 @@ class CategoryController extends Controller
     {
         return $this->success([
             'id' => $category->id,
-            'key' => $category->abreviation,
+            'key' => $category->translation_key,
             'name' => $category->name,
             'description' => $category->description,
         ]);

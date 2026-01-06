@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Category;
+use App\Models\Service;
 use Spatie\TranslationLoader\LanguageLine;
 
 class CategoryObserver
@@ -26,16 +27,16 @@ class CategoryObserver
     /**
      * Handle the Category "deleted" event.
      */
-    public function deleted(Category $category): void
+    public function deleting(Category $category): void
     {
-        // Delete all associated services one by one to trigger their delete events
-        // Spatie Media Library and Translation Loader will automatically clean up their data
-        $category->services()->each(function ($service) {
+        // Delete all associated services one by one to trigger their delete events and observers
+        foreach ($category->services as $service) {
             $service->delete();
-        });
+        }
         
         // Delete category language lines
         LanguageLine::where('group', $category->translation_group)->delete();
+        cache()->forget('spatie.translation-loader');
     }
 
     /**
@@ -51,13 +52,13 @@ class CategoryObserver
      */
     public function forceDeleted(Category $category): void
     {
-        // Force delete all associated services one by one to trigger their delete events
-        // Spatie Media Library and Translation Loader will automatically clean up their data
-        $category->services()->each(function ($service) {
+        // Force delete all associated services one by one to trigger their delete events and observers
+        foreach ($category->services as $service) {
             $service->forceDelete();
-        });
+        }
         
         // Delete category language lines
         LanguageLine::where('group', $category->translation_group)->delete();
+        cache()->forget('spatie.translation-loader');
     }
 }

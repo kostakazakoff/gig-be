@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Service;
+use Spatie\TranslationLoader\LanguageLine;
 
 class ServiceObserver
 {
@@ -25,10 +26,17 @@ class ServiceObserver
     /**
      * Handle the Service "deleted" event.
      */
-    public function deleted(Service $service): void
-    {
-        // Delete associated media when service is deleted
-        $service->clearMediaCollection('service_thumbs');
+    public function deleting(Service $service): void
+    {        
+        // Delete language lines for this service
+        LanguageLine::where('group', $service->translation_group)
+            ->whereIn('key', [
+                "{$service->translation_key}.name",
+                "{$service->translation_key}.description",
+            ])
+            ->delete();
+        
+        cache()->forget('spatie.translation-loader');
     }
 
     /**
@@ -43,8 +51,15 @@ class ServiceObserver
      * Handle the Service "force deleted" event.
      */
     public function forceDeleted(Service $service): void
-    {
-        // Delete associated media when service is force deleted
-        $service->clearMediaCollection('service_thumbs');
+    {        
+        // Delete language lines for this service
+        LanguageLine::where('group', $service->translation_group)
+            ->whereIn('key', [
+                "{$service->translation_key}.name",
+                "{$service->translation_key}.description",
+            ])
+            ->delete();
+        
+        cache()->forget('spatie.translation-loader');
     }
 }

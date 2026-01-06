@@ -75,9 +75,10 @@ class ServiceController extends Controller
      * Remove the specified resource from storage.
      * DELETE - обработка от Blade форма
      */
-    public function destroy(Service $service, DestroyService $destroyService)
+    public function destroy(string $id)
     {
-        $destroyService->handle($service);
+        $service = Service::findOrFail($id);
+        $service->delete();
 
         return redirect()->route('admin.services.index')
             ->with('success', 'Service deleted successfully');

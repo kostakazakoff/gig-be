@@ -7,7 +7,9 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use App\Traits\HttpResponses;
-use Spatie\TranslationLoader\LanguageLine;
+use App\AppServices\StoreCategory;
+use App\AppServices\UpdateCategory;
+use App\AppServices\DestroyCategory;
 
 class CategoryController extends Controller
 {
@@ -36,39 +38,9 @@ class CategoryController extends Controller
      * Store a newly created resource in storage.
      * POST - обработка от Blade форма
      */
-    public function store(StoreCategoryRequest $request)
+    public function store(StoreCategoryRequest $request, StoreCategory $service)
     {
-        $category = Category::create([
-            'translation_group' => 'categories',
-            'translation_key' => $request->key,
-        ]);
-
-        LanguageLine::create([
-            'group' => 'categories',
-            'key' => "{$request->key}.name",
-            'text' => [
-                'en' => $request->name_en,
-                'bg' => $request->name_bg,
-            ],
-        ]);
-
-        LanguageLine::create([
-            'group' => 'categories',
-            'key' => "{$request->key}.description",
-            'text' => [
-                'en' => $request->description_en,
-                'bg' => $request->description_bg,
-            ],
-        ]);
-
-        cache()->forget('spatie.translation-loader');
-
-        // Attach image if uploaded
-        if ($request->hasFile('image')) {
-            $category
-                ->addMedia($request->file('image'))
-                ->toMediaCollection('category_thumbs');
-        }
+        $service->handle($request->all());
 
         return redirect()->route('admin.categories.index')
             ->with('success', 'Category created successfully');
@@ -87,71 +59,23 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      * PUT/PATCH - обработка от Blade форма
      */
-    public function update(UpdateCategoryRequest $request, Category $category)
+    public function update(UpdateCategoryRequest $request, Category $category, UpdateCategory $service)
     {
-        try {
-            $currentKey = $category->translation_key;
+        $service->handle($category, $request->all());
 
-            // Обновяване на превод за име
-            $nameLine = LanguageLine::where([
-                'group' => 'categories',
-                'key' => "{$currentKey}.name",
-            ])->first();
-
-            $text = $nameLine->text;
-            $text['en'] = $request->name_en;
-            $text['bg'] = $request->name_bg;
-            $nameLine->update(['text' => $text]);
-
-            // Обновяване на превод за описание
-            $descriptionLine = LanguageLine::where([
-                'group' => 'categories',
-                'key' => "{$currentKey}.description",
-            ])->first();
-
-            $text = $descriptionLine->text;
-            $text['en'] = $request->description_en;
-            $text['bg'] = $request->description_bg;
-            $descriptionLine->update(['text' => $text]);
-
-            cache()->forget('spatie.translation-loader');
-
-            // Update image if uploaded
-            if ($request->hasFile('image')) {
-                $category
-                    ->addMedia($request->file('image'))
-                    ->toMediaCollection('category_thumbs');
-            }
-
-            return redirect()->route('admin.categories.index')
-                ->with('success', 'Category updated successfully');
-        } catch (\Exception $e) {
-            return back()->withErrors('Cannot update category: ');
-            // return back()->withErrors(['error' => $e->getMessage()]);
-        }
+        return redirect()->route('admin.categories.index')
+            ->with('success', 'Category updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      * DELETE - обработка от Blade форма
      */
-    public function destroy(Category $category)
+    public function destroy(Category $category, DestroyCategory $service)
     {
-        try {
-            LanguageLine::where('group', 'categories')
-                ->whereIn('key', [
-                    "{$category->translation_key}.name",
-                    "{$category->translation_key}.description",
-                ])
-                ->delete();
+        $service->handle($category);
 
-            $category->delete();
-            cache()->forget('spatie.translation-loader');
-
-            return redirect()->route('admin.categories.index')
-                ->with('success', 'Category deleted successfully');
-        } catch (\Exception $e) {
-            return back()->withErrors(['error' => $e->getMessage()]);
-        }
+        return redirect()->route('admin.categories.index')
+            ->with('success', 'Category deleted successfully');
     }
 }

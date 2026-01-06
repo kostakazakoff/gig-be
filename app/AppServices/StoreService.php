@@ -11,7 +11,7 @@ class StoreService
     {
         $service = Service::create([
             'category_id' => $data['category_id'],
-            'translation_group' => 'services',
+            'translation_group' => 'services'.'_'.$data['key'],
             'translation_key' => $data['key'],
             'price_from' => $data['price_from'] ?? null,
             'price_to' => $data['price_to'] ?? null,
@@ -19,7 +19,7 @@ class StoreService
         ]);
 
         LanguageLine::create([
-            'group' => 'services',
+            'group' => $service->translation_group,
             'key' => "{$data['key']}.name",
             'text' => [
                 'en' => $data['name_en'],
@@ -28,7 +28,7 @@ class StoreService
         ]);
 
         LanguageLine::create([
-            'group' => 'services',
+            'group' => $service->translation_group,
             'key' => "{$data['key']}.description",
             'text' => [
                 'en' => $data['description_en'],

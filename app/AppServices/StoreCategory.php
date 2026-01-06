@@ -10,12 +10,12 @@ class StoreCategory
     public function handle(array $data): Category
     {
         $category = Category::create([
-            'translation_group' => 'categories',
+            'translation_group' => 'categories'.'_'.$data['key'],
             'translation_key' => $data['key'],
         ]);
 
         LanguageLine::create([
-            'group' => 'categories',
+            'group' => $category->translation_group,
             'key' => "{$data['key']}.name",
             'text' => [
                 'en' => $data['name_en'],
@@ -24,7 +24,7 @@ class StoreCategory
         ]);
 
         LanguageLine::create([
-            'group' => 'categories',
+            'group' => $category->translation_group,
             'key' => "{$data['key']}.description",
             'text' => [
                 'en' => $data['description_en'],

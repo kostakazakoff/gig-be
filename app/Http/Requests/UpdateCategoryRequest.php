@@ -11,7 +11,7 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,21 @@ class UpdateCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name_en' => 'required|string|max:255',
+            'name_bg' => 'required|string|max:255',
+            'description_en' => 'nullable|string',
+            'description_bg' => 'nullable|string',
+        ];
+    }
+
+    /**
+     * Get custom error messages for validator
+     */
+    public function messages(): array
+    {
+        return [
+            'name_en.required' => 'English name is required',
+            'name_bg.required' => 'Bulgarian name is required',
         ];
     }
 }

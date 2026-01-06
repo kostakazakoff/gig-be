@@ -22,11 +22,25 @@ class StoreCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'key' => 'required|string|max:10|unique:categories,translation_key',
+            'key' => 'required|string|max:50|regex:/^[a-z_]+$/|unique:categories,translation_key',
             'name_en' => 'required|string|max:255',
             'name_bg' => 'required|string|max:255',
             'description_en' => 'nullable|string',
             'description_bg' => 'nullable|string',
+        ];
+    }
+
+    /**
+     * Get custom error messages for validator
+     */
+    public function messages(): array
+    {
+        return [
+            'key.regex' => 'Key must contain only lowercase letters and underscores (a-z, _)',
+            'key.unique' => 'This key already exists',
+            'key.required' => 'Key is required',
+            'name_en.required' => 'English name is required',
+            'name_bg.required' => 'Bulgarian name is required',
         ];
     }
 }

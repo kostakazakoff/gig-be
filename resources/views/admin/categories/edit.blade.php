@@ -15,28 +15,19 @@
                 @csrf
                 @method('PUT')
 
-                <!-- Key Field -->
-                <div>
+                <!-- Display Key (read-only) -->
+                {{-- <div>
                     <label for="key" class="block text-sm font-medium text-gray-700 mb-2">
                         Category Key
                     </label>
-                    <input
-                        type="text"
-                        id="key"
-                        name="key"
-                        placeholder="e.g., tech, furniture, clothing"
-                        value="{{ old('key', $category->abreviation) }}"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('key') border-red-500 @enderror"
-                        required
-                    >
-                    @error('key')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                    <p class="mt-1 text-xs text-gray-500">Unique identifier for this category (lowercase, no spaces)</p>
-                </div>
+                    <div class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 text-gray-600 font-medium">
+                        {{ $category->abreviation }}
+                    </div>
+                    <p class="mt-1 text-xs text-gray-500">This key cannot be changed</p>
+                </div> --}}
 
                 <!-- Name Fields Section -->
-                <div class="border-t pt-6">
+                <div>
                     <h3 class="text-lg font-semibold text-gray-900 mb-4">Category Names</h3>
 
                     <!-- Name EN -->

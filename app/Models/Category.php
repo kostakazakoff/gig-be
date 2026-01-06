@@ -9,10 +9,24 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 class Category extends Model implements HasMedia
 {
     use InteractsWithMedia;
-    
+
     protected $fillable = ['translation_group', 'translation_key'];
 
-    protected $appends = ['name', 'description'];
+    protected $appends = ['name', 'description', 'image_src'];
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('category_thumbs')
+            ->useFallbackUrl('/GIG_960x480.jpg')
+            ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp'])
+            ->singleFile();
+    }
+
+    public function getImageSrcAttribute(): ?string
+    {
+        $media = $this->getFirstMedia('category_thumbs');
+        return $media ? $media->getUrl() : null;
+    }
 
     public function getNameAttribute(): string
     {

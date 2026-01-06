@@ -20,10 +20,10 @@
                     <label for="image" class="block text-sm font-medium text-gray-700 mb-2">
                         Category Image
                     </label>
-                    @if ($category->hasMedia())
+                    @if ($category->image_src)
                         <div class="mb-4">
                             <p class="text-sm text-gray-600 mb-2">Current image:</p>
-                            <img src="{{ $category->getFirstMediaUrl() }}" alt="{{ $category->translation_key }}" class="max-w-xs rounded-lg" />
+                            <img src="{{ $category->image_src }}" alt="{{ $category->translation_key }}" class="max-w-xs rounded-lg" />
                         </div>
                     @endif
                     <div class="flex items-center justify-center w-full">

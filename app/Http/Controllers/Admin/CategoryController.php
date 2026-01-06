@@ -45,11 +45,12 @@ class CategoryController extends Controller
             ]);
 
             // Attach image if uploaded
-            // if ($request->hasFile('image')) {
-            //     $category->addMedia($request->file('image'))
-            //         ->toMediaCollection('category_images')
-            //         ->nonQueued();
-            // }
+            if ($request->hasFile('image')) {
+                $category
+                    ->addMedia($request->file('image'))
+                    ->toMediaCollection('category_thumbs')
+                    ->nonQueued();
+            }
 
             LanguageLine::create([
                 'group' => 'categories',
@@ -70,6 +71,8 @@ class CategoryController extends Controller
             ]);
 
             cache()->forget('spatie.translation-loader');
+
+            sleep(2); // Pause to ensure consistency
 
             return redirect()->route('admin.categories.index')
                 ->with('success', 'Category created successfully');
@@ -94,6 +97,14 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, Category $category)
     {
         try {
+            // Update image if uploaded
+            if ($request->hasFile('image')) {
+                $category
+                    ->addMedia($request->file('image'))
+                    ->toMediaCollection('category_thumbs')
+                    ->nonQueued();
+            }
+
             $currentKey = $category->translation_key;
 
             // Обновяване на превод за име
@@ -120,20 +131,11 @@ class CategoryController extends Controller
 
             cache()->forget('spatie.translation-loader');
 
-            // Update image if uploaded
-            if ($request->hasFile('image')) {
-                dd($request->file('image'));
-                $category->clearMediaCollection();
-                $category->addMedia($request->file('image'))
-                    // ->singleFile()
-                    ->toMediaCollection('category_images')
-                    ->nonQueued();
-            }
-
             return redirect()->route('admin.categories.index')
                 ->with('success', 'Category updated successfully');
         } catch (\Exception $e) {
-            return back()->withErrors(['error' => $e->getMessage()]);
+            return back()->withErrors('Cannot update category: ');
+            // return back()->withErrors(['error' => $e->getMessage()]);
         }
     }
 
@@ -145,11 +147,11 @@ class CategoryController extends Controller
     {
         try {
             LanguageLine::where('group', 'categories')
-            ->whereIn('key', [
-            "{$category->translation_key}.name",
-            "{$category->translation_key}.description",
-        ])
-        ->delete();
+                ->whereIn('key', [
+                    "{$category->translation_key}.name",
+                    "{$category->translation_key}.description",
+                ])
+                ->delete();
 
             $category->delete();
             cache()->forget('spatie.translation-loader');

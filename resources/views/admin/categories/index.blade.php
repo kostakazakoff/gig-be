@@ -41,8 +41,8 @@
                     @forelse ($categories ?? [] as $category)
                         <tr class="border-b border-gray-200 hover:bg-gray-50 transition">
                             <td class="px-6 py-4 text-center">
-                                @if ($category->hasMedia())
-                                    <img src="{{ $category->getFirstMediaUrl() }}" alt="{{ $category->translation_key }}" class="w-12 h-12 rounded object-cover" />
+                                @if ($category->image_src)
+                                    <img src="{{ $category->image_src }}" alt="{{ $category->translation_key }}" class="w-12 h-12 rounded object-cover" />
                                 @else
                                     <div class="w-12 h-12 rounded bg-gray-200 flex items-center justify-center text-gray-400 text-xs">No</div>
                                 @endif

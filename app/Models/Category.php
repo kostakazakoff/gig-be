@@ -23,4 +23,21 @@ class Category extends Model
             "{$this->translation_group}.{$this->translation_key}.description"
         );
     }
+
+    /**
+     * Get translation for a specific language
+     */
+    public function getTranslation(string $key, string $locale = 'en'): ?string
+    {
+        $line = \Spatie\TranslationLoader\LanguageLine::where([
+            'group' => $this->translation_group,
+            'key' => "{$this->translation_key}.{$key}",
+        ])->first();
+
+        if (!$line) {
+            return null;
+        }
+
+        return $line->text[$locale] ?? null;
+    }
 }

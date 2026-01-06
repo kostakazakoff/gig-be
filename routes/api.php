@@ -7,10 +7,8 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+// API маршрути - GET заявки от NEXT.js фронтенд
 Route::prefix('categories')->group(function () {
     Route::get('/', [\App\Http\Controllers\Api\CategoryController::class, 'index']);
-    Route::post('/', [\App\Http\Controllers\Api\CategoryController::class, 'store']);
     Route::get('/{category}', [\App\Http\Controllers\Api\CategoryController::class, 'show']);
-    Route::put('/{category}', [\App\Http\Controllers\Api\CategoryController::class, 'update']);
-    Route::delete('/{category}', [\App\Http\Controllers\Api\CategoryController::class, 'destroy']);
 });

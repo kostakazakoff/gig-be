@@ -38,45 +38,40 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        try {
-            $category = Category::create([
-                'translation_group' => 'categories',
-                'translation_key' => $request->key,
-            ]);
+        $category = Category::create([
+            'translation_group' => 'categories',
+            'translation_key' => $request->key,
+        ]);
 
-            LanguageLine::create([
-                'group' => 'categories',
-                'key' => "{$request->key}.name",
-                'text' => [
-                    'en' => $request->name_en,
-                    'bg' => $request->name_bg,
-                ],
-            ]);
+        LanguageLine::create([
+            'group' => 'categories',
+            'key' => "{$request->key}.name",
+            'text' => [
+                'en' => $request->name_en,
+                'bg' => $request->name_bg,
+            ],
+        ]);
 
-            LanguageLine::create([
-                'group' => 'categories',
-                'key' => "{$request->key}.description",
-                'text' => [
-                    'en' => $request->description_en,
-                    'bg' => $request->description_bg,
-                ],
-            ]);
+        LanguageLine::create([
+            'group' => 'categories',
+            'key' => "{$request->key}.description",
+            'text' => [
+                'en' => $request->description_en,
+                'bg' => $request->description_bg,
+            ],
+        ]);
 
-            cache()->forget('spatie.translation-loader');
+        cache()->forget('spatie.translation-loader');
 
-            // Attach image if uploaded
-            if ($request->hasFile('image')) {
-                $category
-                    ->addMedia($request->file('image'))
-                    ->toMediaCollection('category_thumbs')
-                    ->nonQueued();
-            }
-
-            return redirect()->route('admin.categories.index')
-                ->with('success', 'Category created successfully');
-        } catch (\Exception $e) {
-            return back()->withErrors(['error' => $e->getMessage()]);
+        // Attach image if uploaded
+        if ($request->hasFile('image')) {
+            $category
+                ->addMedia($request->file('image'))
+                ->toMediaCollection('category_thumbs');
         }
+
+        return redirect()->route('admin.categories.index')
+            ->with('success', 'Category created successfully');
     }
 
     /**
@@ -120,13 +115,12 @@ class CategoryController extends Controller
             $descriptionLine->update(['text' => $text]);
 
             cache()->forget('spatie.translation-loader');
-            
+
             // Update image if uploaded
             if ($request->hasFile('image')) {
                 $category
                     ->addMedia($request->file('image'))
-                    ->toMediaCollection('category_thumbs')
-                    ->nonQueued();
+                    ->toMediaCollection('category_thumbs');
             }
 
             return redirect()->route('admin.categories.index')

@@ -8,9 +8,9 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::prefix('categories')->group(function () {
-    Route::get('/', [\App\Http\Controllers\CategoryController::class, 'index']);
-    Route::post('/', [\App\Http\Controllers\CategoryController::class, 'store']);
-    Route::get('/{category}', [\App\Http\Controllers\CategoryController::class, 'show']);
-    Route::put('/{category}', [\App\Http\Controllers\CategoryController::class, 'update']);
-    Route::delete('/{category}', [\App\Http\Controllers\CategoryController::class, 'destroy']);
+    Route::get('/', [\App\Http\Controllers\Api\CategoryController::class, 'index']);
+    Route::post('/', [\App\Http\Controllers\Api\CategoryController::class, 'store']);
+    Route::get('/{category}', [\App\Http\Controllers\Api\CategoryController::class, 'show']);
+    Route::put('/{category}', [\App\Http\Controllers\Api\CategoryController::class, 'update']);
+    Route::delete('/{category}', [\App\Http\Controllers\Api\CategoryController::class, 'destroy']);
 });

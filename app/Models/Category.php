@@ -8,6 +8,8 @@ class Category extends Model
 {
     protected $fillable = ['translation_group', 'translation_key'];
 
+    protected $appends = ['name', 'description'];
+
     public function getNameAttribute(): string
     {
         return __(

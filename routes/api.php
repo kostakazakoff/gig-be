@@ -12,3 +12,7 @@ Route::prefix('categories')->group(function () {
     Route::get('/', [\App\Http\Controllers\Api\CategoryController::class, 'index']);
     Route::get('/{category}', [\App\Http\Controllers\Api\CategoryController::class, 'show']);
 });
+
+Route::prefix('services')->group(function () {
+    Route::get('/{categoryId}', [\App\Http\Controllers\Api\ServiceController::class, 'index']);
+});

@@ -26,7 +26,7 @@
                     >
                         Categories
                     </a>
-                    <a href="#" class="text-gray-700 hover:text-blue-600 font-medium transition">
+                    <a href="{{ route('admin.services.index') }}" class="text-gray-700 hover:text-blue-600 font-medium transition">
                         Services
                     </a>
                     <a href="#" class="text-gray-700 hover:text-blue-600 font-medium transition">

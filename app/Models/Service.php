@@ -6,17 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Category extends Model implements HasMedia
+class Service extends Model implements HasMedia
 {
     use InteractsWithMedia;
 
-    protected $fillable = ['translation_group', 'translation_key'];
+    protected $fillable = ['category_id', 'translation_group', 'translation_key'];
 
     protected $appends = ['name', 'description', 'image_src'];
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('category_thumbs')
+        $this->addMediaCollection('service_thumbs')
             ->useFallbackUrl('/GIG_960x480.jpg')
             ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp'])
             ->singleFile();
@@ -24,7 +24,7 @@ class Category extends Model implements HasMedia
 
     public function getImageSrcAttribute(): ?string
     {
-        $media = $this->getFirstMedia('category_thumbs');
+        $media = $this->getFirstMedia('service_thumbs');
         return $media ? $media->getUrl() : null;
     }
 
@@ -59,8 +59,8 @@ class Category extends Model implements HasMedia
         return $line->text[$locale] ?? null;
     }
 
-    public function services()
+    public function category()
     {
-        return $this->hasMany(Service::class);
+        return $this->belongsTo(Category::class);
     }
 }

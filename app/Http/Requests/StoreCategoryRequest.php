@@ -22,7 +22,7 @@ class StoreCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'key' => 'required|string|max:50|regex:/^[a-z_]+$/|unique:categories,translation_key',
+            'key' => 'required|string|max:50|regex:/^[a-z0-9_]+$/|unique:categories,translation_key',
             'name_en' => 'required|string|max:255',
             'name_bg' => 'required|string|max:255',
             'description_en' => 'nullable|string',
@@ -36,7 +36,7 @@ class StoreCategoryRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'key.regex' => 'Key must contain only lowercase letters and underscores (a-z, _)',
+            'key.regex' => 'Key must contain only lowercase letters, numbers and underscores (a-z, 0-9, _)',
             'key.unique' => 'This key already exists',
             'key.required' => 'Key is required',
             'name_en.required' => 'English name is required',

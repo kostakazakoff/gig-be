@@ -9,6 +9,7 @@ use App\Models\Service;
 use App\Traits\HttpResponses;
 use App\AppServices\IndexServices;
 use App\AppServices\GetCategories;
+use App\AppServices\GetUnits;
 use App\AppServices\StoreService;
 use App\AppServices\UpdateService;
 use App\AppServices\DestroyService;
@@ -31,10 +32,10 @@ class ServiceController extends Controller
      * Show the form for creating a new resource.
      * GET - връща view с форма
      */
-    public function create(GetCategories $getCategories)
+    public function create(GetCategories $getCategories, GetUnits $getUnits)
     {
         $categories = $getCategories->handle();
-        $units = \App\Models\Units::orderBy('translation_key')->get();
+        $units = $getUnits->handle();
         return view('admin.services.create', compact('categories', 'units'));
     }
 
@@ -54,10 +55,11 @@ class ServiceController extends Controller
      * Show the form for editing the specified resource.
      * GET - връща view с форма
      */
-    public function edit(Service $service, GetCategories $getCategories)
+    public function edit(Service $service, GetCategories $getCategories, GetUnits $getUnits)
     {
         $categories = $getCategories->handle();
-        $units = \App\Models\Units::orderBy('translation_key')->get();
+        $units = $getUnits->handle();
+        
         return view('admin.services.edit', compact('service', 'categories', 'units'));
     }
 

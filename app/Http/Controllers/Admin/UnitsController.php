@@ -6,16 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUnitsRequest;
 use App\Http\Requests\UpdateUnitsRequest;
 use App\Models\Units;
-use Spatie\TranslationLoader\LanguageLine;
+use App\AppServices\IndexUnits;
+use App\AppServices\StoreUnit;
+use App\AppServices\UpdateUnit;
+use App\AppServices\DestroyUnit;
 
 class UnitsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(IndexUnits $indexUnits)
     {
-        $units = Units::with('services')->latest()->get();
+        $units = $indexUnits->handle();
         return view('admin.units.index', compact('units'));
     }
 
@@ -30,25 +33,9 @@ class UnitsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreUnitsRequest $request)
+    public function store(StoreUnitsRequest $request, StoreUnit $storeUnit)
     {
-        $data = $request->validated();
-
-        $unit = Units::create([
-            'translation_group' => 'units'.'_'.$data['translation_key'],
-            'translation_key' => $data['translation_key'],
-        ]);
-
-        LanguageLine::create([
-            'group' => $unit->translation_group,
-            'key' => "{$data['translation_key']}.name",
-            'text' => [
-                'en' => $data['name_en'],
-                'bg' => $data['name_bg'],
-            ],
-        ]);
-
-        cache()->forget('spatie.translation-loader');
+        $storeUnit->handle($request->validated());
 
         return redirect()
             ->route('admin.units.index')
@@ -76,47 +63,9 @@ class UnitsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUnitsRequest $request, Units $unit)
+    public function update(UpdateUnitsRequest $request, Units $unit, UpdateUnit $updateUnit)
     {
-        $data = $request->validated();
-
-        $currentKey = $unit->translation_key;
-        $group = $unit->translation_group;
-
-        // Update the unit record
-        $unit->update([
-            'translation_key' => $data['translation_key'],
-        ]);
-
-        // Find existing language line for name and update
-        $line = LanguageLine::where([
-            'group' => $group,
-            'key' => "{$currentKey}.name",
-        ])->first();
-
-        if ($line) {
-            // If key changed, update the key as well
-            if ($currentKey !== $data['translation_key']) {
-                $line->key = "{$data['translation_key']}.name";
-            }
-            $text = $line->text;
-            $text['en'] = $data['name_en'];
-            $text['bg'] = $data['name_bg'];
-            $line->text = $text;
-            $line->save();
-        } else {
-            // Create if missing
-            LanguageLine::create([
-                'group' => $group,
-                'key' => "{$data['translation_key']}.name",
-                'text' => [
-                    'en' => $data['name_en'],
-                    'bg' => $data['name_bg'],
-                ],
-            ]);
-        }
-
-        cache()->forget('spatie.translation-loader');
+        $updateUnit->handle($unit, $request->validated());
 
         return redirect()
             ->route('admin.units.index')
@@ -126,18 +75,9 @@ class UnitsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Units $unit)
+    public function destroy(Units $unit, DestroyUnit $destroyUnit)
     {
-        // Delete translations for this unit
-        LanguageLine::where('group', $unit->translation_group)
-            ->whereIn('key', [
-                "{$unit->translation_key}.name",
-            ])
-            ->delete();
-
-        $unit->delete();
-
-        cache()->forget('spatie.translation-loader');
+        $destroyUnit->handle($unit);
 
         return redirect()
             ->route('admin.units.index')

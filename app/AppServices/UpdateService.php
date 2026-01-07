@@ -18,8 +18,8 @@ class UpdateService
         if (isset($data['price_to'])) {
             $updateData['price_to'] = $data['price_to'];
         }
-        if (isset($data['unit'])) {
-            $updateData['unit'] = $data['unit'];
+        if (array_key_exists('unit_id', $data)) {
+            $updateData['unit_id'] = $data['unit_id'];
         }
         
         $service->update($updateData);

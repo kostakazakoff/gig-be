@@ -27,7 +27,7 @@ class UpdateServiceRequest extends FormRequest
             'description_bg' => 'nullable|string',
             'price_from' => 'nullable|numeric|min:0',
             'price_to' => 'nullable|numeric|min:0',
-            'unit' => 'nullable|string|max:50',
+            'unit_id' => 'nullable|integer|exists:units,id',
             'image' => 'nullable|image|mimes:jpeg,png,webp|max:2048',
         ];
     }

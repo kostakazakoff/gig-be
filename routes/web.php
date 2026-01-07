@@ -25,4 +25,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::put('/{service}', [\App\Http\Controllers\Admin\ServiceController::class, 'update'])->name('update');
         Route::delete('/{service}', [\App\Http\Controllers\Admin\ServiceController::class, 'destroy'])->name('destroy');
     });
+
+    Route::prefix('units')->name('units.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\UnitsController::class, 'index'])->name('index');
+        Route::get('/create', [\App\Http\Controllers\Admin\UnitsController::class, 'create'])->name('create');
+        Route::post('/', [\App\Http\Controllers\Admin\UnitsController::class, 'store'])->name('store');
+        Route::get('/{unit}/edit', [\App\Http\Controllers\Admin\UnitsController::class, 'edit'])->name('edit');
+        Route::put('/{unit}', [\App\Http\Controllers\Admin\UnitsController::class, 'update'])->name('update');
+        Route::delete('/{unit}', [\App\Http\Controllers\Admin\UnitsController::class, 'destroy'])->name('destroy');
+    });
 });

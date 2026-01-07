@@ -11,7 +11,7 @@ class Service extends Model implements HasMedia
 {
     use InteractsWithMedia;
 
-    protected $fillable = ['category_id', 'translation_group', 'translation_key', 'price_from', 'price_to', 'unit'];
+    protected $fillable = ['category_id', 'translation_group', 'translation_key', 'price_from', 'price_to', 'unit_id'];
 
     protected $appends = ['name', 'description', 'image_src'];
 
@@ -63,5 +63,10 @@ class Service extends Model implements HasMedia
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function unit()
+    {
+        return $this->belongsTo(Units::class, 'unit_id');
     }
 }

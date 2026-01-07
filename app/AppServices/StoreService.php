@@ -15,7 +15,7 @@ class StoreService
             'translation_key' => $data['key'],
             'price_from' => $data['price_from'] ?? null,
             'price_to' => $data['price_to'] ?? null,
-            'unit' => $data['unit'] ?? null,
+            'unit_id' => $data['unit_id'] ?? null,
         ]);
 
         LanguageLine::create([

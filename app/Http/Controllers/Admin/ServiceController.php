@@ -34,7 +34,8 @@ class ServiceController extends Controller
     public function create(GetCategories $getCategories)
     {
         $categories = $getCategories->handle();
-        return view('admin.services.create', compact('categories'));
+        $units = \App\Models\Units::orderBy('translation_key')->get();
+        return view('admin.services.create', compact('categories', 'units'));
     }
 
     /**
@@ -56,7 +57,8 @@ class ServiceController extends Controller
     public function edit(Service $service, GetCategories $getCategories)
     {
         $categories = $getCategories->handle();
-        return view('admin.services.edit', compact('service', 'categories'));
+        $units = \App\Models\Units::orderBy('translation_key')->get();
+        return view('admin.services.edit', compact('service', 'categories', 'units'));
     }
 
     /**

@@ -29,6 +29,9 @@
                     <a href="{{ route('admin.services.index') }}" class="text-gray-700 hover:text-blue-600 font-medium transition">
                         Services
                     </a>
+                    <a href="{{ route('admin.units.index') }}" class="text-gray-700 hover:text-blue-600 font-medium transition">
+                        Units
+                    </a>
                     <a href="#" class="text-gray-700 hover:text-blue-600 font-medium transition">
                         Settings
                     </a>

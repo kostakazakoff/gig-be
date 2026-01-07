@@ -10,7 +10,7 @@ class ListServices
     {
         $services = Service::
         whereCategoryId($categoryId)
-        ->with('category')
+        ->with('category', 'unit')
         ->get();
 
         return $services;

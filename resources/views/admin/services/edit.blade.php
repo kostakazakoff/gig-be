@@ -117,11 +117,18 @@
             @enderror
         </div>
 
-        <!-- Unit -->
+        <!-- Unit Select -->
         <div class="mb-6">
-            <label class="block text-gray-700 font-semibold mb-2">Unit (e.g., per hour, per day, per project)</label>
-            <input type="text" name="unit" value="{{ old('unit', $service->unit) }}" class="w-full border rounded px-3 py-2 @error('unit') border-red-500 @enderror" placeholder="e.g., per hour">
-            @error('unit')
+            <label class="block text-gray-700 font-semibold mb-2">Unit</label>
+            <select name="unit_id" class="w-full border rounded px-3 py-2 @error('unit_id') border-red-500 @enderror">
+                <option value="">Select a unit</option>
+                @foreach($units as $unit)
+                    <option value="{{ $unit->id }}" @selected(old('unit_id', $service->unit_id) == $unit->id)>
+                        {{ $unit->getTranslation('name', app()->getLocale()) ?? $unit->translation_key }}
+                    </option>
+                @endforeach
+            </select>
+            @error('unit_id')
                 <span class="text-red-500 text-sm">{{ $message }}</span>
             @enderror
         </div>

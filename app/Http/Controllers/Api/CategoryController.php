@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\AppServices\ListCategories;
+use App\AppServices\Category\ListCategories;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 

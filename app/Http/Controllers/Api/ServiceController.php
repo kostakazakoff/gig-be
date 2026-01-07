@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\AppServices\ListServices;
+use App\AppServices\Service\ListServices;
 use App\Http\Controllers\Controller;
 
 class ServiceController extends Controller

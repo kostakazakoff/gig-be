@@ -7,12 +7,11 @@ use App\Http\Requests\StoreServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
 use App\Models\Service;
 use App\Traits\HttpResponses;
-use App\AppServices\IndexServices;
-use App\AppServices\GetCategories;
-use App\AppServices\GetUnits;
-use App\AppServices\StoreService;
-use App\AppServices\UpdateService;
-use App\AppServices\DestroyService;
+use App\AppServices\Service\IndexServices;
+use App\AppServices\Category\GetCategories;
+use App\AppServices\Unit\GetUnits;
+use App\AppServices\Service\StoreService;
+use App\AppServices\Service\UpdateService;
 
 class ServiceController extends Controller
 {

@@ -7,10 +7,10 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use App\Traits\HttpResponses;
-use App\AppServices\IndexCategories;
-use App\AppServices\StoreCategory;
-use App\AppServices\UpdateCategory;
-use App\AppServices\DestroyCategory;
+use App\AppServices\Category\IndexCategories;
+use App\AppServices\Category\StoreCategory;
+use App\AppServices\Category\UpdateCategory;
+use App\AppServices\Category\DestroyCategory;
 
 class CategoryController extends Controller
 {

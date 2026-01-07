@@ -1,6 +1,6 @@
 <?php
 
-namespace App\AppServices;
+namespace App\AppServices\Category;
 
 use App\Models\Category;
 use Spatie\TranslationLoader\LanguageLine;

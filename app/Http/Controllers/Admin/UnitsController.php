@@ -6,10 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUnitsRequest;
 use App\Http\Requests\UpdateUnitsRequest;
 use App\Models\Units;
-use App\AppServices\IndexUnits;
-use App\AppServices\StoreUnit;
-use App\AppServices\UpdateUnit;
-use App\AppServices\DestroyUnit;
+use App\AppServices\Unit\IndexUnits;
+use App\AppServices\Unit\StoreUnit;
+use App\AppServices\Unit\UpdateUnit;
+use App\AppServices\Unit\DestroyUnit;
 
 class UnitsController extends Controller
 {

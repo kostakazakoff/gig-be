@@ -1,10 +1,10 @@
 <?php
 
-namespace App\AppServices;
+namespace App\AppServices\Category;
 
 use App\Models\Category;
 
-class IndexCategories
+class GetCategories
 {
     public function handle()
     {

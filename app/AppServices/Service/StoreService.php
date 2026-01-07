@@ -1,6 +1,6 @@
 <?php
 
-namespace App\AppServices;
+namespace App\AppServices\Service;
 
 use App\Models\Service;
 use Spatie\TranslationLoader\LanguageLine;

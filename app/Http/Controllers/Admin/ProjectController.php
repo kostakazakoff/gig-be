@@ -91,9 +91,15 @@ class ProjectController extends Controller
         
         if ($media) {
             $media->delete();
-            return $this->success(null, 'Image deleted successfully');
+            return response()->json([
+                'success' => true,
+                'message' => 'Image deleted successfully'
+            ]);
         }
 
-        return $this->error(null, 'Image not found', 404);
+        return response()->json([
+            'success' => false,
+            'message' => 'Image not found'
+        ], 404);
     }
 }

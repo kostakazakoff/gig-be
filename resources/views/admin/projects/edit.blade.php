@@ -200,7 +200,14 @@
             return;
         }
 
-        fetch(`/admin/projects/${projectId}/media/${mediaId}`, {
+        // Show loading state
+        const imageElement = document.querySelector('[data-media-id="' + mediaId + '"]');
+        if (imageElement) {
+            imageElement.style.opacity = '0.5';
+            imageElement.style.pointerEvents = 'none';
+        }
+
+        fetch('/admin/projects/' + projectId + '/media/' + mediaId, {
             method: 'DELETE',
             headers: {
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
@@ -208,24 +215,47 @@
                 'Content-Type': 'application/json'
             }
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
         .then(data => {
+            console.log('Delete response:', data);
             if (data.success) {
-                // Remove the image element from DOM
-                const imageElement = document.querySelector(`[data-media-id="${mediaId}"]`);
+                // Remove the image element from DOM with animation
                 if (imageElement) {
-                    imageElement.remove();
+                    imageElement.style.opacity = '0';
+                    imageElement.style.transform = 'scale(0.8)';
+                    imageElement.style.transition = 'all 0.3s ease';
+                    
+                    setTimeout(function() {
+                        imageElement.remove();
+                        
+                        // Check if there are no more images
+                        const container = document.getElementById('existing-images');
+                        if (container && container.children.length === 0) {
+                            container.parentElement.remove();
+                        }
+                    }, 300);
                 }
-                
-                // Show success message
-                alert('Image deleted successfully');
             } else {
-                alert('Error deleting image: ' + (data.message || 'Unknown error'));
+                // Restore image on error
+                if (imageElement) {
+                    imageElement.style.opacity = '1';
+                    imageElement.style.pointerEvents = 'auto';
+                }
+                console.error('Error deleting image:', data.message);
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('Error deleting image');
+            // Restore image on error
+            if (imageElement) {
+                imageElement.style.opacity = '1';
+                imageElement.style.pointerEvents = 'auto';
+            }
         });
     }
 </script>

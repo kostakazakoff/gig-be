@@ -108,10 +108,7 @@
         // Set files to input
         input.files = files;
         
-        // Trigger change event
-        const event = new Event('change', { bubbles: true });
-        input.dispatchEvent(event);
-        
+        // Preview files (change event will be triggered automatically)
         previewFiles(files);
     }
 })();

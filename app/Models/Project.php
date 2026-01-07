@@ -29,6 +29,11 @@ class Project extends Model implements HasMedia
         return __($this->translation_group . '.' . $this->translation_key . '.description');
     }
 
+    public function getTranslation(string $field, string $locale): ?string
+    {
+        return __($this->translation_group . '.' . $this->translation_key . '.' . $field, [], $locale);
+    }
+
     public function getImageSrcAttribute(): ?string
     {
         $media = $this->getFirstMedia('project_images');

@@ -34,4 +34,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::put('/{unit}', [\App\Http\Controllers\Admin\UnitsController::class, 'update'])->name('update');
         Route::delete('/{unit}', [\App\Http\Controllers\Admin\UnitsController::class, 'destroy'])->name('destroy');
     });
+
+    Route::prefix('projects')->name('projects.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\ProjectController::class, 'index'])->name('index');
+        Route::get('/create', [\App\Http\Controllers\Admin\ProjectController::class, 'create'])->name('create');
+        Route::post('/', [\App\Http\Controllers\Admin\ProjectController::class, 'store'])->name('store');
+        Route::get('/{project}/edit', [\App\Http\Controllers\Admin\ProjectController::class, 'edit'])->name('edit');
+        Route::put('/{project}', [\App\Http\Controllers\Admin\ProjectController::class, 'update'])->name('update');
+        Route::delete('/{project}', [\App\Http\Controllers\Admin\ProjectController::class, 'destroy'])->name('destroy');
+        Route::delete('/{project}/media/{media}', [\App\Http\Controllers\Admin\ProjectController::class, 'deleteMedia'])->name('deleteMedia');
+    });
 });

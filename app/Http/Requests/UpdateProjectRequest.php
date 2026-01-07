@@ -11,7 +11,7 @@ class UpdateProjectRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,14 @@ class UpdateProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title_en' => 'required|string|max:255',
+            'title_bg' => 'required|string|max:255',
+            'description_en' => 'nullable|string',
+            'description_bg' => 'nullable|string',
+            'price' => 'nullable|numeric|min:0',
+            'date' => 'nullable|date',
+            'images' => 'nullable|array',
+            'images.*' => 'image|mimes:jpeg,png,jpg,webp|max:5120',
         ];
     }
 }

@@ -29,7 +29,7 @@ class StoreServiceRequest extends FormRequest
             'price_from' => 'nullable|numeric|min:0',
             'price_to' => 'nullable|numeric|min:0',
             'unit_id' => 'nullable|integer|exists:units,id',
-            'image' => 'nullable|image|mimes:jpeg,png,webp|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,jpg,png,webp|max:2048',
         ];
     }
 
@@ -47,7 +47,7 @@ class StoreServiceRequest extends FormRequest
             'name_en.required' => 'English name is required',
             'name_bg.required' => 'Bulgarian name is required',
             'image.image' => 'File must be an image',
-            'image.mimes' => 'Image must be jpeg, png or webp',
+            'image.mimes' => 'Image must be jpeg, jpg, png or webp',
         ];
     }
 }

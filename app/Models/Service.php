@@ -19,7 +19,7 @@ class Service extends Model implements HasMedia
     {
         $this->addMediaCollection('service_thumbs')
             ->useFallbackUrl('/GIG_960x480.jpg')
-            ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp'])
+            ->acceptsMimeTypes(['image/jpeg',  'image/jpg', 'image/png', 'image/webp'])
             ->singleFile();
     }
 

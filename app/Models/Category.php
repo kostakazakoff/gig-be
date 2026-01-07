@@ -18,7 +18,7 @@ class Category extends Model implements HasMedia
     {
         $this->addMediaCollection('category_thumbs')
             ->useFallbackUrl('/GIG_960x480.jpg')
-            ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp'])
+            ->acceptsMimeTypes(['image/jpeg',  'image/jpg', 'image/png', 'image/webp'])
             ->singleFile();
     }
 

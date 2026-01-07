@@ -1,29 +1,28 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div class="min-h-screen max-w-6xl mx-auto">
-            <!-- Header with Add Button -->
-            <div class="mb-8 flex items-center justify-between sticky top-18 z-50 bg-gray-50 py-4">
-                <div>
-                    <h1 class="text-3xl font-bold text-gray-900">Categories</h1>
-                    <p class="mt-2 text-gray-600">Manage all categories in the system</p>
-                </div>
-                <a href="{{ route('admin.categories.create') }}"
-                    class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition duration-200">
-                    + ADD CATEGORY
-                </a>
+    <div class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <!-- Header with Add Button -->
+        <div class="mb-8 flex items-center justify-between sticky top-18 z-50 bg-gray-50 py-4">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900">Categories</h1>
+                <p class="mt-2 text-gray-600">Manage all categories in the system</p>
             </div>
+            <a href="{{ route('admin.categories.create') }}"
+                class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition duration-200">
+                + ADD CATEGORY
+            </a>
+        </div>
 
-            <!-- Success Message -->
-            @if (session('success'))
-                <div class="mb-6 bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg">
-                    <p class="font-medium">{{ session('success') }}</p>
-                </div>
-            @endif
+        <!-- Success Message -->
+        @if (session('success'))
+            <div class="mb-6 bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg">
+                <p class="font-medium">{{ session('success') }}</p>
+            </div>
+        @endif
 
-            <!-- Categories Table -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <!-- Categories Table -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
                 <table class="w-full">
                     <thead>
                         <tr class="bg-gray-100 border-b border-gray-200">
@@ -31,7 +30,8 @@
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Key</th>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Name (EN)</th>
                             <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Name (BG)</th>
-                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Description</th>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Description (EN)</th>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Description (BG)</th>
                             <th class="px-6 py-3 text-center text-sm font-semibold text-gray-700">Actions</th>
                         </tr>
                     </thead>
@@ -55,7 +55,10 @@
                                     {{ $category->getTranslation('name', 'bg') ?? '—' }}
                                 </td>
                                 <td class="px-6 py-4 text-sm text-gray-700 truncate max-w-xs">
-                                    {{ substr($category->description ?? '—', 0, 50) }}
+                                    {{ Str::limit($category->description ?? '—', 50) }}
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-700 truncate max-w-xs">
+                                    {{ Str::limit($category->getTranslation('description', 'bg') ?? '—', 50) }}
                                 </td>
                                 <td class="px-6 py-4 text-center">
                                     <div class="flex items-center justify-center gap-2">
@@ -81,7 +84,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="px-6 py-8 text-center text-gray-500">
+                                <td colspan="7" class="px-6 py-8 text-center text-gray-500">
                                     <div class="flex flex-col items-center justify-center">
                                         <svg class="w-12 h-12 text-gray-400 mb-3" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
@@ -96,9 +99,8 @@
                                 </td>
                             </tr>
                         @endforelse
-                    </tbody>
-                </table>
-            </div>
+                </tbody>
+            </table>
         </div>
     </div>
 @endsection

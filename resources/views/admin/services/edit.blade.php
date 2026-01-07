@@ -75,7 +75,7 @@
         <!-- Bulgarian Name -->
         <div class="mb-4">
             <label class="block text-gray-700 font-semibold mb-2">Name (Bulgarian)</label>
-            <input type="text" name="name_bg" value="{{ old('name_bg', \Spatie\TranslationLoader\LanguageLine::where(['group' => 'services', 'key' => $service->translation_key . '.name'])->first()?->text['bg'] ?? '') }}" class="w-full border rounded px-3 py-2 @error('name_bg') border-red-500 @enderror" required>
+            <input type="text" name="name_bg" value="{{ old('name_bg', $service->getTranslation('name', 'bg'))}}" class="w-full border rounded px-3 py-2 @error('name_bg') border-red-500 @enderror" required>
             @error('name_bg')
                 <span class="text-red-500 text-sm">{{ $message }}</span>
             @enderror
@@ -93,7 +93,7 @@
         <!-- Bulgarian Description -->
         <div class="mb-6">
             <label class="block text-gray-700 font-semibold mb-2">Description (Bulgarian)</label>
-            <textarea name="description_bg" class="w-full border rounded px-3 py-2 @error('description_bg') border-red-500 @enderror" rows="4">{{ old('description_bg', \Spatie\TranslationLoader\LanguageLine::where(['group' => 'services', 'key' => $service->translation_key . '.description'])->first()?->text['bg'] ?? '') }}</textarea>
+            <textarea name="description_bg" class="w-full border rounded px-3 py-2 @error('description_bg') border-red-500 @enderror" rows="4">{{ old('description_bg', $service->getTranslation('description', 'bg')) }}</textarea>
             @error('description_bg')
                 <span class="text-red-500 text-sm">{{ $message }}</span>
             @enderror

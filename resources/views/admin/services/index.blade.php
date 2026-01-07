@@ -59,7 +59,10 @@
                                 @endif
                             </td>
                             <td class="px-6 py-3 text-sm">
-                                {{ Str::limit($service->getTranslation('description', 'en'), 50) }}
+                                <div class="text-sm">
+                                    <div class="text-blue-600">EN: {{ Str::limit($service->getTranslation('description', 'en'), 50) }}</div>
+                                    <div class="text-red-600">BG: {{ Str::limit($service->getTranslation('description', 'bg'), 50) }}</div>
+                                </div>
                             </td>
                             <td class="px-6 py-3 text-center">
                                 <a href="{{ route('admin.services.edit', $service) }}"

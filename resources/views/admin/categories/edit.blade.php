@@ -23,7 +23,7 @@
                             <img src="{{ $category->image_src }}" alt="{{ $category->translation_key }}" class="max-w-xs rounded-lg" />
                         </div>
                     @endif
-                    @include('partials.image-dropzone', ['label' => 'Category Image'])
+                    @include('single-image-dropzone', ['label' => 'Category Image'])
                 </div>
 
                 <!-- Display Key (read-only) -->

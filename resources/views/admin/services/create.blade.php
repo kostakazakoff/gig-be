@@ -44,7 +44,7 @@
 
         <!-- Image Upload -->
         <div class="mb-4">
-            @include('partials.image-dropzone', ['label' => 'Image'])
+            @include('single-image-dropzone', ['label' => 'Image'])
         </div>
 
         <!-- English Name -->

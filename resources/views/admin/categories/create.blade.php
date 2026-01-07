@@ -15,7 +15,7 @@
                 @csrf
 
                 <!-- Image Upload Field (Drag & Drop) -->
-                @include('partials.image-dropzone', ['label' => 'Category Image'])
+                @include('partials.single-image-dropzone', ['label' => 'Category Image'])
 
                 <!-- Key Field -->
                 <div>

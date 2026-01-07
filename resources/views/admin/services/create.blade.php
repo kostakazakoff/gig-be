@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="p-6 max-w-4xl">
+<div class="p-6 max-w-4xl mx-auto">
     <h1 class="text-3xl font-bold mb-6">Create Service</h1>
 
     @if ($errors->any())
@@ -44,7 +44,7 @@
 
         <!-- Image Upload -->
         <div class="mb-4">
-            @include('single-image-dropzone', ['label' => 'Image'])
+            @include('partials.single-image-dropzone', ['label' => 'Image'])
         </div>
 
         <!-- English Name -->

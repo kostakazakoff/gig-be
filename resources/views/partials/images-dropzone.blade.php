@@ -44,30 +44,71 @@
     const dropzone = document.getElementById('{{ $id }}-dropzone');
     const preview = document.getElementById('{{ $id }}-preview');
     
+    // Store selected files
+    let selectedFiles = [];
+    
     // Preview function
     function previewFiles(files) {
         preview.innerHTML = '';
+        selectedFiles = Array.from(files);
         
-        Array.from(files).forEach((file, index) => {
+        selectedFiles.forEach((file, index) => {
             if (file.type.startsWith('image/')) {
                 const reader = new FileReader();
                 reader.onload = function(event) {
                     const div = document.createElement('div');
-                    div.className = 'relative';
-                    div.innerHTML = `
-                        <img src="${event.target.result}" class="w-full h-32 object-cover rounded-lg" />
-                        <span class="absolute top-1 right-1 bg-blue-600 text-white text-xs px-2 py-1 rounded">${index + 1}</span>
-                    `;
+                    div.className = 'relative group';
+                    div.setAttribute('data-file-index', index);
+                    div.innerHTML = 
+                        '<img src="' + event.target.result + '" class="w-full h-32 object-cover rounded-lg" />' +
+                        '<span class="absolute top-1 left-1 bg-blue-600 text-white text-xs px-2 py-1 rounded">' + (index + 1) + '</span>' +
+                        '<button type="button" onclick="removeFile(' + index + ')" ' +
+                        'class="absolute top-1 right-1 bg-red-600 text-white p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-700" ' +
+                        'title="Remove image">' +
+                        '<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">' +
+                        '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />' +
+                        '</svg>' +
+                        '</button>';
                     preview.appendChild(div);
                 };
                 reader.readAsDataURL(file);
             }
         });
+        
+        updateInputFiles();
     }
+    
+    // Add new files to existing selection
+    function addFiles(newFiles) {
+        const filesArray = Array.from(newFiles);
+        filesArray.forEach(file => {
+            if (file.type.startsWith('image/')) {
+                selectedFiles.push(file);
+            }
+        });
+        previewFiles(selectedFiles);
+    }
+    
+    // Update input files
+    function updateInputFiles() {
+        const dt = new DataTransfer();
+        selectedFiles.forEach(file => {
+            dt.items.add(file);
+        });
+        input.files = dt.files;
+    }
+    
+    // Remove file function (make it global for this instance)
+    window.removeFile = function(index) {
+        selectedFiles.splice(index, 1);
+        previewFiles(selectedFiles);
+    };
     
     // File input change
     input.addEventListener('change', function(e) {
-        previewFiles(e.target.files);
+        if (e.target.files.length > 0) {
+            addFiles(e.target.files);
+        }
     });
     
     // Prevent default drag behaviors
@@ -104,12 +145,10 @@
     function handleDrop(e) {
         const dt = e.dataTransfer;
         const files = dt.files;
-        
-        // Set files to input
-        input.files = files;
-        
-        // Preview files (change event will be triggered automatically)
-        previewFiles(files);
+        // Add files to existing selection
+        if (files.length > 0) {
+            addFiles(files);
+        }
     }
 })();
 </script>

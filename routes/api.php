@@ -8,11 +8,18 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 // API маршрути - GET заявки от NEXT.js фронтенд
-Route::prefix('categories')->group(function () {
-    Route::get('/', [\App\Http\Controllers\Api\CategoryController::class, 'index']);
-    Route::get('/{category}', [\App\Http\Controllers\Api\CategoryController::class, 'show']);
-});
+Route::middleware('locale')->group(function () {
+    Route::prefix('categories')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Api\CategoryController::class, 'index']);
+        Route::get('/{category}', [\App\Http\Controllers\Api\CategoryController::class, 'show']);
+    });
 
-Route::prefix('services')->group(function () {
-    Route::get('/{categoryId}', [\App\Http\Controllers\Api\ServiceController::class, 'index']);
+    Route::prefix('services')->group(function () {
+        Route::get('/{categoryId}', [\App\Http\Controllers\Api\ServiceController::class, 'index']);
+    });
+
+    Route::prefix('locale')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Api\LocaleController::class, 'getLocale']);
+        Route::post('/', [\App\Http\Controllers\Api\LocaleController::class, 'switch']);
+    });
 });

@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin.categories.index');
 });
 
 // Admin маршрути - POST, UPDATE, DELETE заявки от Blade форми

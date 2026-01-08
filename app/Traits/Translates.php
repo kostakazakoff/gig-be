@@ -22,4 +22,23 @@ trait Translates
             cache()->forget('spatie.translation-loader');
         }
     }
+
+    public function updateTranslation(Model $model, array $data, array $attributes)
+    {
+        foreach ($attributes as $attribute) {
+            $translationLine = LanguageLine::where([
+                'group' => $model->translation_group,
+                'key' => "{$model->translation_key}.".$attribute,
+            ])->first();
+
+            $text = $translationLine->text;
+            
+            $text['en'] = $data["{$attribute}"."_en"];
+            $text['bg'] = $data["{$attribute}"."_bg"];
+
+            $translationLine->update(['text' => $text]);
+
+            cache()->forget('spatie.translation-loader');
+        }
+    }
 }

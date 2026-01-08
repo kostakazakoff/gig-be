@@ -3,10 +3,12 @@
 namespace App\AppServices\Project;
 
 use App\Models\Project;
-use Spatie\TranslationLoader\LanguageLine;
+use App\Traits\Translates;
 
 class UpdateProject
 {
+    use Translates;
+
     public function handle(Project $project, array $data): Project
     {
         // Update project fields
@@ -15,27 +17,7 @@ class UpdateProject
             'date' => $data['date'] ?? null,
         ]);
 
-        // Update title translations
-        $titleTranslation = LanguageLine::where('group', $project->translation_group)
-            ->where('key', "{$project->translation_key}.title")
-            ->first();
-
-        if ($titleTranslation) {
-            $titleTranslation->setTranslation('en', $data['title_en']);
-            $titleTranslation->setTranslation('bg', $data['title_bg']);
-            $titleTranslation->save();
-        }
-
-        // Update description translations
-        $descriptionTranslation = LanguageLine::where('group', $project->translation_group)
-            ->where('key', "{$project->translation_key}.description")
-            ->first();
-
-        if ($descriptionTranslation) {
-            $descriptionTranslation->setTranslation('en', $data['description_en'] ?? '');
-            $descriptionTranslation->setTranslation('bg', $data['description_bg'] ?? '');
-            $descriptionTranslation->save();
-        }
+        $this->updateTranslation($project, $data, ['title', 'description']);
 
         // Handle new images
         if (!empty($data['images'])) {

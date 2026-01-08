@@ -4,11 +4,12 @@ namespace App\AppServices\Service;
 
 use App\Models\Service;
 use App\Traits\CreateThumbnail;
+use App\Traits\Translates;
 use Spatie\TranslationLoader\LanguageLine;
 
 class UpdateService
 {
-    use CreateThumbnail;
+    use CreateThumbnail, Translates;
 
     public function handle(Service $service, array $data): Service
     {
@@ -27,35 +28,7 @@ class UpdateService
         
         $service->update($updateData);
 
-        $currentKey = $service->translation_key;
-
-        // Update name translation
-        $nameLine = LanguageLine::where([
-            'group' => $service->translation_group,
-            'key' => "{$currentKey}.name",
-        ])->first();
-
-
-        $text = $nameLine->text;
-            $text['en'] = $data['name_en'];
-            $text['bg'] = $data['name_bg'];
-            $nameLine->update(['text' => $text]);
-
-            
-        // Update description translation
-        $descriptionLine = LanguageLine::where([
-            'group' => $service->translation_group,
-            'key' => "{$currentKey}.description",
-        ])->first();
-
-
-        $text = $descriptionLine->text;
-            $text['en'] = $data['description_en'];
-            $text['bg'] = $data['description_bg'];
-            $descriptionLine->update(['text' => $text]);
-
-            
-        cache()->forget('spatie.translation-loader');
+        $this->updateTranslation($service, $data, ['name', 'description']);
 
         // Update image if provided
         if ($data['image'] ?? null) {

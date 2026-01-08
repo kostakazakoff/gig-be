@@ -3,12 +3,12 @@
 namespace App\AppServices\Category;
 
 use App\Models\Category;
-use App\Traits\OptimizesImages;
+use App\Traits\CreateThumbnail;
 use Spatie\TranslationLoader\LanguageLine;
 
 class StoreCategory
 {
-    use OptimizesImages;
+    use CreateThumbnail;
 
     public function handle(array $data): Category
     {
@@ -40,14 +40,8 @@ class StoreCategory
 
         cache()->forget('spatie.translation-loader');
 
-        // TODO: Refactor image optimization to a dedicated Action
-        // Attach image if provided
         if ($data['image'] ?? null) {
-            $this->optimizeImage($data['image'], 384, 256);
-
-            $category
-                ->addMedia($data['image'])
-                ->toMediaCollection('category_thumbs');
+            $this->createThumbnail($category, [$data['image']], 'category_thumbs');
         }
 
         return $category;

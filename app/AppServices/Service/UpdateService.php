@@ -3,10 +3,13 @@
 namespace App\AppServices\Service;
 
 use App\Models\Service;
+use App\Traits\CreateThumbnail;
 use Spatie\TranslationLoader\LanguageLine;
 
 class UpdateService
 {
+    use CreateThumbnail;
+
     public function handle(Service $service, array $data): Service
     {
         // Update category and price data if provided
@@ -56,9 +59,7 @@ class UpdateService
 
         // Update image if provided
         if ($data['image'] ?? null) {
-            $service
-                ->addMedia($data['image'])
-                ->toMediaCollection('service_thumbs');
+            $this->createThumbnail($service, [$data['image']], 'service_thumbs');
         }
 
         return $service;

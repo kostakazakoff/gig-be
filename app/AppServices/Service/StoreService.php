@@ -3,10 +3,13 @@
 namespace App\AppServices\Service;
 
 use App\Models\Service;
+use App\Traits\CreateThumbnail;
 use Spatie\TranslationLoader\LanguageLine;
 
 class StoreService
 {
+    use CreateThumbnail;
+
     public function handle(array $data): Service
     {
         $service = Service::create([
@@ -18,6 +21,7 @@ class StoreService
             'unit_id' => $data['unit_id'] ?? null,
         ]);
 
+        // TODO: Refactor to use a Translation Service
         LanguageLine::create([
             'group' => $service->translation_group,
             'key' => "{$data['key']}.name",
@@ -38,11 +42,10 @@ class StoreService
 
         cache()->forget('spatie.translation-loader');
 
+        // TODO: Refactor to use a Media Service
         // Attach image if provided
         if ($data['image'] ?? null) {
-            $service
-                ->addMedia($data['image'])
-                ->toMediaCollection('service_thumbs');
+            $this->createThumbnail($service, [$data['image']], 'service_thumbs');
         }
 
         return $service;

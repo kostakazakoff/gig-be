@@ -4,11 +4,11 @@ namespace App\AppServices\Category;
 
 use App\Models\Category;
 use App\Traits\CreateThumbnail;
-use Spatie\TranslationLoader\LanguageLine;
+use App\Traits\Translates;
 
 class StoreCategory
 {
-    use CreateThumbnail;
+    use CreateThumbnail, Translates;
 
     public function handle(array $data): Category
     {
@@ -17,28 +17,7 @@ class StoreCategory
             'translation_key' => $data['key'],
         ]);
 
-        //TODO: Refactor to a Translation Action or Service
-        // ----------------------------------------------------
-        LanguageLine::create([
-            'group' => $category->translation_group,
-            'key' => "{$data['key']}.name",
-            'text' => [
-                'en' => $data['name_en'],
-                'bg' => $data['name_bg'],
-            ],
-        ]);
-
-        LanguageLine::create([
-            'group' => $category->translation_group,
-            'key' => "{$data['key']}.description",
-            'text' => [
-                'en' => $data['description_en'],
-                'bg' => $data['description_bg'],
-            ],
-        ]);
-        // ----------------------------------------------------
-
-        cache()->forget('spatie.translation-loader');
+        $this->translate($category, data: $data, attributes: ['name', 'description']);
 
         if ($data['image'] ?? null) {
             $this->createThumbnail($category, [$data['image']], 'category_thumbs');

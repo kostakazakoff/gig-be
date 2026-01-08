@@ -3,10 +3,12 @@
 namespace App\AppServices\Project;
 
 use App\Models\Project;
+use App\Traits\Translates;
 use Spatie\TranslationLoader\LanguageLine;
 
 class StoreProject
 {
+    use Translates;
     public function handle(array $data): Project
     {
         $project = Project::create([
@@ -16,25 +18,7 @@ class StoreProject
             'date' => $data['date'] ?? null,
         ]);
 
-        // Create translations for title
-        LanguageLine::create([
-            'group' => $project->translation_group,
-            'key' => "{$data['key']}.title",
-            'text' => [
-                'en' => $data['title_en'],
-                'bg' => $data['title_bg'],
-            ],
-        ]);
-
-        // Create translations for description
-        LanguageLine::create([
-            'group' => $project->translation_group,
-            'key' => "{$data['key']}.description",
-            'text' => [
-                'en' => $data['description_en'] ?? '',
-                'bg' => $data['description_bg'] ?? '',
-            ],
-        ]);
+        $this->translate($project, $data, ['title', 'description']);
 
         // Handle multiple images
         if (!empty($data['images'])) {

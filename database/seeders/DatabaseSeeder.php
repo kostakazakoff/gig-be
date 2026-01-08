@@ -15,11 +15,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // TODO: Uncomment if you want to create a default user
+
         // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
+        //     'name' => 'Admin',
+        //     'email' => 'admin@example.com',
         // ]);
 
+        // TODO: Remove for production
+        
         // Run seeders in correct order (dependencies first)
         $this->call([
             CategorySeeder::class,

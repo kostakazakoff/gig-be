@@ -27,4 +27,9 @@ Route::middleware('locale')->group(function () {
         Route::get('/', [\App\Http\Controllers\Api\ProjectController::class, 'index']);
         Route::get('/{id}', [\App\Http\Controllers\Api\ProjectController::class, 'show']);
     });
+
+    Route::prefix('news')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Api\NewsController::class, 'index']);
+        Route::get('/{id}', [\App\Http\Controllers\Api\NewsController::class, 'show']);
+    });
 });

@@ -36,6 +36,9 @@
                     <a href="{{ route('admin.projects.index') }}" class="text-gray-700 hover:text-blue-600 font-medium transition">
                         Projects
                     </a>
+                    <a href="{{ route('admin.news.index') }}" class="text-gray-700 hover:text-blue-600 font-medium transition">
+                        News
+                    </a>
                     <a href="#" class="text-gray-700 hover:text-blue-600 font-medium transition">
                         Settings
                     </a>

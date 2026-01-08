@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('unit_id')->nullable();
             $table->string('translation_group');
             $table->string('translation_key');
+            $table->unique(['translation_group', 'translation_key']);
             $table->decimal('price_from', 10, 2)->nullable();
             $table->decimal('price_to', 10, 2)->nullable();
             $table->string('unit')->nullable();

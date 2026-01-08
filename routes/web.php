@@ -44,4 +44,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::delete('/{project}', [\App\Http\Controllers\Admin\ProjectController::class, 'destroy'])->name('destroy');
         Route::delete('/{project}/media/{media}', [\App\Http\Controllers\Admin\ProjectController::class, 'deleteMedia'])->name('deleteMedia');
     });
+
+    Route::prefix('news')->name('news.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\NewsController::class, 'index'])->name('index');
+        Route::get('/create', [\App\Http\Controllers\Admin\NewsController::class, 'create'])->name('create');
+        Route::post('/', [\App\Http\Controllers\Admin\NewsController::class, 'store'])->name('store');
+        Route::get('/{news}/edit', [\App\Http\Controllers\Admin\NewsController::class, 'edit'])->name('edit');
+        Route::put('/{news}', [\App\Http\Controllers\Admin\NewsController::class, 'update'])->name('update');
+        Route::delete('/{news}', [\App\Http\Controllers\Admin\NewsController::class, 'destroy'])->name('destroy');
+    });
 });

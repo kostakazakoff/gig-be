@@ -1,0 +1,83 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreNewsRequest;
+use App\Http\Requests\UpdateNewsRequest;
+use App\Models\News;
+use App\Traits\HttpResponses;
+use App\AppServices\News\IndexNews;
+use App\AppServices\News\StoreNews;
+use App\AppServices\News\UpdateNews;
+use App\AppServices\News\DestroyNews;
+
+class NewsController extends Controller
+{
+    use HttpResponses;
+
+    /**
+     * Display a listing of all news articles.
+     * GET - връща view със таблица
+     */
+    public function index(IndexNews $indexNews)
+    {
+        $news = $indexNews->handle();
+        return view('admin.news.index', compact('news'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     * GET - връща view с форма
+     */
+    public function create()
+    {
+        return view('admin.news.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     * POST - обработка от Blade форма
+     */
+    public function store(StoreNewsRequest $request, StoreNews $service)
+    {
+        $service->handle($request->all());
+
+        return redirect()->route('admin.news.index')
+            ->with('success', 'News article created successfully');
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     * GET - връща view с форма
+     */
+    public function edit(News $news)
+    {
+        return view('admin.news.edit', compact('news'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     * PUT/PATCH - обработка от Blade форма
+     */
+    public function update(UpdateNewsRequest $request, News $news, UpdateNews $service)
+    {
+        $service->handle($news, $request->all());
+
+        return redirect()->route('admin.news.index')
+            ->with('success', 'News article updated successfully');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     * DELETE - обработка от Blade форма
+     */
+    public function destroy(News $news, DestroyNews $service)
+    {
+        $service->handle($news);
+
+        return redirect()->route('admin.news.index')
+            ->with('success', 'News article deleted successfully');
+    }
+}
+

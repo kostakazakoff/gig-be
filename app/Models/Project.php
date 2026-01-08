@@ -46,4 +46,7 @@ class Project extends Model implements HasMedia
             ->useFallbackUrl('/GIG_960x480.jpg')
             ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/jpg', 'image/webp']);
     }
+
+    // TODO: Add media conversions for thumbnails if needed
+    // https://spatie.be/docs/laravel-medialibrary/v11/converting-images/optimizing-converted-images
 }

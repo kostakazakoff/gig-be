@@ -22,4 +22,9 @@ Route::middleware('locale')->group(function () {
         Route::get('/', [\App\Http\Controllers\Api\LocaleController::class, 'getLocale']);
         Route::post('/', [\App\Http\Controllers\Api\LocaleController::class, 'switch']);
     });
+
+    Route::prefix('projects')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Api\ProjectController::class, 'index']);
+        Route::get('/{id}', [\App\Http\Controllers\Api\ProjectController::class, 'show']);
+    });
 });

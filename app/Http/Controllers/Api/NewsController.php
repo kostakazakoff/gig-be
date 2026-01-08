@@ -12,7 +12,6 @@ class NewsController extends Controller
     use HttpResponses;
     /**
      * Display a listing of all news articles.
-     * GET - връща JSON отговор
      */
     public function index()
     {
@@ -22,7 +21,6 @@ class NewsController extends Controller
 
     /**
      * Display the specified news article.
-     * GET - връща JSON отговор
      */
     public function show($id)
     {

@@ -45,6 +45,19 @@ class UpdateProject
             }
         }
 
+        // Reorder existing images if order provided
+        if (!empty($data['media_order'])) {
+            $ids = array_filter(explode(',', $data['media_order']));
+            foreach ($ids as $position => $id) {
+                $media = $project->getMedia('project_images')->firstWhere('id', (int) $id);
+                if ($media) {
+                    // Update order_column (Spatie Media Library uses this for sorting)
+                    $media->order_column = $position + 1;
+                    $media->save();
+                }
+            }
+        }
+
         return $project;
     }
 }

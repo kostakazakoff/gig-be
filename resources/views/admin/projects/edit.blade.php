@@ -19,9 +19,11 @@
                 @if($project->getMedia('project_images')->count() > 0)
                 <div class="border-b pb-6">
                     <h3 class="text-lg font-semibold text-gray-900 mb-4">Current Images</h3>
+                    <div class="text-xs text-gray-500 mb-2">Drag images to reorder; first becomes the thumbnail.</div>
+                    <input type="hidden" name="media_order" id="media_order" value="">
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="existing-images">
                         @foreach($project->getMedia('project_images') as $media)
-                        <div class="relative group" data-media-id="{{ $media->id }}">
+                        <div class="relative group" data-media-id="{{ $media->id }}" draggable="true">
                             <img src="{{ $media->getUrl() }}" alt="Project image" class="w-full h-32 object-cover rounded-lg" />
                             <button
                                 type="button"
@@ -238,6 +240,7 @@
                         if (container && container.children.length === 0) {
                             container.parentElement.remove();
                         }
+                        updateMediaOrder();
                     }, 300);
                 }
             } else {
@@ -256,6 +259,59 @@
                 imageElement.style.opacity = '1';
                 imageElement.style.pointerEvents = 'auto';
             }
+        });
+    }
+
+    // Drag & drop reordering for existing images
+    const container = document.getElementById('existing-images');
+    const orderInput = document.getElementById('media_order');
+
+    function updateMediaOrder() {
+        if (!container || !orderInput) return;
+        const ids = Array.from(container.children)
+            .map(el => el.getAttribute('data-media-id'))
+            .filter(Boolean);
+        orderInput.value = ids.join(',');
+    }
+
+    // Initialize current order
+    updateMediaOrder();
+
+    let dragEl = null;
+    if (container) {
+        container.addEventListener('dragstart', (e) => {
+            const target = e.target.closest('[data-media-id]');
+            if (!target) return;
+            dragEl = target;
+            target.classList.add('opacity-50');
+            e.dataTransfer.effectAllowed = 'move';
+        });
+
+        container.addEventListener('dragend', (e) => {
+            const target = e.target.closest('[data-media-id]');
+            if (!target) return;
+            target.classList.remove('opacity-50');
+        });
+
+        container.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            const target = e.target.closest('[data-media-id]');
+            if (!target || target === dragEl) return;
+            // Insert visual placeholder by moving the element in DOM
+            const bounding = target.getBoundingClientRect();
+            const offset = bounding.y + (bounding.height / 2);
+            if (e.clientY - offset > 0) {
+                target.after(dragEl);
+            } else {
+                target.before(dragEl);
+            }
+        });
+
+        container.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dragEl = null;
+            updateMediaOrder();
         });
     }
 </script>

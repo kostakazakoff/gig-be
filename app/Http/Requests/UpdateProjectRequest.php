@@ -30,6 +30,7 @@ class UpdateProjectRequest extends FormRequest
             'date' => 'nullable|date',
             'images' => 'nullable|array',
             'images.*' => 'image|mimes:jpeg,png,jpg,webp|max:5120',
+            'media_order' => 'nullable|string',
         ];
     }
 }

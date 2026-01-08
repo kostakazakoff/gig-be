@@ -29,6 +29,7 @@
             </p>
         </label>
     </div>
+    <div class="mt-2 text-xs text-gray-500">Drag images to reorder; first becomes the thumbnail.</div>
     <div id="{{ $id }}-preview" class="mt-4 grid grid-cols-3 gap-4"></div>
     @error($name)
         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -58,6 +59,7 @@
                 reader.onload = function(event) {
                     const div = document.createElement('div');
                     div.className = 'relative group';
+                    div.setAttribute('draggable', 'true');
                     div.setAttribute('data-file-index', index);
                     div.innerHTML = 
                         '<img src="' + event.target.result + '" class="w-full h-32 object-cover rounded-lg" />' +
@@ -69,6 +71,7 @@
                         '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />' +
                         '</svg>' +
                         '</button>';
+                    attachDragHandlers(div);
                     preview.appendChild(div);
                 };
                 reader.readAsDataURL(file);
@@ -149,6 +152,40 @@
         if (files.length > 0) {
             addFiles(files);
         }
+    }
+
+    // Drag & drop reordering within preview
+    let dragSrcIndex = null;
+
+    function attachDragHandlers(el) {
+        el.addEventListener('dragstart', function(e) {
+            el.classList.add('opacity-50');
+            dragSrcIndex = parseInt(el.getAttribute('data-file-index'));
+            e.dataTransfer.effectAllowed = 'move';
+        });
+
+        el.addEventListener('dragend', function() {
+            el.classList.remove('opacity-50');
+        });
+
+        el.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+        });
+
+        el.addEventListener('drop', function(e) {
+            e.preventDefault();
+            const targetIndex = parseInt(el.getAttribute('data-file-index'));
+            if (dragSrcIndex === null || dragSrcIndex === targetIndex) return;
+
+            // Reorder selectedFiles array
+            const moved = selectedFiles.splice(dragSrcIndex, 1)[0];
+            selectedFiles.splice(targetIndex, 0, moved);
+
+            // Re-render preview with new ordering
+            previewFiles(selectedFiles);
+            dragSrcIndex = null;
+        });
     }
 })();
 </script>

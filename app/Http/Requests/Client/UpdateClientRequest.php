@@ -28,6 +28,7 @@ class UpdateClientRequest extends FormRequest
             'phone'      => ['nullable', 'string', 'max:255'],
             'address'    => ['nullable', 'string'],
             'company'    => ['nullable', 'string', 'max:255'],
+            'image'      => ['nullable', 'image', 'mimes:jpeg,jpg,png,webp', 'max:2048'],
         ];
     }
 
@@ -54,6 +55,9 @@ class UpdateClientRequest extends FormRequest
             
             'company.string' => 'Company must be a string',
             'company.max' => 'Company must not exceed 255 characters',
+            'image.image' => 'File must be an image',
+            'image.mimes' => 'Image must be jpeg, jpg, png or webp',
+            'image.max' => 'Image must not exceed 2MB',
         ];
     }
 }

@@ -23,6 +23,7 @@
             <table class="w-full">
                 <thead>
                 <tr class="bg-gray-100 border-b border-gray-200">
+                    <th class="px-6 py-3 text-center text-sm font-semibold text-gray-700">Image</th>
                     <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Name</th>
                     <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Email</th>
                     <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Phone</th>
@@ -35,6 +36,16 @@
                 <tbody>
                 @forelse($clients ?? [] as $client)
                     <tr class="border-b border-gray-200 hover:bg-gray-50 transition">
+                        <td class="px-6 py-4 text-center">
+                            @if ($client->getFirstMedia('category_thumbs'))
+                                <img src="{{ $client->getFirstMedia('category_thumbs')->getUrl() }}" alt="{{ $client->first_name }} {{ $client->last_name }}"
+                                    class="w-12 h-12 rounded object-cover" />
+                            @else
+                                <div class="w-12 h-12 rounded bg-gray-200 flex items-center justify-center text-gray-400 text-xs">
+                                    No
+                                </div>
+                            @endif
+                        </td>
                         <td class="px-6 py-4 text-sm text-gray-900 font-medium">
                             {{ $client->first_name }} {{ $client->last_name }}
                         </td>
@@ -63,7 +74,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" class="px-6 py-8 text-center text-gray-500">
+                        <td colspan="8" class="px-6 py-8 text-center text-gray-500">
                             <div class="flex flex-col items-center justify-center">
                                 <svg class="w-12 h-12 text-gray-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

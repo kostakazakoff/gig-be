@@ -9,8 +9,10 @@
         </div>
 
         <div class="bg-white rounded-lg shadow-md p-8">
-            <form action="{{ route('admin.clients.store') }}" method="POST" class="space-y-6">
+            <form action="{{ route('admin.clients.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                 @csrf
+
+                @include('partials.single-image-dropzone', ['label' => 'Client Image'])
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>

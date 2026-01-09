@@ -9,9 +9,21 @@
         </div>
 
         <div class="bg-white rounded-lg shadow-md p-8">
-            <form action="{{ route('admin.clients.update', $client->id) }}" method="POST" class="space-y-6">
+            <form action="{{ route('admin.clients.update', $client->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                 @csrf
                 @method('PUT')
+
+                @include('partials.single-image-dropzone', ['label' => 'Client Image', 'imageSrc' => $client->getFirstMedia('category_thumbs')?->getUrl()])
+
+                @php
+                    $existingImageSrc = $client->getFirstMedia('category_thumbs')?->getUrl();
+                @endphp
+                @if($existingImageSrc)
+                    <div class="mt-4">
+                        <p class="text-sm font-medium text-gray-700 mb-2">Current Image:</p>
+                        <img src="{{ $existingImageSrc }}" alt="Current client image" class="w-32 h-32 object-cover rounded border border-gray-300">
+                    </div>
+                @endif
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>

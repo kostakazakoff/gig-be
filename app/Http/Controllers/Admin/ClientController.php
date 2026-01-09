@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Http\Requests\Client\StoreClientRequest;
 use App\Http\Requests\Client\UpdateClientRequest;
+use App\AppServices\Client\StoreClient;
+use App\AppServices\Client\UpdateClient;
 
 class ClientController extends Controller
 {
@@ -33,9 +35,9 @@ class ClientController extends Controller
     /**
      * Store a newly created client in storage.
      */
-    public function store(StoreClientRequest $request)
+    public function store(StoreClientRequest $request, StoreClient $service)
     {
-        Client::create($request->validated());
+        $service->handle($request->validated());
 
         return redirect()->route('admin.clients.index')
             ->with('success', 'Client created successfully');
@@ -52,9 +54,9 @@ class ClientController extends Controller
     /**
      * Update the specified client in storage.
      */
-    public function update(UpdateClientRequest $request, Client $client)
+    public function update(UpdateClientRequest $request, Client $client, UpdateClient $service)
     {
-        $client->update($request->validated());
+        $service->handle($client, $request->validated());
 
         return redirect()->route('admin.clients.index')
             ->with('success', 'Client updated successfully');

@@ -3,7 +3,7 @@
 @section('content')
     <div class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <!-- Header with Add Button -->
-        <div class="mb-8 flex items-center justify-between sticky top-16 z-40 bg-gray-50 py-4">
+        <div class="mb-8 flex items-center justify-between sticky top-16 z-40 bg-gray-50 py-4 mx-auto" style="max-width: 60%;">
             <div>
                 <h1 class="text-3xl font-bold text-gray-900">Units</h1>
                 <p class="mt-2 text-gray-600">Manage all units in the system</p>
@@ -22,7 +22,7 @@
         @endif
 
         <!-- Units Table -->
-        <div class="overflow-x-auto bg-white rounded shadow">
+        <div class="overflow-x-auto bg-white rounded shadow mx-auto" style="max-width: 60%;">
             <table class="w-full">
                 <thead class="bg-gray-200">
                     <tr>

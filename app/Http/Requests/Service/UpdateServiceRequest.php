@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Service;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCategoryRequest extends FormRequest
+class UpdateServiceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -16,17 +16,19 @@ class StoreCategoryRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
-            'key' => 'required|string|max:50|regex:/^[a-z0-9_]+$/|unique:categories,translation_key',
+            'category_id' => 'required|exists:categories,id',
             'name_en' => 'required|string|max:255',
             'name_bg' => 'required|string|max:255',
             'description_en' => 'nullable|string',
             'description_bg' => 'nullable|string',
+            'price_from' => 'nullable|numeric|min:0',
+            'price_to' => 'nullable|numeric|min:0',
+            'unit_id' => 'nullable|integer|exists:units,id',
+            'image' => 'nullable|image|mimes:jpeg,jpg,png,webp|max:2048',
         ];
     }
 
@@ -36,11 +38,12 @@ class StoreCategoryRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'key.regex' => 'Key must contain only lowercase letters, numbers and underscores (a-z, 0-9, _)',
-            'key.unique' => 'This key already exists',
-            'key.required' => 'Key is required',
+            'category_id.required' => 'Category is required',
+            'category_id.exists' => 'Selected category does not exist',
             'name_en.required' => 'English name is required',
             'name_bg.required' => 'Bulgarian name is required',
+            'image.image' => 'File must be an image',
+            'image.mimes' => 'Image must be jpeg, jpg, png or webp',
         ];
     }
 }

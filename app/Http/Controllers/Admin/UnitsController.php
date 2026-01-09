@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreUnitsRequest;
-use App\Http\Requests\UpdateUnitsRequest;
+use App\Http\Requests\Units\StoreUnitsRequest;
+use App\Http\Requests\Units\UpdateUnitsRequest;
 use App\Models\Units;
 use App\AppServices\Unit\IndexUnits;
 use App\AppServices\Unit\StoreUnit;

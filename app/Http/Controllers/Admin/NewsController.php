@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreNewsRequest;
-use App\Http\Requests\UpdateNewsRequest;
+use App\Http\Requests\News\StoreNewsRequest;
+use App\Http\Requests\News\UpdateNewsRequest;
 use App\Models\News;
 use App\Traits\HttpResponses;
 use App\AppServices\News\IndexNews;

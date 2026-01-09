@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Client;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StoreClientRequest extends FormRequest
+class UpdateClientRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -13,10 +14,17 @@ class StoreClientRequest extends FormRequest
 
     public function rules(): array
     {
+        $clientId = $this->route('client')?->id ?? $this->route('client');
+
         return [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name'  => ['required', 'string', 'max:255'],
-            'email'      => ['required', 'email', 'max:255', 'unique:clients,email'],
+            'email'      => [
+                'required',
+                'email',
+                'max:255',
+                Rule::unique('clients', 'email')->ignore($clientId),
+            ],
             'phone'      => ['nullable', 'string', 'max:255'],
             'address'    => ['nullable', 'string'],
             'company'    => ['nullable', 'string', 'max:255'],

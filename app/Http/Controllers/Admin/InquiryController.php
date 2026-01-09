@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Inquiry;
 use App\Models\Client;
 use App\Models\Service;
-use App\Http\Requests\StoreInquiryRequest;
-use App\Http\Requests\UpdateInquiryRequest;
+use App\Http\Requests\Inquiry\StoreInquiryRequest;
+use App\Http\Requests\Inquiry\UpdateInquiryRequest;
 
 class InquiryController extends Controller
 {

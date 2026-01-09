@@ -40,39 +40,13 @@
             <input type="text" value="{{ $service->translation_key }}" class="w-full border rounded px-3 py-2 bg-gray-100 cursor-not-allowed" disabled>
         </div>
 
-        <!-- Current Image -->
-        @if($service->image_src)
-            <div class="mb-4">
-                <label class="block text-gray-700 font-semibold mb-2">Current Image</label>
-                <div class="relative group inline-block">
-                    <img src="{{ $service->image_src }}" alt="{{ $service->name }}" class="h-32 w-32 object-cover rounded">
-                    <button
-                        type="button"
-                        onclick="deleteImage({{ $service->id }})"
-                        class="absolute top-2 right-2 bg-red-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-700"
-                        title="Delete image"
-                    >
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        @endif
-
         <!-- Image Upload -->
         <div class="mb-4">
-            <label class="block text-gray-700 font-semibold mb-2">Replace Image</label>
-            <div id="dropZone" class="border-2 border-dashed border-gray-300 rounded p-6 text-center cursor-pointer hover:border-blue-500 transition">
-                <input type="file" name="image" id="imageInput" class="hidden" accept="image/*">
-                <div id="dropText">
-                    <p class="text-gray-500">Drag and drop a new image here or click to select</p>
-                </div>
-                <img id="imagePreview" src="" alt="Preview" class="hidden mt-4 max-h-48 mx-auto">
-            </div>
-            @error('image')
-                <span class="text-red-500 text-sm">{{ $message }}</span>
-            @enderror
+            @include('partials.single-image-dropzone', [
+                'label' => 'Replace Image',
+                'existingImage' => $service->image_src,
+                'deleteUrl' => route('admin.services.deleteImage', $service),
+            ])
         </div>
 
         <!-- English Name -->
@@ -164,101 +138,4 @@
     </form>
 </div>
 
-<script>
-    const dropZone = document.getElementById('dropZone');
-    const imageInput = document.getElementById('imageInput');
-    const imagePreview = document.getElementById('imagePreview');
-    const dropText = document.getElementById('dropText');
-
-    dropZone.addEventListener('click', () => imageInput.click());
-
-    dropZone.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        dropZone.classList.add('border-blue-500');
-    });
-
-    dropZone.addEventListener('dragleave', () => {
-        dropZone.classList.remove('border-blue-500');
-    });
-
-    dropZone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dropZone.classList.remove('border-blue-500');
-        imageInput.files = e.dataTransfer.files;
-        handleImageSelect();
-    });
-
-    imageInput.addEventListener('change', handleImageSelect);
-
-    function handleImageSelect() {
-        if (imageInput.files.length > 0) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                imagePreview.src = e.target.result;
-                imagePreview.classList.remove('hidden');
-                dropText.classList.add('hidden');
-            };
-            reader.readAsDataURL(imageInput.files[0]);
-        }
-    }
-
-    // Delete image function
-    function deleteImage(serviceId) {
-        if (!confirm('Are you sure you want to delete this image?')) {
-            return;
-        }
-
-        // Show loading state
-        const imageContainer = document.querySelector('.relative.group.inline-block');
-        if (imageContainer) {
-            imageContainer.style.opacity = '0.5';
-            imageContainer.style.pointerEvents = 'none';
-        }
-
-        fetch('/admin/services/' + serviceId + '/image', {
-            method: 'DELETE',
-            headers: {
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Delete response:', data);
-            if (data.success) {
-                // Remove the image element from DOM with animation
-                if (imageContainer) {
-                    imageContainer.style.opacity = '0';
-                    imageContainer.style.transform = 'scale(0.8)';
-                    imageContainer.style.transition = 'all 0.3s ease';
-                    
-                    setTimeout(function() {
-                        imageContainer.closest('.mb-4').remove();
-                    }, 300);
-                }
-            } else {
-                // Restore image on error
-                if (imageContainer) {
-                    imageContainer.style.opacity = '1';
-                    imageContainer.style.pointerEvents = 'auto';
-                }
-                console.error('Error deleting image:', data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            // Restore image on error
-            if (imageContainer) {
-                imageContainer.style.opacity = '1';
-                imageContainer.style.pointerEvents = 'auto';
-            }
-        });
-    }
-</script>
 @endsection

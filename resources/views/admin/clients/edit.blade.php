@@ -92,6 +92,17 @@
                     </a>
                 </div>
             </form>
+
+            <!-- Delete Button (Separate Form) -->
+            <form action="{{ route('admin.clients.destroy', $client) }}" method="POST" class="mt-6 pt-6 border-t border-gray-200"
+                onsubmit="return confirm('Are you sure you want to delete this client?');">
+                @csrf
+                @method('DELETE')
+                <button type="submit"
+                    class="w-full bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-6 rounded-lg transition duration-200">
+                    Delete Client
+                </button>
+            </form>
         </div>
     </div>
 </div>

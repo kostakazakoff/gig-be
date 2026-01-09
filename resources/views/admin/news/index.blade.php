@@ -28,11 +28,10 @@
                     <thead>
                         <tr class="bg-gray-100 border-b border-gray-200">
                             <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm font-semibold text-gray-700">Image</th>
-                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Key</th>
                             <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Title (EN)</th>
-                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Title (BG)</th>
-                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Content (EN)</th>
-                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Content (BG)</th>
+                            <th class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Title (BG)</th>
+                            <th class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Content (EN)</th>
+                            <th class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Content (BG)</th>
                             <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm font-semibold text-gray-700">Actions</th>
                         </tr>
                     </thead>
@@ -49,29 +48,21 @@
                                             No</div>
                                     @endif
                                 </td>
-                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-900 font-medium">{{ $article->translation_key }}</td>
                                 <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-600">{{ $article->getTranslation('title', 'en') }}</td>
-                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-600">{{ $article->getTranslation('title', 'bg') }}</td>
-                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-600">
+                                <td class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-600">{{ $article->getTranslation('title', 'bg') }}</td>
+                                <td class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-600">
                                     {{ Str::limit($article->getTranslation('content', 'en'), 50) }}
                                 </td>
-                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-600">
+                                <td class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-600">
                                     {{ Str::limit($article->getTranslation('content', 'bg'), 50) }}
                                 </td>
                                 <td class="px-4 sm:px-6 py-2 sm:py-4 text-center">
-                                    <a href="{{ route('admin.news.edit', $article->id) }}"
-                                        class="inline-flex items-center px-3 py-1 my-1 bg-yellow-50 text-yellow-700 border border-yellow-300 rounded hover:bg-yellow-100 transition text-sm font-medium">
-                                        Edit
-                                    </a>
-                                    <form action="{{ route('admin.news.destroy', $article->id) }}" method="POST"
-                                        class="inline ml-4"
-                                        onsubmit="return confirm('Are you sure you want to delete this news article?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="inline-flex items-center px-3 py-1 my-1 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium ml-2">
-                                            Delete
-                                        </button>
-                                    </form>
+                                    @include('partials.action-buttons', [
+                                        'editRoute' => 'admin.news.edit',
+                                        'deleteRoute' => 'admin.news.destroy',
+                                        'model' => $article,
+                                        'confirmMessage' => 'Are you sure you want to delete this article?'
+                                    ])
                                 </td>
                             </tr>
                         @empty

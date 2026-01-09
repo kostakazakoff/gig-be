@@ -20,11 +20,10 @@
                 <thead class="bg-gray-200">
                     <tr>
                         <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Image</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Key</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Category</th>
+                        <th class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Category</th>
                         <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Name (EN/BG)</th>
                         <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Price</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Description</th>
+                        <th class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Description</th>
                         <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm">Actions</th>
                     </tr>
                 </thead>
@@ -39,8 +38,7 @@
                                     <span class="text-gray-400">No</span>
                                 @endif
                             </td>
-                            <td class="px-4 sm:px-6 py-2 sm:py-3 font-mono text-xs lg:text-sm">{{ $service->translation_key }}</td>
-                            <td class="px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">{{ $service->category->name ?? 'N/A' }}</td>
+                            <td class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">{{ $service->category->name ?? 'N/A' }}</td>
                             <td class="px-4 sm:px-6 py-2 sm:py-3">
                                 <div class="text-xs lg:text-sm">
                                     <div class="text-blue-600">EN: {{ $service->getTranslation('name', 'en') }}</div>
@@ -58,23 +56,18 @@
                                     <span class="text-gray-400">N/A</span>
                                 @endif
                             </td>
-                            <td class="px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">
+                            <td class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">
                                 <div class="text-xs lg:text-sm">
                                     <div class="text-blue-600">EN: {{ Str::limit($service->getTranslation('description', 'en'), 50) }}</div>
                                     <div class="text-red-600">BG: {{ Str::limit($service->getTranslation('description', 'bg'), 50) }}</div>
                                 </div>
                             </td>
-                            <td class="px-4 sm:px-6 py-2 sm:py-3 text-center">
-                                <a href="{{ route('admin.services.edit', $service) }}"
-                                    class="inline-flex items-center px-3 py-1 my-1 bg-yellow-50 text-yellow-700 border border-yellow-300 rounded hover:bg-yellow-100 transition text-sm font-medium">Edit</a>
-                                <form method="POST" action="{{ route('admin.services.destroy', $service) }}"
-                                    style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" onclick="return confirm('Are you sure?')"
-                                        class="inline-flex items-center px-3 py-1 my-1 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium ml-2">Delete</button>
-                                </form>
-                            </td>
+                            @include('partials.action-buttons', [
+                                'editRoute' => 'admin.services.edit',
+                                'deleteRoute' => 'admin.services.destroy',
+                                'model' => $service,
+                                'confirmMessage' => 'Are you sure you want to delete this service?'
+                            ])
                         </tr>
                     @empty
                         <tr>

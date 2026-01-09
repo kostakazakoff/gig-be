@@ -27,46 +27,33 @@
             <table class="w-full">
                 <thead>
                     <tr class="bg-gray-100 border-b border-gray-200">
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Key</th>
                         <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Name (EN)</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Name (BG)</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Services</th>
+                        <th class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Name (BG)</th>
+                        <th class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Services</th>
                         <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm font-semibold text-gray-700">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($units ?? [] as $unit)
                         <tr class="border-b border-gray-200 hover:bg-gray-50 transition">
-                            <td class="px-4 sm:px-6 py-2 sm:py-4 font-mono text-xs lg:text-sm text-gray-600">{{ $unit->translation_key }}</td>
                             <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-900">
                                 {{ $unit->getTranslation('name', 'en') }}
                             </td>
-                            <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-900">
+                            <td class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-900">
                                 {{ $unit->getTranslation('name', 'bg') }}
                             </td>
-                            <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-600">
+                            <td class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-600">
                                 @php
                                     $serviceNames = $unit->services->map(fn($s) => $s->name)->filter()->values();
                                 @endphp
                                 {{ $serviceNames->isNotEmpty() ? $serviceNames->implode(', ') : 'N/A' }}
                             </td>
-                            <td class="px-4 sm:px-6 py-2 sm:py-4 text-center">
-                                <div class="flex justify-center gap-2">
-                                    <a href="{{ route('admin.units.edit', $unit) }}"
-                                        class="inline-flex items-center px-3 py-1 my-1 bg-yellow-50 text-yellow-700 border border-yellow-300 rounded hover:bg-yellow-100 transition text-sm font-medium">
-                                        Edit
-                                    </a>
-                                    <form action="{{ route('admin.units.destroy', $unit) }}" method="POST"
-                                        onsubmit="return confirm('Are you sure you want to delete this unit?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
-                                            class="inline-flex items-center px-3 py-1 my-1 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium">
-                                            Delete
-                                        </button>
-                                    </form>
-                                </div>
-                            </td>
+                            @include('partials.action-buttons', [
+                                'editRoute' => 'admin.units.edit',
+                                'deleteRoute' => 'admin.units.destroy',
+                                'model' => $unit,
+                                'confirmMessage' => 'Are you sure you want to delete this unit?'
+                            ])
                         </tr>
                     @empty
                         <tr>

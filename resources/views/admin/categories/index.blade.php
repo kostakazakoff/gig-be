@@ -28,11 +28,10 @@
                     <thead>
                         <tr class="bg-gray-100 border-b border-gray-200">
                             <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm font-semibold text-gray-700">Image</th>
-                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Key</th>
                             <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Name (EN)</th>
-                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Name (BG)</th>
-                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Description (EN)</th>
-                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Description (BG)</th>
+                            <th class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Name (BG)</th>
+                            <th class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Description (EN)</th>
+                            <th class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Description (BG)</th>
                             <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm font-semibold text-gray-700">Actions</th>
                         </tr>
                     </thead>
@@ -49,39 +48,22 @@
                                             No</div>
                                     @endif
                                 </td>
-                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-900 font-medium">{{ $category->translation_key }}
-                                </td>
                                 <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700">{{ $category->name }}</td>
-                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700">
+                                <td class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700">
                                     {{ $category->getTranslation('name', 'bg') ?? '—' }}
                                 </td>
-                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700 truncate max-w-xs">
+                                <td class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700 truncate max-w-xs">
                                     {{ Str::limit($category->description ?? '—', 50) }}
                                 </td>
-                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700 truncate max-w-xs">
+                                <td class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700 truncate max-w-xs">
                                     {{ Str::limit($category->getTranslation('description', 'bg') ?? '—', 50) }}
                                 </td>
-                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-center">
-                                    <div class="flex items-center justify-center gap-2">
-                                        <!-- Edit Button -->
-                                        <a href="{{ route('admin.categories.edit', $category->id) }}"
-                                            class="inline-flex items-center px-3 py-1 my-1 bg-yellow-50 text-yellow-700 border border-yellow-300 rounded hover:bg-yellow-100 transition text-sm font-medium">
-                                            Edit
-                                        </a>
-
-                                        <!-- Delete Button -->
-                                        <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST"
-                                            class="inline"
-                                            onsubmit="return confirm('Are you sure you want to delete this category?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                class="inline-flex items-center px-3 py-1 my-1 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium">
-                                                Delete
-                                            </button>
-                                        </form>
-                                    </div>
-                                </td>
+                                @include('partials.action-buttons', [
+                                    'editRoute' => 'admin.categories.edit',
+                                    'deleteRoute' => 'admin.categories.destroy',
+                                    'model' => $category,
+                                    'confirmMessage' => 'Are you sure you want to delete this category?'
+                                ])
                             </tr>
                         @empty
                             <tr>

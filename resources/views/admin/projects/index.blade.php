@@ -28,11 +28,10 @@
                 <thead>
                     <tr class="bg-gray-100 border-b border-gray-200">
                         <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm font-semibold text-gray-700">Image</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Key</th>
                         <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Title (EN)</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Title (BG)</th>
+                        <th class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Title (BG)</th>
                         <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Price</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Date</th>
+                        <th class="hidden sm:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Date</th>
                         <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm font-semibold text-gray-700">Actions</th>
                     </tr>
                 </thead>
@@ -49,38 +48,22 @@
                                         No</div>
                                 @endif
                             </td>
-                            <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-900 font-medium">{{ $project->translation_key }}</td>
                             <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700">{{ $project->title }}</td>
-                            <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700">
+                            <td class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700">
                                 {{ $project->getTranslation('title', 'bg') ?? '—' }}
                             </td>
                             <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700">
                                 {{ $project->price ? number_format($project->price, 2) . ' лв.' : '—' }}
                             </td>
-                            <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700">
+                            <td class="hidden sm:table-cell px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700">
                                 {{ $project->date ? \Carbon\Carbon::parse($project->date)->format('d.m.Y') : '—' }}
                             </td>
-                            <td class="px-4 sm:px-6 py-2 sm:py-4 text-center">
-                                <div class="flex items-center justify-center gap-2">
-                                    <!-- Edit Button -->
-                                    <a href="{{ route('admin.projects.edit', $project->id) }}"
-                                        class="inline-flex items-center px-3 py-1 my-1 bg-yellow-50 text-yellow-700 border border-yellow-300 rounded hover:bg-yellow-100 transition text-sm font-medium">
-                                        Edit
-                                    </a>
-
-                                    <!-- Delete Button -->
-                                    <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST"
-                                        class="inline"
-                                        onsubmit="return confirm('Are you sure you want to delete this project?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
-                                            class="inline-flex items-center px-3 py-1 my-1 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium">
-                                            Delete
-                                        </button>
-                                    </form>
-                                </div>
-                            </td>
+                            @include('partials.action-buttons', [
+                                'editRoute' => 'admin.projects.edit',
+                                'deleteRoute' => 'admin.projects.destroy',
+                                'model' => $project,
+                                'confirmMessage' => 'Are you sure you want to delete this project?'
+                            ])
                         </tr>
                     @empty
                         <tr>

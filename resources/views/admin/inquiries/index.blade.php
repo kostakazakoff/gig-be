@@ -26,8 +26,8 @@
                 <tr class="bg-gray-100 border-b border-gray-200">
                     <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Client</th>
                     <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Service</th>
-                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Message</th>
-                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Created</th>
+                    <th class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Message</th>
+                    <th class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Created</th>
                     <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm font-semibold text-gray-700">Actions</th>
                 </tr>
                 </thead>
@@ -42,23 +42,12 @@
                         </td>
                         <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700 truncate max-w-xs">{{ Str::limit($inquiry->message, 80) }}</td>
                         <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700">{{ $inquiry->created_at->format('Y-m-d H:i') }}</td>
-                        <td class="px-4 sm:px-6 py-2 sm:py-4 text-center">
-                            <div class="flex items-center justify-center gap-2">
-                                          <a href="{{ route('admin.inquiries.edit', $inquiry->id) }}"
-                                              class="inline-flex items-center px-3 py-1 my-1 bg-yellow-50 text-yellow-700 border border-yellow-300 rounded hover:bg-yellow-100 transition text-sm font-medium">
-                                    Edit
-                                </a>
-                                <form action="{{ route('admin.inquiries.destroy', $inquiry->id) }}" method="POST" class="inline"
-                                      onsubmit="return confirm('Are you sure you want to delete this inquiry?')">
-                                    @csrf
-                                    @method('DELETE')
-                                        <button type="submit"
-                                            class="inline-flex items-center px-3 py-1 my-1 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium">
-                                        Delete
-                                    </button>
-                                </form>
-                            </div>
-                        </td>
+                        @include('partials.action-buttons', [
+                            'editRoute' => 'admin.inquiries.edit',
+                            'deleteRoute' => 'admin.inquiries.destroy',
+                            'model' => $inquiry,
+                            'confirmMessage' => 'Are you sure you want to delete this inquiry?'
+                        ])
                     </tr>
                 @empty
                     <tr>

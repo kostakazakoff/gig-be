@@ -22,26 +22,25 @@
         @endif
 
         <!-- Units Table -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden">
-            <div class="overflow-x-auto">
+        <div class="overflow-x-auto bg-white rounded shadow">
             <table class="w-full">
-                <thead>
-                    <tr class="bg-gray-100 border-b border-gray-200">
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Name (EN/BG)</th>
-                        <th class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Services</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm font-semibold text-gray-700">Actions</th>
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Name (EN/BG)</th>
+                        <th class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Services</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-right text-xs lg:text-sm">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($units ?? [] as $unit)
-                        <tr class="border-b border-gray-200 hover:bg-gray-50 transition">
-                            <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm">
+                        <tr class="border-t hover:bg-gray-50">
+                            <td class="px-4 sm:px-6 py-2 sm:py-3">
                                 <div class="text-xs lg:text-sm">
                                     <div class="text-blue-600">EN: {{ $unit->getTranslation('name', 'en') }}</div>
                                     <div class="text-red-600">BG: {{ $unit->getTranslation('name', 'bg') }}</div>
                                 </div>
                             </td>
-                            <td class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-600">
+                            <td class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">
                                 @php
                                     $serviceNames = $unit->services->map(fn($s) => $s->name)->filter()->values();
                                 @endphp
@@ -56,7 +55,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="px-6 py-8 text-center text-gray-500">
+                            <td colspan="3" class="px-6 py-8 text-center text-gray-500">
                                 No units found. <a href="{{ route('admin.units.create') }}"
                                     class="text-blue-600 hover:underline">Create one now</a>
                             </td>

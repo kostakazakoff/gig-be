@@ -22,42 +22,32 @@
         @endif
 
         <!-- Categories Table -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden">
-            <div class="overflow-x-auto">
+        <div class="overflow-x-auto bg-white rounded shadow">
             <table class="w-full">
-                    <thead>
-                        <tr class="bg-gray-100 border-b border-gray-200">
-                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm font-semibold text-gray-700">Image</th>
-                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Name (EN/BG)</th>
-                            <th class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Description (EN/BG)</th>
-                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm font-semibold text-gray-700">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($categories ?? [] as $category)
-                            <tr class="border-b border-gray-200 hover:bg-gray-50 transition">
-                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-center">
-                                    @if ($category->image_src)
-                                        <img src="{{ $category->image_src }}" alt="{{ $category->translation_key }}"
-                                            class="w-12 h-12 rounded object-cover" />
-                                    @else
-                                        <div
-                                            class="w-12 h-12 rounded bg-gray-200 flex items-center justify-center text-gray-400 text-xs">
-                                            No</div>
-                                    @endif
-                                </td>
-                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm">
-                                    <div class="text-xs lg:text-sm">
-                                        <div class="text-blue-600">EN: {{ $category->name }}</div>
-                                        <div class="text-red-600">BG: {{ $category->getTranslation('name', 'bg') ?? '—' }}</div>
-                                    </div>
-                                </td>
-                                <td class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm">
-                                    <div class="text-xs lg:text-sm">
-                                        <div class="text-blue-600">EN: {{ Str::limit($category->description ?? '—', 50) }}</div>
-                                        <div class="text-red-600">BG: {{ Str::limit($category->getTranslation('description', 'bg') ?? '—', 50) }}</div>
-                                    </div>
-                                </td>
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Image</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Name (EN/BG)</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-right text-xs lg:text-sm">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($categories ?? [] as $category)
+                        <tr class="border-t hover:bg-gray-50">
+                            <td class="px-6 py-3">
+                                @if ($category->image_src)
+                                    <img src="{{ $category->image_src }}" alt="{{ $category->translation_key }}"
+                                        class="h-12 w-12 object-cover rounded">
+                                @else
+                                    <span class="text-gray-400">No</span>
+                                @endif
+                            </td>
+                            <td class="px-4 sm:px-6 py-2 sm:py-3">
+                                <div class="text-xs lg:text-sm">
+                                    <div class="text-blue-600">EN: {{ $category->name }}</div>
+                                    <div class="text-red-600">BG: {{ $category->getTranslation('name', 'bg') ?? '—' }}</div>
+                                </div>
+                            </td>
                                 @include('partials.action-buttons', [
                                     'editRoute' => 'admin.categories.edit',
                                     'deleteRoute' => 'admin.categories.destroy',
@@ -67,7 +57,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="px-6 py-8 text-center text-gray-500">
+                                <td colspan="3" class="px-6 py-8 text-center text-gray-500">
                                     <div class="flex flex-col items-center justify-center">
                                         <svg class="w-12 h-12 text-gray-400 mb-3" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
@@ -82,9 +72,9 @@
                                 </td>
                             </tr>
                         @endforelse
-                </tbody>
-            </table>
-                </div>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 @endsection

@@ -19,42 +19,37 @@
             </div>
         @endif
 
-        <div class="bg-white rounded-lg shadow-md overflow-hidden">
-            <div class="overflow-x-auto">
+        <div class="overflow-x-auto bg-white rounded shadow">
             <table class="w-full">
-                <thead>
-                <tr class="bg-gray-100 border-b border-gray-200">
-                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm font-semibold text-gray-700">Image</th>
-                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Name</th>
-                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Email</th>
-                    <th class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Phone</th>
-                    <th class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Company</th>
-                    <th class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Address</th>
-                    <th class="hidden sm:table-cell px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm font-semibold text-gray-700">Inquiries</th>
-                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm font-semibold text-gray-700">Actions</th>
-                </tr>
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Image</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Name</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Email</th>
+                        <th class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Phone</th>
+                        <th class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Company</th>
+                        <th class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Address</th>
+                    <th class="hidden sm:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Inquiries</th>
+                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-right text-xs lg:text-sm">Actions</th>
+                    </tr>
                 </thead>
                 <tbody>
                 @forelse($clients ?? [] as $client)
-                    <tr class="border-b border-gray-200 hover:bg-gray-50 transition">
-                        <td class="px-4 sm:px-6 py-2 sm:py-4 text-center">
+                    <tr class="border-t hover:bg-gray-50">
+                        <td class="px-6 py-3">
                             @if ($client->getFirstMedia('category_thumbs'))
                                 <img src="{{ $client->getFirstMedia('category_thumbs')->getUrl() }}" alt="{{ $client->first_name }} {{ $client->last_name }}"
-                                    class="w-12 h-12 rounded object-cover" />
+                                    class="h-12 w-12 object-cover rounded">
                             @else
-                                <div class="w-12 h-12 rounded bg-gray-200 flex items-center justify-center text-gray-400 text-xs">
-                                    No
-                                </div>
+                                <span class="text-gray-400">No</span>
                             @endif
                         </td>
-                        <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-900 font-medium">
-                            {{ $client->first_name }} {{ $client->last_name }}
-                        </td>
-                        <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700">{{ $client->email }}</td>
-                        <td class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700">{{ $client->phone ?? '—' }}</td>
-                        <td class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700">{{ $client->company ?? '—' }}</td>
-                        <td class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700 truncate max-w-xs">{{ $client->address ?? '—' }}</td>
-                        <td class="hidden sm:table-cell px-4 sm:px-6 py-2 sm:py-4 text-center text-xs lg:text-sm text-gray-700">{{ $client->inquiries_count ?? 0 }}</td>
+                        <td class="px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">{{ $client->first_name }} {{ $client->last_name }}</td>
+                        <td class="px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">{{ $client->email }}</td>
+                        <td class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">{{ $client->phone ?? '—' }}</td>
+                        <td class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">{{ $client->company ?? '—' }}</td>
+                        <td class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">{{ $client->address ?? '—' }}</td>
+                        <td class="hidden sm:table-cell px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm">{{ $client->inquiries_count ?? 0 }}</td>
                         @include('partials.action-buttons', [
                             'editRoute' => 'admin.clients.edit',
                             'deleteRoute' => 'admin.clients.destroy',

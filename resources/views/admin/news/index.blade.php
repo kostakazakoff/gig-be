@@ -22,62 +22,50 @@
         @endif
 
         <!-- News Table -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden">
-            <div class="overflow-x-auto">
+        <div class="overflow-x-auto bg-white rounded shadow">
             <table class="w-full">
-                    <thead>
-                        <tr class="bg-gray-100 border-b border-gray-200">
-                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm font-semibold text-gray-700">Image</th>
-                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Title (EN/BG)</th>
-                            <th class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Content (EN/BG)</th>
-                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm font-semibold text-gray-700">Actions</th>
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs lg:text-sm">Image</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Title (EN/BG)</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-right text-xs lg:text-sm">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($news ?? [] as $article)
+                        <tr class="border-t hover:bg-gray-50">
+                            <td class="px-6 py-3">
+                                @if ($article->image_src)
+                                    <img src="{{ $article->image_src }}" alt="{{ $article->translation_key }}"
+                                        class="h-12 w-12 object-cover rounded">
+                                @else
+                                    <span class="text-gray-400">No</span>
+                                @endif
+                            </td>
+                            <td class="px-4 sm:px-6 py-2 sm:py-3">
+                                <div class="text-xs lg:text-sm">
+                                    <div class="text-blue-600">EN: {{ $article->getTranslation('title', 'en') }}</div>
+                                    <div class="text-red-600">BG: {{ $article->getTranslation('title', 'bg') }}</div>
+                                </div>
+                            </td>
+                            @include('partials.action-buttons', [
+                                'editRoute' => 'admin.news.edit',
+                                'deleteRoute' => 'admin.news.destroy',
+                                'model' => $article,
+                                'confirmMessage' => 'Are you sure you want to delete this article?',
+                            ])
                         </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($news ?? [] as $article)
-                            <tr class="border-b border-gray-200 hover:bg-gray-50 transition">
-                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-center">
-                                    @if ($article->image_src)
-                                        <img src="{{ $article->image_src }}" alt="{{ $article->translation_key }}"
-                                            class="w-12 h-12 rounded object-cover" />
-                                    @else
-                                        <div
-                                            class="w-12 h-12 rounded bg-gray-200 flex items-center justify-center text-gray-400 text-xs">
-                                            No</div>
-                                    @endif
-                                </td>
-                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm">
-                                    <div class="text-xs lg:text-sm">
-                                        <div class="text-blue-600">EN: {{ $article->getTranslation('title', 'en') }}</div>
-                                        <div class="text-red-600">BG: {{ $article->getTranslation('title', 'bg') }}</div>
-                                    </div>
-                                </td>
-                                <td class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm">
-                                    <div class="text-xs lg:text-sm">
-                                        <div class="text-blue-600">EN: {{ Str::limit($article->getTranslation('content', 'en'), 50) }}</div>
-                                        <div class="text-red-600">BG: {{ Str::limit($article->getTranslation('content', 'bg'), 50) }}</div>
-                                    </div>
-                                </td>
-                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-center">
-                                    @include('partials.action-buttons', [
-                                        'editRoute' => 'admin.news.edit',
-                                        'deleteRoute' => 'admin.news.destroy',
-                                        'model' => $article,
-                                        'confirmMessage' => 'Are you sure you want to delete this article?'
-                                    ])
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="7" class="px-6 py-8 text-center text-gray-600">
-                                    No news articles found. <a href="{{ route('admin.news.create') }}"
-                                        class="text-blue-600 hover:text-blue-900 font-medium">Create one</a>
-                                </td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-                </div>
+                    @empty
+                        <tr>
+                            <td colspan="3" class="px-6 py-8 text-left text-gray-500">
+                                No news articles found. <a href="{{ route('admin.news.create') }}"
+                                    class="text-blue-600 hover:text-blue-900 font-medium">Create one</a>
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
+    </div>
     </div>
 @endsection

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div class="mb-8 flex items-center justify-between sticky top-18 z-50 bg-gray-50 py-4">
+        <div class="mb-8 flex items-center justify-between sticky top-16 z-40 bg-gray-50 py-4">
             <div>
                 <h1 class="text-3xl font-bold text-gray-900">Inquiries</h1>
                 <p class="mt-2 text-gray-600">Manage all inquiries</p>

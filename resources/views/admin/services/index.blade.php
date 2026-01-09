@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center mb-6 sticky top-18 z-50 bg-gray-50 py-4">
+        <div class="flex justify-between items-center mb-6 sticky top-16 z-40 bg-gray-50 py-4">
             <h1 class="text-3xl font-bold">Services</h1>
             <a href="{{ route('admin.services.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
                 + ADD SERVICE

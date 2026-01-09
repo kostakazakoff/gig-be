@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Project extends Model implements HasMedia
 {
@@ -47,6 +48,12 @@ class Project extends Model implements HasMedia
             ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/jpg', 'image/webp']);
     }
 
-    // TODO: Add media conversions for thumbnails if needed
-    // https://spatie.be/docs/laravel-medialibrary/v11/converting-images/optimizing-converted-images
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        $this->addMediaConversion('project_thumb')
+            ->width(480)
+            ->height(360)
+            ->sharpen(10)
+            ->nonQueued();
+    }
 }

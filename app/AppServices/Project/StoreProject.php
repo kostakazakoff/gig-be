@@ -3,12 +3,13 @@
 namespace App\AppServices\Project;
 
 use App\Models\Project;
+use App\Traits\OptimizesImages;
 use App\Traits\Translates;
 use Spatie\TranslationLoader\LanguageLine;
 
 class StoreProject
 {
-    use Translates;
+    use Translates, OptimizesImages;
     public function handle(array $data): Project
     {
         $project = Project::create([
@@ -23,7 +24,8 @@ class StoreProject
         // Handle multiple images
         if (!empty($data['images'])) {
             foreach ($data['images'] as $image) {
-                $project->addMedia($image)
+                $optimizedImage = $this->optimizeImage($image, 1440, 900);
+                $project->addMedia($optimizedImage)
                     ->toMediaCollection('project_images');
             }
         }

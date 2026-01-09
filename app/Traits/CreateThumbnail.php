@@ -9,7 +9,7 @@ trait CreateThumbnail
     public function createThumbnail($model, array $images, string $collectionName): void
     {
         foreach ($images as $image) {
-            $optimizedImage = $this->optimizeImage($image, 384, 256);
+            $optimizedImage = $this->optimizeImage($image, 480, 360);
 
             $model  ->addMedia($optimizedImage)
                     ->toMediaCollection($collectionName);

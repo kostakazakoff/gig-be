@@ -28,10 +28,8 @@
                     <thead>
                         <tr class="bg-gray-100 border-b border-gray-200">
                             <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm font-semibold text-gray-700">Image</th>
-                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Name (EN)</th>
-                            <th class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Name (BG)</th>
-                            <th class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Description (EN)</th>
-                            <th class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Description (BG)</th>
+                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Name (EN/BG)</th>
+                            <th class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Description (EN/BG)</th>
                             <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm font-semibold text-gray-700">Actions</th>
                         </tr>
                     </thead>
@@ -48,15 +46,17 @@
                                             No</div>
                                     @endif
                                 </td>
-                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700">{{ $category->name }}</td>
-                                <td class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700">
-                                    {{ $category->getTranslation('name', 'bg') ?? '—' }}
+                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm">
+                                    <div class="text-xs lg:text-sm">
+                                        <div class="text-blue-600">EN: {{ $category->name }}</div>
+                                        <div class="text-red-600">BG: {{ $category->getTranslation('name', 'bg') ?? '—' }}</div>
+                                    </div>
                                 </td>
-                                <td class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700 truncate max-w-xs">
-                                    {{ Str::limit($category->description ?? '—', 50) }}
-                                </td>
-                                <td class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700 truncate max-w-xs">
-                                    {{ Str::limit($category->getTranslation('description', 'bg') ?? '—', 50) }}
+                                <td class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm">
+                                    <div class="text-xs lg:text-sm">
+                                        <div class="text-blue-600">EN: {{ Str::limit($category->description ?? '—', 50) }}</div>
+                                        <div class="text-red-600">BG: {{ Str::limit($category->getTranslation('description', 'bg') ?? '—', 50) }}</div>
+                                    </div>
                                 </td>
                                 @include('partials.action-buttons', [
                                     'editRoute' => 'admin.categories.edit',

@@ -24,14 +24,14 @@
             <table class="w-full">
                 <thead>
                 <tr class="bg-gray-100 border-b border-gray-200">
-                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs sm:text-sm font-semibold text-gray-700">Image</th>
-                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Name</th>
-                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Email</th>
-                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Phone</th>
-                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Company</th>
-                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Address</th>
-                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs sm:text-sm font-semibold text-gray-700">Inquiries</th>
-                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs sm:text-sm font-semibold text-gray-700">Actions</th>
+                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm font-semibold text-gray-700">Image</th>
+                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Name</th>
+                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Email</th>
+                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Phone</th>
+                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Company</th>
+                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Address</th>
+                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm font-semibold text-gray-700">Inquiries</th>
+                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm font-semibold text-gray-700">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -47,14 +47,14 @@
                                 </div>
                             @endif
                         </td>
-                        <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-900 font-medium">
+                        <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-900 font-medium">
                             {{ $client->first_name }} {{ $client->last_name }}
                         </td>
-                        <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-700">{{ $client->email }}</td>
-                        <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-700">{{ $client->phone ?? '—' }}</td>
-                        <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-700">{{ $client->company ?? '—' }}</td>
-                        <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-700 truncate max-w-xs">{{ $client->address ?? '—' }}</td>
-                        <td class="px-4 sm:px-6 py-2 sm:py-4 text-center text-xs sm:text-sm text-gray-700">{{ $client->inquiries_count ?? 0 }}</td>
+                        <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700">{{ $client->email }}</td>
+                        <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700">{{ $client->phone ?? '—' }}</td>
+                        <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700">{{ $client->company ?? '—' }}</td>
+                        <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700 truncate max-w-xs">{{ $client->address ?? '—' }}</td>
+                        <td class="px-4 sm:px-6 py-2 sm:py-4 text-center text-xs lg:text-sm text-gray-700">{{ $client->inquiries_count ?? 0 }}</td>
                         <td class="px-4 sm:px-6 py-2 sm:py-4 text-center">
                             <div class="flex items-center justify-center gap-2">
                                           <a href="{{ route('admin.clients.edit', $client->id) }}"

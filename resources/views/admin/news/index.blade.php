@@ -27,13 +27,13 @@
             <table class="w-full">
                     <thead>
                         <tr class="bg-gray-100 border-b border-gray-200">
-                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs sm:text-sm font-semibold text-gray-700">Image</th>
-                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Key</th>
-                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Title (EN)</th>
-                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Title (BG)</th>
-                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Content (EN)</th>
-                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Content (BG)</th>
-                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs sm:text-sm font-semibold text-gray-700">Actions</th>
+                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm font-semibold text-gray-700">Image</th>
+                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Key</th>
+                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Title (EN)</th>
+                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Title (BG)</th>
+                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Content (EN)</th>
+                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Content (BG)</th>
+                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm font-semibold text-gray-700">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,13 +49,13 @@
                                             No</div>
                                     @endif
                                 </td>
-                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-900 font-medium">{{ $article->translation_key }}</td>
-                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-600">{{ $article->getTranslation('title', 'en') }}</td>
-                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-600">{{ $article->getTranslation('title', 'bg') }}</td>
-                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-600">
+                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-900 font-medium">{{ $article->translation_key }}</td>
+                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-600">{{ $article->getTranslation('title', 'en') }}</td>
+                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-600">{{ $article->getTranslation('title', 'bg') }}</td>
+                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-600">
                                     {{ Str::limit($article->getTranslation('content', 'en'), 50) }}
                                 </td>
-                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-600">
+                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-600">
                                     {{ Str::limit($article->getTranslation('content', 'bg'), 50) }}
                                 </td>
                                 <td class="px-4 sm:px-6 py-2 sm:py-4 text-center">

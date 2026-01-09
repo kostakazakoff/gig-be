@@ -27,24 +27,24 @@
             <table class="w-full">
                 <thead>
                     <tr class="bg-gray-100 border-b border-gray-200">
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Key</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Name (EN)</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Name (BG)</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Services</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs sm:text-sm font-semibold text-gray-700">Actions</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Key</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Name (EN)</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Name (BG)</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Services</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm font-semibold text-gray-700">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($units ?? [] as $unit)
                         <tr class="border-b border-gray-200 hover:bg-gray-50 transition">
-                            <td class="px-4 sm:px-6 py-2 sm:py-4 font-mono text-xs sm:text-sm text-gray-600">{{ $unit->translation_key }}</td>
-                            <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-900">
+                            <td class="px-4 sm:px-6 py-2 sm:py-4 font-mono text-xs lg:text-sm text-gray-600">{{ $unit->translation_key }}</td>
+                            <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-900">
                                 {{ $unit->getTranslation('name', 'en') }}
                             </td>
-                            <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-900">
+                            <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-900">
                                 {{ $unit->getTranslation('name', 'bg') }}
                             </td>
-                            <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-600">
+                            <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-600">
                                 @php
                                     $serviceNames = $unit->services->map(fn($s) => $s->name)->filter()->values();
                                 @endphp

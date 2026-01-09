@@ -24,24 +24,24 @@
             <table class="w-full">
                 <thead>
                 <tr class="bg-gray-100 border-b border-gray-200">
-                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Client</th>
-                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Service</th>
-                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Message</th>
-                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Created</th>
-                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs sm:text-sm font-semibold text-gray-700">Actions</th>
+                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Client</th>
+                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Service</th>
+                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Message</th>
+                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Created</th>
+                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm font-semibold text-gray-700">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 @forelse($inquiries ?? [] as $inquiry)
                     <tr class="border-b border-gray-200 hover:bg-gray-50 transition">
-                        <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-900 font-medium">
+                        <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-900 font-medium">
                             {{ optional($inquiry->client)->first_name }} {{ optional($inquiry->client)->last_name }}
                         </td>
-                        <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-700">
+                        <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700">
                             {{ optional($inquiry->service)->name ?? '—' }}
                         </td>
-                        <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-700 truncate max-w-xs">{{ Str::limit($inquiry->message, 80) }}</td>
-                        <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-700">{{ $inquiry->created_at->format('Y-m-d H:i') }}</td>
+                        <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700 truncate max-w-xs">{{ Str::limit($inquiry->message, 80) }}</td>
+                        <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700">{{ $inquiry->created_at->format('Y-m-d H:i') }}</td>
                         <td class="px-4 sm:px-6 py-2 sm:py-4 text-center">
                             <div class="flex items-center justify-center gap-2">
                                           <a href="{{ route('admin.inquiries.edit', $inquiry->id) }}"

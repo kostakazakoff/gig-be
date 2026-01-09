@@ -19,13 +19,13 @@
             <table class="w-full">
                 <thead class="bg-gray-200">
                     <tr>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm">Image</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm">Key</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm">Category</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm">Name (EN/BG)</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm">Price</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm">Description</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs sm:text-sm">Actions</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Image</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Key</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Category</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Name (EN/BG)</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Price</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Description</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,27 +39,27 @@
                                     <span class="text-gray-400">No</span>
                                 @endif
                             </td>
-                            <td class="px-4 sm:px-6 py-2 sm:py-3 font-mono text-xs sm:text-sm">{{ $service->translation_key }}</td>
-                            <td class="px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm">{{ $service->category->name ?? 'N/A' }}</td>
+                            <td class="px-4 sm:px-6 py-2 sm:py-3 font-mono text-xs lg:text-sm">{{ $service->translation_key }}</td>
+                            <td class="px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">{{ $service->category->name ?? 'N/A' }}</td>
                             <td class="px-4 sm:px-6 py-2 sm:py-3">
-                                <div class="text-xs sm:text-sm">
+                                <div class="text-xs lg:text-sm">
                                     <div class="text-blue-600">EN: {{ $service->getTranslation('name', 'en') }}</div>
                                     <div class="text-red-600">BG: {{ $service->getTranslation('name', 'bg') }}</div>
                                 </div>
                             </td>
-                            <td class="px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm">
+                            <td class="px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">
                                 @if ($service->price_from || $service->price_to)
                                     <div>{{ $service->price_from ? '$' . number_format($service->price_from, 2) : '-' }} -
                                         {{ $service->price_to ? '$' . number_format($service->price_to, 2) : '-' }}</div>
                                     @if ($service->unit)
-                                        <div class="text-gray-500 text-xs sm:text-sm">{{ $service->unit }}</div>
+                                        <div class="text-gray-500 text-xs lg:text-sm">{{ $service->unit }}</div>
                                     @endif
                                 @else
                                     <span class="text-gray-400">N/A</span>
                                 @endif
                             </td>
-                            <td class="px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm">
-                                <div class="text-xs sm:text-sm">
+                            <td class="px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">
+                                <div class="text-xs lg:text-sm">
                                     <div class="text-blue-600">EN: {{ Str::limit($service->getTranslation('description', 'en'), 50) }}</div>
                                     <div class="text-red-600">BG: {{ Str::limit($service->getTranslation('description', 'bg'), 50) }}</div>
                                 </div>

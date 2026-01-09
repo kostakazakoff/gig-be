@@ -27,13 +27,13 @@
             <table class="w-full">
                     <thead>
                         <tr class="bg-gray-100 border-b border-gray-200">
-                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs sm:text-sm font-semibold text-gray-700">Image</th>
-                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Key</th>
-                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Name (EN)</th>
-                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Name (BG)</th>
-                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Description (EN)</th>
-                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Description (BG)</th>
-                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs sm:text-sm font-semibold text-gray-700">Actions</th>
+                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm font-semibold text-gray-700">Image</th>
+                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Key</th>
+                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Name (EN)</th>
+                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Name (BG)</th>
+                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Description (EN)</th>
+                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm font-semibold text-gray-700">Description (BG)</th>
+                            <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm font-semibold text-gray-700">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,16 +49,16 @@
                                             No</div>
                                     @endif
                                 </td>
-                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-900 font-medium">{{ $category->translation_key }}
+                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-900 font-medium">{{ $category->translation_key }}
                                 </td>
-                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-700">{{ $category->name }}</td>
-                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-700">
+                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700">{{ $category->name }}</td>
+                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700">
                                     {{ $category->getTranslation('name', 'bg') ?? '—' }}
                                 </td>
-                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-700 truncate max-w-xs">
+                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700 truncate max-w-xs">
                                     {{ Str::limit($category->description ?? '—', 50) }}
                                 </td>
-                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-700 truncate max-w-xs">
+                                <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs lg:text-sm text-gray-700 truncate max-w-xs">
                                     {{ Str::limit($category->getTranslation('description', 'bg') ?? '—', 50) }}
                                 </td>
                                 <td class="px-4 sm:px-6 py-2 sm:py-4 text-center">

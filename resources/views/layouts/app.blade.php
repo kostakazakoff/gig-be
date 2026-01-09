@@ -9,7 +9,7 @@
 </head>
 <body class="bg-gray-100">
     <!-- Navigation -->
-    <nav class="bg-white shadow-md sticky top-0 z-50">
+    <nav class="bg-white shadow-md sticky top-0 z-60">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <!-- Logo -->
@@ -19,8 +19,8 @@
                     </a>
                 </div>
 
-                <!-- Menu -->
-                <div class="flex items-center space-x-8">
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex items-center space-x-8">
                     <a
                         href="{{ route('admin.categories.index') }}"
                         class="text-gray-700 hover:text-blue-600 font-medium transition"
@@ -50,15 +50,68 @@
                     </a>
                 </div>
 
-                <!-- User Menu -->
-                <div class="flex items-center">
+                <!-- Desktop User Menu -->
+                <div class="hidden lg:flex items-center">
                     <button class="text-gray-700 hover:text-blue-600 font-medium transition">
+                        Logout
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center lg:hidden">
+                    <button id="mobile-menu-btn" type="button" class="text-gray-700 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded p-2">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Dropdown -->
+            <div id="mobile-menu" class="hidden lg:hidden pb-4">
+                <div class="flex flex-col space-y-2">
+                    <a
+                        href="{{ route('admin.categories.index') }}"
+                        class="text-gray-700 hover:text-blue-600 hover:bg-gray-50 font-medium transition px-4 py-2 rounded"
+                    >
+                        Categories
+                    </a>
+                    <a href="{{ route('admin.services.index') }}" class="text-gray-700 hover:text-blue-600 hover:bg-gray-50 font-medium transition px-4 py-2 rounded">
+                        Services
+                    </a>
+                    <a href="{{ route('admin.clients.index') }}" class="text-gray-700 hover:text-blue-600 hover:bg-gray-50 font-medium transition px-4 py-2 rounded">
+                        Clients
+                    </a>
+                    <a href="{{ route('admin.inquiries.index') }}" class="text-gray-700 hover:text-blue-600 hover:bg-gray-50 font-medium transition px-4 py-2 rounded">
+                        Inquiries
+                    </a>
+                    <a href="{{ route('admin.units.index') }}" class="text-gray-700 hover:text-blue-600 hover:bg-gray-50 font-medium transition px-4 py-2 rounded">
+                        Units
+                    </a>
+                    <a href="{{ route('admin.projects.index') }}" class="text-gray-700 hover:text-blue-600 hover:bg-gray-50 font-medium transition px-4 py-2 rounded">
+                        Projects
+                    </a>
+                    <a href="{{ route('admin.news.index') }}" class="text-gray-700 hover:text-blue-600 hover:bg-gray-50 font-medium transition px-4 py-2 rounded">
+                        News
+                    </a>
+                    <a href="#" class="text-gray-700 hover:text-blue-600 hover:bg-gray-50 font-medium transition px-4 py-2 rounded">
+                        Settings
+                    </a>
+                    <button class="text-gray-700 hover:text-blue-600 hover:bg-gray-50 font-medium transition px-4 py-2 rounded text-left">
                         Logout
                     </button>
                 </div>
             </div>
         </div>
     </nav>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
 
     <!-- Main Content -->
     <main class="py-8">

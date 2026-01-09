@@ -15,6 +15,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/{category}/edit', [\App\Http\Controllers\Admin\CategoryController::class, 'edit'])->name('edit');
         Route::put('/{category}', [\App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('update');
         Route::delete('/{category}', [\App\Http\Controllers\Admin\CategoryController::class, 'destroy'])->name('destroy');
+        Route::delete('/{category}/image', [\App\Http\Controllers\Admin\CategoryController::class, 'deleteImage'])->name('deleteImage');
     });
 
     Route::prefix('services')->name('services.')->group(function () {
@@ -24,6 +25,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/{service}/edit', [\App\Http\Controllers\Admin\ServiceController::class, 'edit'])->name('edit');
         Route::put('/{service}', [\App\Http\Controllers\Admin\ServiceController::class, 'update'])->name('update');
         Route::delete('/{service}', [\App\Http\Controllers\Admin\ServiceController::class, 'destroy'])->name('destroy');
+        Route::delete('/{service}/image', [\App\Http\Controllers\Admin\ServiceController::class, 'deleteImage'])->name('deleteImage');
     });
 
     Route::prefix('units')->name('units.')->group(function () {

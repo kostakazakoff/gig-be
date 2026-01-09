@@ -79,4 +79,23 @@ class CategoryController extends Controller
         return redirect()->route('admin.categories.index')
             ->with('success', 'Category deleted successfully');
     }
+
+    /**
+     * Delete a specific image from a category
+     */
+    public function deleteImage(Category $category)
+    {
+        if ($category->hasMedia('category_thumbs')) {
+            $category->clearMediaCollection('category_thumbs');
+            return response()->json([
+                'success' => true,
+                'message' => 'Image deleted successfully'
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Image not found'
+        ], 404);
+    }
 }

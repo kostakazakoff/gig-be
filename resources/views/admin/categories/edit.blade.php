@@ -20,7 +20,19 @@
                     @if ($category->image_src)
                         <div class="mb-4">
                             <p class="text-sm text-gray-600 mb-2">Current image:</p>
-                            <img src="{{ $category->image_src }}" alt="{{ $category->translation_key }}" class="max-w-xs rounded-lg" />
+                            <div class="relative group inline-block">
+                                <img src="{{ $category->image_src }}" alt="{{ $category->translation_key }}" class="max-w-xs rounded-lg" />
+                                <button
+                                    type="button"
+                                    onclick="deleteImage({{ $category->id }})"
+                                    class="absolute top-2 right-2 bg-red-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-700"
+                                    title="Delete image"
+                                >
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                     @endif
                     @include('partials.single-image-dropzone', ['label' => 'Category Image'])
@@ -150,5 +162,64 @@
     </div>
 </div>
 
-{{-- Drag & drop image script is now initialized globally via resources/js/app.js --}}
+<script>
+    // Delete image function
+    function deleteImage(categoryId) {
+        if (!confirm('Are you sure you want to delete this image?')) {
+            return;
+        }
+
+        // Show loading state
+        const imageContainer = document.querySelector('.relative.group.inline-block');
+        if (imageContainer) {
+            imageContainer.style.opacity = '0.5';
+            imageContainer.style.pointerEvents = 'none';
+        }
+
+        fetch('/admin/categories/' + categoryId + '/image', {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Delete response:', data);
+            if (data.success) {
+                // Remove the image element from DOM with animation
+                if (imageContainer) {
+                    imageContainer.style.opacity = '0';
+                    imageContainer.style.transform = 'scale(0.8)';
+                    imageContainer.style.transition = 'all 0.3s ease';
+                    
+                    setTimeout(function() {
+                        imageContainer.closest('.mb-4').remove();
+                    }, 300);
+                }
+            } else {
+                // Restore image on error
+                if (imageContainer) {
+                    imageContainer.style.opacity = '1';
+                    imageContainer.style.pointerEvents = 'auto';
+                }
+                console.error('Error deleting image:', data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Restore image on error
+            if (imageContainer) {
+                imageContainer.style.opacity = '1';
+                imageContainer.style.pointerEvents = 'auto';
+            }
+        });
+    }
+</script>
 @endsection

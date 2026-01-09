@@ -85,4 +85,23 @@ class ServiceController extends Controller
         return redirect()->route('admin.services.index')
             ->with('success', 'Service deleted successfully');
     }
+
+    /**
+     * Delete a specific image from a service
+     */
+    public function deleteImage(Service $service)
+    {
+        if ($service->hasMedia('service_thumbs')) {
+            $service->clearMediaCollection('service_thumbs');
+            return response()->json([
+                'success' => true,
+                'message' => 'Image deleted successfully'
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Image not found'
+        ], 404);
+    }
 }

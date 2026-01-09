@@ -66,13 +66,13 @@
                             </td>
                             <td class="px-6 py-3 text-center">
                                 <a href="{{ route('admin.services.edit', $service) }}"
-                                    class="text-blue-600 hover:underline">Edit</a>
+                                    class="inline-flex items-center px-3 py-1 bg-yellow-50 text-yellow-700 border border-yellow-300 rounded hover:bg-yellow-100 transition text-sm font-medium">Edit</a>
                                 <form method="POST" action="{{ route('admin.services.destroy', $service) }}"
                                     style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" onclick="return confirm('Are you sure?')"
-                                        class="text-red-600 hover:underline ml-4">Delete</button>
+                                        class="inline-flex items-center px-3 py-1 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium ml-2">Delete</button>
                                 </form>
                             </td>
                         </tr>

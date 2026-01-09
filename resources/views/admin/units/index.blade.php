@@ -52,7 +52,7 @@
                             <td class="px-6 py-4 text-center">
                                 <div class="flex justify-center gap-2">
                                     <a href="{{ route('admin.units.edit', $unit) }}"
-                                        class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm transition">
+                                        class="inline-flex items-center px-3 py-1 bg-yellow-50 text-yellow-700 border border-yellow-300 rounded hover:bg-yellow-100 transition text-sm font-medium">
                                         Edit
                                     </a>
                                     <form action="{{ route('admin.units.destroy', $unit) }}" method="POST"
@@ -60,7 +60,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
-                                            class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm transition">
+                                            class="inline-flex items-center px-3 py-1 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium">
                                             Delete
                                         </button>
                                     </form>

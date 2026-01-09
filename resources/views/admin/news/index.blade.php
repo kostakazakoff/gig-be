@@ -59,7 +59,7 @@
                                 </td>
                                 <td class="px-6 py-4 text-center">
                                     <a href="{{ route('admin.news.edit', $article->id) }}"
-                                        class="text-blue-600 hover:text-blue-900 font-medium transition">
+                                        class="inline-flex items-center px-3 py-1 bg-yellow-50 text-yellow-700 border border-yellow-300 rounded hover:bg-yellow-100 transition text-sm font-medium">
                                         Edit
                                     </a>
                                     <form action="{{ route('admin.news.destroy', $article->id) }}" method="POST"
@@ -67,7 +67,7 @@
                                         onsubmit="return confirm('Are you sure you want to delete this news article?')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="text-red-600 hover:text-red-900 font-medium transition">
+                                        <button type="submit" class="inline-flex items-center px-3 py-1 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium ml-2">
                                             Delete
                                         </button>
                                     </form>

@@ -20,39 +20,40 @@
         @endif
 
         <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="overflow-x-auto">
             <table class="w-full">
                 <thead>
                 <tr class="bg-gray-100 border-b border-gray-200">
-                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Client</th>
-                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Service</th>
-                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Message</th>
-                    <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Created</th>
-                    <th class="px-6 py-3 text-center text-sm font-semibold text-gray-700">Actions</th>
+                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Client</th>
+                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Service</th>
+                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Message</th>
+                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Created</th>
+                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs sm:text-sm font-semibold text-gray-700">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 @forelse($inquiries ?? [] as $inquiry)
                     <tr class="border-b border-gray-200 hover:bg-gray-50 transition">
-                        <td class="px-6 py-4 text-sm text-gray-900 font-medium">
+                        <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-900 font-medium">
                             {{ optional($inquiry->client)->first_name }} {{ optional($inquiry->client)->last_name }}
                         </td>
-                        <td class="px-6 py-4 text-sm text-gray-700">
+                        <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-700">
                             {{ optional($inquiry->service)->name ?? '—' }}
                         </td>
-                        <td class="px-6 py-4 text-sm text-gray-700 truncate max-w-xs">{{ Str::limit($inquiry->message, 80) }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-700">{{ $inquiry->created_at->format('Y-m-d H:i') }}</td>
-                        <td class="px-6 py-4 text-center">
+                        <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-700 truncate max-w-xs">{{ Str::limit($inquiry->message, 80) }}</td>
+                        <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-700">{{ $inquiry->created_at->format('Y-m-d H:i') }}</td>
+                        <td class="px-4 sm:px-6 py-2 sm:py-4 text-center">
                             <div class="flex items-center justify-center gap-2">
-                                <a href="{{ route('admin.inquiries.edit', $inquiry->id) }}"
-                                   class="inline-flex items-center px-3 py-1 bg-yellow-50 text-yellow-700 border border-yellow-300 rounded hover:bg-yellow-100 transition text-sm font-medium">
+                                          <a href="{{ route('admin.inquiries.edit', $inquiry->id) }}"
+                                              class="inline-flex items-center px-3 py-1 my-1 bg-yellow-50 text-yellow-700 border border-yellow-300 rounded hover:bg-yellow-100 transition text-sm font-medium">
                                     Edit
                                 </a>
                                 <form action="{{ route('admin.inquiries.destroy', $inquiry->id) }}" method="POST" class="inline"
                                       onsubmit="return confirm('Are you sure you want to delete this inquiry?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit"
-                                            class="inline-flex items-center px-3 py-1 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium">
+                                        <button type="submit"
+                                            class="inline-flex items-center px-3 py-1 my-1 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium">
                                         Delete
                                     </button>
                                 </form>
@@ -75,6 +76,7 @@
                 @endforelse
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
 @endsection

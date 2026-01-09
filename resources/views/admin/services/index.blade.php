@@ -19,13 +19,13 @@
             <table class="w-full">
                 <thead class="bg-gray-200">
                     <tr>
-                        <th class="px-6 py-3 text-left">Image</th>
-                        <th class="px-6 py-3 text-left">Key</th>
-                        <th class="px-6 py-3 text-left">Category</th>
-                        <th class="px-6 py-3 text-left">Name (EN/BG)</th>
-                        <th class="px-6 py-3 text-left">Price</th>
-                        <th class="px-6 py-3 text-left">Description</th>
-                        <th class="px-6 py-3 text-center">Actions</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm">Image</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm">Key</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm">Category</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm">Name (EN/BG)</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm">Price</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm">Description</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs sm:text-sm">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,40 +39,40 @@
                                     <span class="text-gray-400">No</span>
                                 @endif
                             </td>
-                            <td class="px-6 py-3 font-mono text-sm">{{ $service->translation_key }}</td>
-                            <td class="px-6 py-3">{{ $service->category->name ?? 'N/A' }}</td>
-                            <td class="px-6 py-3">
-                                <div class="text-sm">
+                            <td class="px-4 sm:px-6 py-2 sm:py-3 font-mono text-xs sm:text-sm">{{ $service->translation_key }}</td>
+                            <td class="px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm">{{ $service->category->name ?? 'N/A' }}</td>
+                            <td class="px-4 sm:px-6 py-2 sm:py-3">
+                                <div class="text-xs sm:text-sm">
                                     <div class="text-blue-600">EN: {{ $service->getTranslation('name', 'en') }}</div>
                                     <div class="text-red-600">BG: {{ $service->getTranslation('name', 'bg') }}</div>
                                 </div>
                             </td>
-                            <td class="px-6 py-3 text-sm">
+                            <td class="px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm">
                                 @if ($service->price_from || $service->price_to)
                                     <div>{{ $service->price_from ? '$' . number_format($service->price_from, 2) : '-' }} -
                                         {{ $service->price_to ? '$' . number_format($service->price_to, 2) : '-' }}</div>
                                     @if ($service->unit)
-                                        <div class="text-gray-500">{{ $service->unit }}</div>
+                                        <div class="text-gray-500 text-xs sm:text-sm">{{ $service->unit }}</div>
                                     @endif
                                 @else
                                     <span class="text-gray-400">N/A</span>
                                 @endif
                             </td>
-                            <td class="px-6 py-3 text-sm">
-                                <div class="text-sm">
+                            <td class="px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm">
+                                <div class="text-xs sm:text-sm">
                                     <div class="text-blue-600">EN: {{ Str::limit($service->getTranslation('description', 'en'), 50) }}</div>
                                     <div class="text-red-600">BG: {{ Str::limit($service->getTranslation('description', 'bg'), 50) }}</div>
                                 </div>
                             </td>
-                            <td class="px-6 py-3 text-center">
+                            <td class="px-4 sm:px-6 py-2 sm:py-3 text-center">
                                 <a href="{{ route('admin.services.edit', $service) }}"
-                                    class="inline-flex items-center px-3 py-1 bg-yellow-50 text-yellow-700 border border-yellow-300 rounded hover:bg-yellow-100 transition text-sm font-medium">Edit</a>
+                                    class="inline-flex items-center px-3 py-1 my-1 bg-yellow-50 text-yellow-700 border border-yellow-300 rounded hover:bg-yellow-100 transition text-sm font-medium">Edit</a>
                                 <form method="POST" action="{{ route('admin.services.destroy', $service) }}"
                                     style="display:inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" onclick="return confirm('Are you sure?')"
-                                        class="inline-flex items-center px-3 py-1 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium ml-2">Delete</button>
+                                        class="inline-flex items-center px-3 py-1 my-1 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium ml-2">Delete</button>
                                 </form>
                             </td>
                         </tr>

@@ -23,36 +23,37 @@
 
         <!-- Units Table -->
         <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="overflow-x-auto">
             <table class="w-full">
                 <thead>
                     <tr class="bg-gray-100 border-b border-gray-200">
-                        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Key</th>
-                        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Name (EN)</th>
-                        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Name (BG)</th>
-                        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Services</th>
-                        <th class="px-6 py-3 text-center text-sm font-semibold text-gray-700">Actions</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Key</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Name (EN)</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Name (BG)</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs sm:text-sm font-semibold text-gray-700">Services</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-center text-xs sm:text-sm font-semibold text-gray-700">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($units ?? [] as $unit)
                         <tr class="border-b border-gray-200 hover:bg-gray-50 transition">
-                            <td class="px-6 py-4 font-mono text-sm text-gray-600">{{ $unit->translation_key }}</td>
-                            <td class="px-6 py-4 text-sm text-gray-900">
+                            <td class="px-4 sm:px-6 py-2 sm:py-4 font-mono text-xs sm:text-sm text-gray-600">{{ $unit->translation_key }}</td>
+                            <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-900">
                                 {{ $unit->getTranslation('name', 'en') }}
                             </td>
-                            <td class="px-6 py-4 text-sm text-gray-900">
+                            <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-900">
                                 {{ $unit->getTranslation('name', 'bg') }}
                             </td>
-                            <td class="px-6 py-4 text-sm text-gray-600">
+                            <td class="px-4 sm:px-6 py-2 sm:py-4 text-xs sm:text-sm text-gray-600">
                                 @php
                                     $serviceNames = $unit->services->map(fn($s) => $s->name)->filter()->values();
                                 @endphp
                                 {{ $serviceNames->isNotEmpty() ? $serviceNames->implode(', ') : 'N/A' }}
                             </td>
-                            <td class="px-6 py-4 text-center">
+                            <td class="px-4 sm:px-6 py-2 sm:py-4 text-center">
                                 <div class="flex justify-center gap-2">
                                     <a href="{{ route('admin.units.edit', $unit) }}"
-                                        class="inline-flex items-center px-3 py-1 bg-yellow-50 text-yellow-700 border border-yellow-300 rounded hover:bg-yellow-100 transition text-sm font-medium">
+                                        class="inline-flex items-center px-3 py-1 my-1 bg-yellow-50 text-yellow-700 border border-yellow-300 rounded hover:bg-yellow-100 transition text-sm font-medium">
                                         Edit
                                     </a>
                                     <form action="{{ route('admin.units.destroy', $unit) }}" method="POST"
@@ -60,7 +61,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
-                                            class="inline-flex items-center px-3 py-1 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium">
+                                            class="inline-flex items-center px-3 py-1 my-1 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium">
                                             Delete
                                         </button>
                                     </form>
@@ -77,6 +78,7 @@
                     @endforelse
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
 @endsection

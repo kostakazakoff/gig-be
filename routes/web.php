@@ -53,4 +53,22 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::put('/{news}', [\App\Http\Controllers\Admin\NewsController::class, 'update'])->name('update');
         Route::delete('/{news}', [\App\Http\Controllers\Admin\NewsController::class, 'destroy'])->name('destroy');
     });
+
+    Route::prefix('clients')->name('clients.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\ClientController::class, 'index'])->name('index');
+        Route::get('/create', [\App\Http\Controllers\Admin\ClientController::class, 'create'])->name('create');
+        Route::post('/', [\App\Http\Controllers\Admin\ClientController::class, 'store'])->name('store');
+        Route::get('/{client}/edit', [\App\Http\Controllers\Admin\ClientController::class, 'edit'])->name('edit');
+        Route::put('/{client}', [\App\Http\Controllers\Admin\ClientController::class, 'update'])->name('update');
+        Route::delete('/{client}', [\App\Http\Controllers\Admin\ClientController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('inquiries')->name('inquiries.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\InquiryController::class, 'index'])->name('index');
+        Route::get('/create', [\App\Http\Controllers\Admin\InquiryController::class, 'create'])->name('create');
+        Route::post('/', [\App\Http\Controllers\Admin\InquiryController::class, 'store'])->name('store');
+        Route::get('/{inquiry}/edit', [\App\Http\Controllers\Admin\InquiryController::class, 'edit'])->name('edit');
+        Route::put('/{inquiry}', [\App\Http\Controllers\Admin\InquiryController::class, 'update'])->name('update');
+        Route::delete('/{inquiry}', [\App\Http\Controllers\Admin\InquiryController::class, 'destroy'])->name('destroy');
+    });
 });

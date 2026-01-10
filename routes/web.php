@@ -63,6 +63,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/{client}/edit', [\App\Http\Controllers\Admin\ClientController::class, 'edit'])->name('edit');
         Route::put('/{client}', [\App\Http\Controllers\Admin\ClientController::class, 'update'])->name('update');
         Route::delete('/{client}', [\App\Http\Controllers\Admin\ClientController::class, 'destroy'])->name('destroy');
+        Route::delete('/{client}/image', [\App\Http\Controllers\Admin\ClientController::class, 'deleteImage'])->name('deleteImage');
     });
 
     Route::prefix('inquiries')->name('inquiries.')->group(function () {

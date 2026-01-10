@@ -72,4 +72,24 @@ class ClientController extends Controller
         return redirect()->route('admin.clients.index')
             ->with('success', 'Client deleted successfully');
     }
+
+    /**
+     * Delete a specific image from a client
+     */
+    public function deleteImage(Client $client)
+    {
+        if ($client->hasMedia('client_thumbs')) {
+            $client->clearMediaCollection('client_thumbs');
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Image deleted successfully'
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Image not found'
+        ], 404);
+    }
 }

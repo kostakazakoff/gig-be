@@ -19,9 +19,19 @@ class Client extends Model implements HasMedia
         'company',
     ];
 
+    protected $appends = [
+        'image_src',
+    ];
+
+    public function getImageSrcAttribute()
+    {
+        $media = $this->getFirstMedia('client_thumbs');
+        return $media ? $media->getUrl() : null;
+    }
+
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('category_thumbs')
+        $this->addMediaCollection('client_thumbs')
             ->acceptsMimeTypes(['image/jpeg',  'image/jpg', 'image/png', 'image/webp'])
             ->singleFile();
     }

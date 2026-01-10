@@ -37,8 +37,8 @@
                 @forelse($clients ?? [] as $client)
                     <tr class="border-t hover:bg-gray-50">
                         <td class="px-6 py-3">
-                            @if ($client->getFirstMedia('category_thumbs'))
-                                <img src="{{ $client->getFirstMedia('category_thumbs')->getUrl() }}" alt="{{ $client->first_name }} {{ $client->last_name }}"
+                            @if ($client->getFirstMedia('client_thumbs'))
+                                <img src="{{ $client->getFirstMedia('client_thumbs')->getUrl() }}" alt="{{ $client->first_name }} {{ $client->last_name }}"
                                     class="h-12 w-12 object-cover rounded">
                             @else
                                 <span class="text-gray-400">No</span>

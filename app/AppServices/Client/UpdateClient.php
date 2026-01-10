@@ -30,7 +30,7 @@ class UpdateClient
         $client->update($updateData);
 
         if ($data['image'] ?? null) {
-            $this->createThumbnail($client, [$data['image']], 'category_thumbs');
+            $this->createThumbnail($client, [$data['image']], 'client_thumbs');
         }
 
         return $client;

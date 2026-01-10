@@ -9,13 +9,9 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
-Route::get('/admin', function () {
-    return redirect('/admin/categories');
-})->middleware(['auth'])->name('admin.dashboard');
-
 Route::middleware(['auth'])->prefix('admin/settings')->name('admin.settings.')->group(function () {
     Route::get('/', [\App\Http\Controllers\Admin\SettingsController::class, 'edit'])->name('edit');
-    Route::put('/', [\App\Http\Controllers\Admin\SettingsController::class, 'update'])->name('update');
+    Route::post('/', [\App\Http\Controllers\Admin\SettingsController::class, 'update'])->name('update');
     Route::post('/password', [\App\Http\Controllers\Admin\SettingsController::class, 'updatePassword'])->name('update-password');
 });
 

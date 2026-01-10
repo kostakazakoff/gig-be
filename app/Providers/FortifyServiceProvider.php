@@ -43,15 +43,14 @@ class FortifyServiceProvider extends ServiceProvider
 
         Fortify::resetPasswordView(function ($request) {
             return view('auth.reset-password', ['request' => $request]);
-
-                // Logout redirect
-                Fortify::logoutResponse(function () {
-                    return redirect('/login');
-                });
         });
 
+        // Fortify::logoutResponse(function () {
+        //     return redirect('/login');
+        // });
+
         RateLimiter::for('login', function (Request $request) {
-            $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
+            $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())) . '|' . $request->ip());
 
             return Limit::perMinute(5)->by($throttleKey);
         });

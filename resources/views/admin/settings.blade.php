@@ -5,7 +5,7 @@
 @section('content')
 <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="mb-8">
-        <h1 class="text-3xl font-bold text-gray-900">Настройки</h1>
+        <h1 class="text-3xl font-bold text-gray-900">Профил на администратора</h1>
         <p class="mt-2 text-gray-600">Управление на вашия профил и пароли</p>
     </div>
 
@@ -51,9 +51,9 @@
                         class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('name') border-red-500 @enderror"
                         required
                     >
-                    @error('name')
+                    {{-- @error('name')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror
+                    @enderror --}}
                 </div>
 
                 <!-- Email -->
@@ -69,9 +69,9 @@
                         class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('email') border-red-500 @enderror"
                         required
                     >
-                    @error('email')
+                    {{-- @error('email')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror
+                    @enderror --}}
                 </div>
             </div>
 
@@ -92,7 +92,7 @@
 
         <form action="{{ route('admin.settings.update-password') }}" method="POST">
             @csrf
-            @method('PUT')
+            @method('POST')
 
             <!-- Password Validation Errors -->
             @if ($errors->has('current_password') || $errors->has('password'))

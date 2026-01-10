@@ -18,7 +18,7 @@ class Project extends Model implements HasMedia
         'date',
     ];
 
-    protected $appends = ['title', 'description', 'image_src'];
+    protected $appends = ['title', 'description', 'image_src', 'image_thumb_src'];
 
     public function getTitleAttribute()
     {
@@ -39,6 +39,12 @@ class Project extends Model implements HasMedia
     {
         $media = $this->getFirstMedia('project_images');
         return $media ? $media->getUrl() : null;
+    }
+
+    public function getImageThumbSrcAttribute(): ?string
+    {
+        $media = $this->getFirstMedia('project_images');
+        return $media ? $media->getUrl('project_thumb') : null;
     }
 
     public function registerMediaCollections(): void

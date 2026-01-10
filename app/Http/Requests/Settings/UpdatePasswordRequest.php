@@ -30,10 +30,10 @@ class UpdatePasswordRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'current_password.required' => 'The current password field is required.',
-            'password.required' => 'The new password field is required.',
-            'password.min' => 'The new password must be at least :min characters.',
-            'password.confirmed' => 'The new password confirmation does not match.',
+            'current_password.required' => 'Въвведете текущата парола.',
+            'password.required' => 'Въведете новата парола.',
+            'password.min' => 'Новата парола трябва да е поне :min символа.',
+            'password.confirmed' => 'Потвърждението на новата парола не съвпада.',
         ];
     }
 }

@@ -1,5 +1,5 @@
 @php
-    $label = $label ?? 'Images';
+    $label = $label ?? 'Снимки';
     $name = $name ?? 'images[]';
     $id = $id ?? 'images';
 @endphp
@@ -22,14 +22,14 @@
                 <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
             <p class="mt-2 text-sm text-gray-600">
-                Click to upload multiple images or drag and drop
+                Кликнете, за да качите снимки или ги плъзнете тук
             </p>
             <p class="text-xs text-gray-500 mt-1">
-                PNG, JPG, WEBP up to 5MB each
+                PNG, JPG, WEBP до 5MB всяка
             </p>
         </label>
     </div>
-    <div class="mt-2 text-xs text-gray-500">Drag images to reorder; first becomes the thumbnail.</div>
+    <div class="mt-2 text-xs text-gray-500">Провлачвай снимките за смяна на реда. Първата става основна (миниатюра).</div>
     <div id="{{ $id }}-preview" class="mt-4 grid grid-cols-3 gap-4"></div>
     @error($name)
         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -66,7 +66,7 @@
                         '<span class="absolute top-1 left-1 bg-blue-600 text-white text-xs px-2 py-1 rounded">' + (index + 1) + '</span>' +
                         '<button type="button" onclick="removeFile(' + index + ')" ' +
                         'class="absolute top-1 right-1 bg-red-600 text-white p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-700" ' +
-                        'title="Remove image">' +
+                        'title="Премахни снимка">' +
                         '<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">' +
                         '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />' +
                         '</svg>' +

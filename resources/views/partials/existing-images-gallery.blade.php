@@ -3,7 +3,7 @@
     $media = $media ?? collect();
     $deleteRoute = $deleteRoute ?? null;
     $label = $label ?? 'Текущи снимки';
-    $helpText = $helpText ?? 'Тръсете снимки, чтобы пресъредите; първия става миниатюра.';
+    $helpText = $helpText ?? 'Провлачвай снимките за смяна на реда. Първата става основна (миниатюра).';
     $deleteConfirm = $deleteConfirm ?? 'Сигурни ли сте, че искате да изтриете тази снимка?';
 @endphp
 

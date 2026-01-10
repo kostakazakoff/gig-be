@@ -51,10 +51,43 @@
                 </div>
 
                 <!-- Desktop User Menu -->
-                <div class="hidden lg:flex items-center">
-                    <button class="text-gray-700 hover:text-blue-600 font-medium transition">
-                        Изход
+                <div class="hidden lg:flex items-center relative" id="user-menu">
+                    <button
+                        type="button"
+                        class="flex items-center space-x-2 text-gray-700 hover:text-blue-600 font-medium transition focus:outline-none"
+                        onclick="toggleUserMenu()"
+                    >
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A9 9 0 0112 15a9 9 0 016.879 2.804M15 11a3 3 0 10-6 0 3 3 0 006 0z" />
+                        </svg>
+                        <span>{{ auth()->user()->name }}</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
                     </button>
+
+                    {{-- User Dropdown Menu --}}
+                    <div
+                        id="user-menu-dropdown"
+                        class="hidden absolute right-0 mt-30 w-48 bg-white rounded-md shadow-lg py-2 border border-gray-100"
+                    >
+                        <a
+                            href="{{ route('admin.settings.edit') }}"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600"
+                        >
+                            Настройки
+                        </a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button
+                                type="submit"
+                                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600"
+                            >
+                                Изход
+                            </button>
+                        </form>
+                    </div>
+                    
                 </div>
 
                 <!-- Mobile Menu Button -->
@@ -94,12 +127,15 @@
                     <a href="{{ route('admin.news.index') }}" class="text-gray-700 hover:text-blue-600 hover:bg-gray-50 font-medium transition px-4 py-2 rounded">
                         Новини
                     </a>
-                    <a href="#" class="text-gray-700 hover:text-blue-600 hover:bg-gray-50 font-medium transition px-4 py-2 rounded">
+                    <a href="/admin/settings" class="text-gray-700 hover:text-blue-600 hover:bg-gray-50 font-medium transition px-4 py-2 rounded">
                         Настройки
                     </a>
-                    <button class="text-gray-700 hover:text-blue-600 hover:bg-gray-50 font-medium transition px-4 py-2 rounded text-left">
-                        Изход
-                    </button>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="text-gray-700 hover:text-blue-600 hover:bg-gray-50 font-medium transition px-4 py-2 rounded text-left w-full">
+                            Изход
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -110,6 +146,20 @@
         document.getElementById('mobile-menu-btn').addEventListener('click', function() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
+        });
+
+        // User dropdown toggle
+        function toggleUserMenu() {
+            document.getElementById('user-menu-dropdown').classList.toggle('hidden');
+        }
+
+        // Close user menu on outside click
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('user-menu');
+            const dropdown = document.getElementById('user-menu-dropdown');
+            if (!menu.contains(event.target)) {
+                dropdown.classList.add('hidden');
+            }
         });
     </script>
 

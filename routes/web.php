@@ -3,11 +3,24 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('admin.categories.index');
+    if (auth()->check()) {
+        return redirect('/admin/categories');
+    }
+    return redirect('/login');
+});
+
+Route::get('/admin', function () {
+    return redirect('/admin/categories');
+})->middleware(['auth'])->name('admin.dashboard');
+
+Route::middleware(['auth'])->prefix('admin/settings')->name('admin.settings.')->group(function () {
+    Route::get('/', [\App\Http\Controllers\Admin\SettingsController::class, 'edit'])->name('edit');
+    Route::put('/', [\App\Http\Controllers\Admin\SettingsController::class, 'update'])->name('update');
+    Route::post('/password', [\App\Http\Controllers\Admin\SettingsController::class, 'updatePassword'])->name('update-password');
 });
 
 // Admin маршрути - POST, UPDATE, DELETE заявки от Blade форми
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::prefix('categories')->name('categories.')->group(function () {
         Route::get('/', [\App\Http\Controllers\Admin\CategoryController::class, 'index'])->name('index');
         Route::get('/create', [\App\Http\Controllers\Admin\CategoryController::class, 'create'])->name('create');

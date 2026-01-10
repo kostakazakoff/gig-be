@@ -4,12 +4,12 @@
     <div class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div class="mb-8 flex items-center justify-between sticky top-16 z-40 bg-gray-50 py-4 mx-auto xl:max-w-7xl">
             <div>
-                <h1 class="text-3xl font-bold text-gray-900">Clients</h1>
-                <p class="mt-2 text-gray-600">Manage all clients</p>
+                <h1 class="text-3xl font-bold text-gray-900">Клиенти</h1>
+                <p class="mt-2 text-gray-600">Управлявайте всички клиенти</p>
             </div>
             <a href="{{ route('admin.clients.create') }}"
                class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition duration-200">
-                + ADD CLIENT
+                + ДОБАВИ КЛИЕНТ
             </a>
         </div>
 
@@ -23,14 +23,14 @@
             <table class="w-full">
                 <thead class="bg-gray-200">
                     <tr>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Image</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Name</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Изображение</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Име</th>
                         <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Email</th>
-                        <th class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Phone</th>
-                        <th class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Company</th>
-                        <th class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Address</th>
-                    <th class="hidden sm:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Inquiries</th>
-                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-right text-xs lg:text-sm">Actions</th>
+                        <th class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Телефон</th>
+                        <th class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Компания</th>
+                        <th class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Адрес</th>
+                    <th class="hidden sm:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Запитвания</th>
+                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-right text-xs lg:text-sm">Действия</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,7 +41,7 @@
                                 <img src="{{ $client->getFirstMedia('client_thumbs')->getUrl() }}" alt="{{ $client->first_name }} {{ $client->last_name }}"
                                     class="h-12 w-12 object-cover rounded">
                             @else
-                                <span class="text-gray-400">No</span>
+                                <span class="text-gray-400">Няма</span>
                             @endif
                         </td>
                         <td class="px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">{{ $client->first_name }} {{ $client->last_name }}</td>
@@ -54,7 +54,7 @@
                             'editRoute' => 'admin.clients.edit',
                             'deleteRoute' => 'admin.clients.destroy',
                             'model' => $client,
-                            'confirmMessage' => 'Are you sure you want to delete this client?'
+                            'confirmMessage' => 'Сигурни ли сте, че искате да изтриете този клиент?'
                         ])
                     </tr>
                 @empty
@@ -65,8 +65,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                           d="M16 7a4 4 0 01-8 0M12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                 </svg>
-                                <p class="font-medium">No clients found</p>
-                                <p class="text-sm mt-1">Create your first client by clicking the ADD CLIENT button above</p>
+                                <p class="font-medium">Няма намерени клиенти</p>
+                                <p class="text-sm mt-1">Създайте първия клиент чрез бутона ДОБАВИ КЛИЕНТ по-горе</p>
                             </div>
                         </td>
                     </tr>

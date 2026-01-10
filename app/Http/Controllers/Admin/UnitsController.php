@@ -10,9 +10,11 @@ use App\AppServices\Unit\IndexUnits;
 use App\AppServices\Unit\StoreUnit;
 use App\AppServices\Unit\UpdateUnit;
 use App\AppServices\Unit\DestroyUnit;
+use App\Traits\HttpResponses;
 
 class UnitsController extends Controller
 {
+    use HttpResponses;
     /**
      * Display a listing of the resource.
      */
@@ -75,9 +77,13 @@ class UnitsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Units $unit, DestroyUnit $destroyUnit)
+    public function destroy(Units $unit)
     {
-        $destroyUnit->handle($unit);
+        if ($unit->services()->exists()) {
+            return back()->withErrors([
+                'delete' => 'Мерната единица е използвана в услуга и не може да бъде изтрита.',
+            ]);
+        }
 
         return redirect()
             ->route('admin.units.index')

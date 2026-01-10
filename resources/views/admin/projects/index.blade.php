@@ -5,12 +5,12 @@
         <!-- Header with Add Button -->
         <div class="mb-8 flex items-center justify-between sticky top-16 z-40 bg-gray-50 py-4 mx-auto xl:max-w-7xl">
             <div>
-                <h1 class="text-3xl font-bold text-gray-900">Projects</h1>
-                <p class="mt-2 text-gray-600">Manage all projects in the system</p>
+                <h1 class="text-3xl font-bold text-gray-900">Проекти</h1>
+                <p class="mt-2 text-gray-600">Управлявайте всички проекти в системата</p>
             </div>
             <a href="{{ route('admin.projects.create') }}"
                 class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition duration-200">
-                + ADD PROJECT
+                + ДОБАВИ ПРОЕКТ
             </a>
         </div>
 
@@ -26,11 +26,11 @@
             <table class="w-full">
                 <thead class="bg-gray-200">
                     <tr>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Image</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Title (EN/BG)</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Price</th>
-                        <th class="hidden sm:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Date</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-right text-xs lg:text-sm">Actions</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Снимка</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Заглавие (EN/BG)</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Цена</th>
+                        <th class="hidden sm:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Дата</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-right text-xs lg:text-sm">Действия</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -60,14 +60,14 @@
                                 'editRoute' => 'admin.projects.edit',
                                 'deleteRoute' => 'admin.projects.destroy',
                                 'model' => $project,
-                                'confirmMessage' => 'Are you sure you want to delete this project?'
+                                'confirmMessage' => 'Сигурни ли сте, че искате да изтриете този проект?'
                             ])
                         </tr>
                     @empty
                         <tr>
                             <td colspan="5" class="px-6 py-8 text-center text-gray-500">
-                                No projects found. <a href="{{ route('admin.projects.create') }}"
-                                    class="text-blue-600 hover:underline">Create your first project</a>
+                                Няма намерени проекти. <a href="{{ route('admin.projects.create') }}"
+                                    class="text-blue-600 hover:underline">Създай първия проект</a>
                             </td>
                         </tr>
                     @endforelse

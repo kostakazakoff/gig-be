@@ -5,8 +5,8 @@
     <div class="max-w-4xl mx-auto">
         <!-- Header -->
         <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-900">Edit Project</h1>
-            <p class="mt-2 text-gray-600">Update project information and gallery</p>
+            <h1 class="text-3xl font-bold text-gray-900">Редактирай проект</h1>
+            <p class="mt-2 text-gray-600">Актуализирай информация на проекта и галерията
         </div>
 
         <!-- Form Card -->
@@ -16,59 +16,43 @@
                 @method('PUT')
 
                 <!-- Existing Images Gallery -->
-                @if($project->getMedia('project_images')->count() > 0)
-                <div class="border-b pb-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Current Images</h3>
-                    <div class="text-xs text-gray-500 mb-2">Drag images to reorder; first becomes the thumbnail.</div>
-                    <input type="hidden" name="media_order" id="media_order" value="">
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="existing-images">
-                        @foreach($project->getMedia('project_images') as $media)
-                        <div class="relative group" data-media-id="{{ $media->id }}" draggable="true">
-                            <img src="{{ $media->getUrl() }}" alt="Project image" class="w-full h-32 object-cover rounded-lg" />
-                            <button
-                                type="button"
-                                onclick="deleteImage({{ $project->id }}, {{ $media->id }})"
-                                class="absolute top-2 right-2 bg-red-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-700"
-                                title="Delete image"
-                            >
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </button>
-                        </div>
-                        @endforeach
-                    </div>
-                </div>
-                @endif
+                @include('partials.existing-images-gallery', [
+                    'model' => $project,
+                    'media' => $project->getMedia('project_images'),
+                    'deleteRoute' => '/admin/projects',
+                    'label' => 'Текущи снимки',
+                    'helpText' => 'Тръсете снимки, чтобы пресъредите; първия става миниатюра.',
+                    'deleteConfirm' => 'Сигурни ли сте, че искате да изтриете тази снимка?'
+                ])
 
                 <!-- Add New Images -->
-                @include('partials.images-dropzone', ['label' => 'Add New Images'])
+                @include('partials.images-dropzone', ['label' => 'Добави нови снимки'])
 
                 <!-- Display Key (read-only) -->
                 <div>
                     <label for="key" class="block text-sm font-medium text-gray-700 mb-2">
-                        Project Key
+                        Ключ на проект
                     </label>
                     <div class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 text-gray-600 font-medium">
                         {{ $project->translation_key }}
                     </div>
-                    <p class="mt-1 text-xs text-gray-500">This key cannot be changed</p>
+                    <p class="mt-1 text-xs text-gray-500">Този ключ не може да бъде променен</p>
                 </div>
 
                 <!-- Title Fields Section -->
                 <div class="border-t pt-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Project Titles</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Заглавие на проекта</h3>
 
                     <!-- Title EN -->
                     <div class="mb-4">
                         <label for="title_en" class="block text-sm font-medium text-gray-700 mb-2">
-                            Title (English)
+                            Заглавие (Английски)
                         </label>
                         <input
                             type="text"
                             id="title_en"
                             name="title_en"
-                            placeholder="Enter project title in English"
+                            placeholder="Въведете наслов на проекта на английски"
                             value="{{ old('title_en', $project->title) }}"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('title_en') border-red-500 @enderror"
                             required
@@ -81,13 +65,13 @@
                     <!-- Title BG -->
                     <div>
                         <label for="title_bg" class="block text-sm font-medium text-gray-700 mb-2">
-                            Title (Bulgarian)
+                            Заглавие (Български)
                         </label>
                         <input
                             type="text"
                             id="title_bg"
                             name="title_bg"
-                            placeholder="Въведете заглавие на български"
+                            placeholder="Въведете наслов на български"
                             value="{{ old('title_bg', $project->getTranslation('title', 'bg')) }}"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('title_bg') border-red-500 @enderror"
                             required
@@ -100,17 +84,17 @@
 
                 <!-- Description Fields Section -->
                 <div class="border-t pt-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Descriptions</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Описания</h3>
 
                     <!-- Description EN -->
                     <div class="mb-4">
                         <label for="description_en" class="block text-sm font-medium text-gray-700 mb-2">
-                            Description (English)
+                            Описание (Английски)
                         </label>
                         <textarea
                             id="description_en"
                             name="description_en"
-                            placeholder="Enter project description in English"
+                            placeholder="Въведете описание на проекта на английски"
                             rows="4"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('description_en') border-red-500 @enderror"
                         >{{ old('description_en', $project->description) }}</textarea>
@@ -122,7 +106,7 @@
                     <!-- Description BG -->
                     <div>
                         <label for="description_bg" class="block text-sm font-medium text-gray-700 mb-2">
-                            Description (Bulgarian)
+                            Описание (Български)
                         </label>
                         <textarea
                             id="description_bg"
@@ -139,12 +123,12 @@
 
                 <!-- Additional Fields -->
                 <div class="border-t pt-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Additional Information</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Допълнителна информация</h3>
 
                     <!-- Price -->
                     <div class="mb-4">
                         <label for="price" class="block text-sm font-medium text-gray-700 mb-2">
-                            Price (optional)
+                            Цена (добре)
                         </label>
                         <input
                             type="number"
@@ -164,7 +148,7 @@
                     <!-- Date -->
                     <div>
                         <label for="date" class="block text-sm font-medium text-gray-700 mb-2">
-                            Project Date (optional)
+                            Дата на проекта (добре)
                         </label>
                         <input
                             type="date"
@@ -183,147 +167,26 @@
                 <div class="flex items-center justify-end gap-4 pt-6 border-t">
                     <a href="{{ route('admin.projects.index') }}"
                         class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition font-medium">
-                        Cancel
+                        Откажи
                     </a>
                     <button type="submit"
                         class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium">
-                        Update Project
+                        Актуализирай проект
                     </button>
                 </div>
             </form>
 
             <!-- Delete Button (Separate Form) -->
             <form action="{{ route('admin.projects.destroy', $project) }}" method="POST" class="mt-6 pt-6 border-t border-gray-200"
-                onsubmit="return confirm('Are you sure you want to delete this project?');">
+                onsubmit="return confirm('Сигурни ли сте, че искате да изтриете този проект?');">
                 @csrf
                 @method('DELETE')
                 <button type="submit"
                     class="w-full inline-flex items-center justify-center px-3 py-2 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium">
-                    Delete Project
+                    Изтрий проект
                 </button>
             </form>
         </div>
     </div>
 </div>
-
-<script>
-    // Delete image function
-    function deleteImage(projectId, mediaId) {
-        if (!confirm('Are you sure you want to delete this image?')) {
-            return;
-        }
-
-        // Show loading state
-        const imageElement = document.querySelector('[data-media-id="' + mediaId + '"]');
-        if (imageElement) {
-            imageElement.style.opacity = '0.5';
-            imageElement.style.pointerEvents = 'none';
-        }
-
-        fetch('/admin/projects/' + projectId + '/media/' + mediaId, {
-            method: 'DELETE',
-            headers: {
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Delete response:', data);
-            if (data.success) {
-                // Remove the image element from DOM with animation
-                if (imageElement) {
-                    imageElement.style.opacity = '0';
-                    imageElement.style.transform = 'scale(0.8)';
-                    imageElement.style.transition = 'all 0.3s ease';
-                    
-                    setTimeout(function() {
-                        imageElement.remove();
-                        
-                        // Check if there are no more images
-                        const container = document.getElementById('existing-images');
-                        if (container && container.children.length === 0) {
-                            container.parentElement.remove();
-                        }
-                        updateMediaOrder();
-                    }, 300);
-                }
-            } else {
-                // Restore image on error
-                if (imageElement) {
-                    imageElement.style.opacity = '1';
-                    imageElement.style.pointerEvents = 'auto';
-                }
-                console.error('Error deleting image:', data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            // Restore image on error
-            if (imageElement) {
-                imageElement.style.opacity = '1';
-                imageElement.style.pointerEvents = 'auto';
-            }
-        });
-    }
-
-    // Drag & drop reordering for existing images
-    const container = document.getElementById('existing-images');
-    const orderInput = document.getElementById('media_order');
-
-    function updateMediaOrder() {
-        if (!container || !orderInput) return;
-        const ids = Array.from(container.children)
-            .map(el => el.getAttribute('data-media-id'))
-            .filter(Boolean);
-        orderInput.value = ids.join(',');
-    }
-
-    // Initialize current order
-    updateMediaOrder();
-
-    let dragEl = null;
-    if (container) {
-        container.addEventListener('dragstart', (e) => {
-            const target = e.target.closest('[data-media-id]');
-            if (!target) return;
-            dragEl = target;
-            target.classList.add('opacity-50');
-            e.dataTransfer.effectAllowed = 'move';
-        });
-
-        container.addEventListener('dragend', (e) => {
-            const target = e.target.closest('[data-media-id]');
-            if (!target) return;
-            target.classList.remove('opacity-50');
-        });
-
-        container.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            e.dataTransfer.dropEffect = 'move';
-            const target = e.target.closest('[data-media-id]');
-            if (!target || target === dragEl) return;
-            // Insert visual placeholder by moving the element in DOM
-            const bounding = target.getBoundingClientRect();
-            const offset = bounding.y + (bounding.height / 2);
-            if (e.clientY - offset > 0) {
-                target.after(dragEl);
-            } else {
-                target.before(dragEl);
-            }
-        });
-
-        container.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dragEl = null;
-            updateMediaOrder();
-        });
-    }
-</script>
 @endsection

@@ -1,4 +1,4 @@
-@php($label = $label ?? 'Image')
+@php($label = $label ?? 'Изображение')
 @php($name = $name ?? 'image')
 @php($existingImage = $existingImage ?? null)
 @php($deleteUrl = $deleteUrl ?? null)
@@ -21,7 +21,7 @@
                         type="button"
                         id="deleteBtn_{{ $uid }}"
                         class="absolute top-2 right-2 bg-red-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-700"
-                        title="Delete image"
+                        title="Изтрий изображението"
                     >
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -39,7 +39,7 @@
                 <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
             <p class="mt-2 text-sm text-gray-600">
-                Click to upload an image or drag and drop
+                Кликнете за качване или плъзнете и пуснете файл
             </p>
             <p class="text-xs text-gray-500 mt-1">
                 PNG, JPG, WEBP
@@ -107,7 +107,7 @@
 
     if (deleteBtn) {
         deleteBtn.addEventListener('click', () => {
-            if (!confirm('Are you sure you want to delete this image?')) {
+            if (!confirm('Сигурни ли сте, че искате да изтриете това изображение?')) {
                 return;
             }
 

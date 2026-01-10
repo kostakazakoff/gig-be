@@ -5,8 +5,8 @@
     <div class="max-w-2xl mx-auto">
         <!-- Header -->
         <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-900">Create Category</h1>
-            <p class="mt-2 text-gray-600">Add a new category to the system</p>
+            <h1 class="text-3xl font-bold text-gray-900">Създай категория</h1>
+            <p class="mt-2 text-gray-600">Добави нова категория в системата</p>
         </div>
 
         <!-- Form Card -->
@@ -15,18 +15,18 @@
                 @csrf
 
                 <!-- Image Upload Field (Drag & Drop) -->
-                @include('partials.single-image-dropzone', ['label' => 'Category Image'])
+                @include('partials.single-image-dropzone', ['label' => 'Изображение към категория'])
 
                 <!-- Key Field -->
                 <div>
                     <label for="key" class="block text-sm font-medium text-gray-700 mb-2">
-                        Category Key
+                        Ключ на категория
                     </label>
                     <input
                         type="text"
                         id="key"
                         name="key"
-                        placeholder="e.g., tech, furniture, clothing"
+                        placeholder="напр. tech, furniture, clothing"
                         value="{{ old('key') }}"
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('key') border-red-500 @enderror"
                         required
@@ -34,23 +34,23 @@
                     @error('key')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
-                    <p class="mt-1 text-xs text-gray-500">Unique identifier for this category (lowercase, no spaces)</p>
+                    <p class="mt-1 text-xs text-gray-500">Уникален идентификатор за категорията (малки букви, без интервали)</p>
                 </div>
 
                 <!-- Name Fields Section -->
                 <div class="border-t pt-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Category Names</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Имена на категория</h3>
 
                     <!-- Name EN -->
                     <div class="mb-4">
                         <label for="name_en" class="block text-sm font-medium text-gray-700 mb-2">
-                            Name (English)
+                            Име (Английски)
                         </label>
                         <input
                             type="text"
                             id="name_en"
                             name="name_en"
-                            placeholder="Enter category name in English"
+                            placeholder="Въведете име на категория на английски"
                             value="{{ old('name_en') }}"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('name_en') border-red-500 @enderror"
                             required
@@ -63,7 +63,7 @@
                     <!-- Name BG -->
                     <div>
                         <label for="name_bg" class="block text-sm font-medium text-gray-700 mb-2">
-                            Name (Bulgarian)
+                            Име (Български)
                         </label>
                         <input
                             type="text"
@@ -82,17 +82,17 @@
 
                 <!-- Description Fields Section -->
                 <div class="border-t pt-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Descriptions</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Описания</h3>
 
                     <!-- Description EN -->
                     <div class="mb-4">
                         <label for="description_en" class="block text-sm font-medium text-gray-700 mb-2">
-                            Description (English)
+                            Описание (Английски)
                         </label>
                         <textarea
                             id="description_en"
                             name="description_en"
-                            placeholder="Enter category description in English"
+                            placeholder="Въведете описание на английски"
                             rows="4"
                             value="{{ old('description_en') }}"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('description_en') border-red-500 @enderror"
@@ -105,7 +105,7 @@
                     <!-- Description BG -->
                     <div>
                         <label for="description_bg" class="block text-sm font-medium text-gray-700 mb-2">
-                            Description (Bulgarian)
+                            Описание (Български)
                         </label>
                         <textarea
                             id="description_bg"
@@ -127,13 +127,13 @@
                         type="submit"
                         class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200"
                     >
-                        Create Category
+                        Създай Категория
                     </button>
                     <a
                         href="{{ route('admin.categories.index') }}"
                         class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-900 font-medium py-2 px-4 rounded-lg transition duration-200 text-center"
                     >
-                        Cancel
+                        Откажи
                     </a>
                 </div>
             </form>

@@ -7,6 +7,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\TranslationLoader\LanguageLine;
 use App\Models\Service;
+use DomainException;
 
 class Units extends Model implements HasMedia
 {
@@ -15,6 +16,17 @@ class Units extends Model implements HasMedia
     protected $fillable = ['translation_group', 'translation_key'];
 
     protected $appends = ['name'];
+
+    public function delete(): void
+    {
+        if ($this->services()->exists()) {
+            throw new DomainException(
+                'Unit is assigned to services.'
+            );
+        }
+
+        $this->delete();
+    }
 
     public function getNameAttribute(): string
     {

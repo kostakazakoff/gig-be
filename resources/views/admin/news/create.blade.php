@@ -5,8 +5,8 @@
     <div class="max-w-2xl mx-auto">
         <!-- Header -->
         <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-900">Create News Article</h1>
-            <p class="mt-2 text-gray-600">Add a new news article to the system</p>
+            <h1 class="text-3xl font-bold text-gray-900">Създай новина</h1>
+            <p class="mt-2 text-gray-600">Добави нова новина в системата</p>
         </div>
 
         <!-- Form Card -->
@@ -15,18 +15,18 @@
                 @csrf
 
                 <!-- Image Upload Field (Drag & Drop) -->
-                @include('partials.single-image-dropzone', ['label' => 'News Image'])
+                @include('partials.single-image-dropzone', ['label' => 'Основна снимка'])
 
                 <!-- Key Field -->
                 <div>
                     <label for="key" class="block text-sm font-medium text-gray-700 mb-2">
-                        Article Key
+                        Ключ на статия
                     </label>
                     <input
                         type="text"
                         id="key"
                         name="key"
-                        placeholder="e.g., announcement-2024, press-release"
+                        placeholder="н.p., announcement-2024, press-release"
                         value="{{ old('key') }}"
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('key') border-red-500 @enderror"
                         required
@@ -34,23 +34,23 @@
                     @error('key')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
-                    <p class="mt-1 text-xs text-gray-500">Unique identifier for this article (lowercase, no spaces)</p>
+                    <p class="mt-1 text-xs text-gray-500">Уникален идентификатор за тази статия (малки букви, без прозърци)</p>
                 </div>
 
                 <!-- Title Fields Section -->
                 <div class="border-t pt-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Article Titles</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Заглавие на статия</h3>
 
                     <!-- Title EN -->
                     <div class="mb-4">
                         <label for="title_en" class="block text-sm font-medium text-gray-700 mb-2">
-                            Title (English)
+                            Заглавие (Английски)
                         </label>
                         <input
                             type="text"
                             id="title_en"
                             name="title_en"
-                            placeholder="Enter news title in English"
+                            placeholder="Въведете наслов на новината на английски"
                             value="{{ old('title_en') }}"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('title_en') border-red-500 @enderror"
                             required
@@ -63,13 +63,13 @@
                     <!-- Title BG -->
                     <div>
                         <label for="title_bg" class="block text-sm font-medium text-gray-700 mb-2">
-                            Title (Bulgarian)
+                            Заглавие (Български)
                         </label>
                         <input
                             type="text"
                             id="title_bg"
                             name="title_bg"
-                            placeholder="Въведете заглавие на български"
+                            placeholder="Въведете наслов на български"
                             value="{{ old('title_bg') }}"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('title_bg') border-red-500 @enderror"
                             required
@@ -82,17 +82,17 @@
 
                 <!-- Content Fields Section -->
                 <div class="border-t pt-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Article Content</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Съдържание</h3>
 
                     <!-- Content EN -->
                     <div class="mb-4">
                         <label for="content_en" class="block text-sm font-medium text-gray-700 mb-2">
-                            Content (English)
+                            Съдържание (Английски)
                         </label>
                         <textarea
                             id="content_en"
                             name="content_en"
-                            placeholder="Enter news content in English"
+                            placeholder="Въведете съдържание на новината на английски"
                             rows="6"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('content_en') border-red-500 @enderror"
                             required
@@ -105,7 +105,7 @@
                     <!-- Content BG -->
                     <div>
                         <label for="content_bg" class="block text-sm font-medium text-gray-700 mb-2">
-                            Content (Bulgarian)
+                            Съдържание (Български)
                         </label>
                         <textarea
                             id="content_bg"
@@ -127,13 +127,13 @@
                         type="submit"
                         class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200"
                     >
-                        Create News
+                        Създай новина
                     </button>
                     <a
                         href="{{ route('admin.news.index') }}"
                         class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-900 font-medium py-2 px-4 rounded-lg transition duration-200 text-center"
                     >
-                        Cancel
+                        Откажи
                     </a>
                 </div>
             </form>

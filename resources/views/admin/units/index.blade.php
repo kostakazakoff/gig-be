@@ -5,12 +5,12 @@
         <!-- Header with Add Button -->
         <div class="mb-8 flex items-center justify-between sticky top-16 z-40 bg-gray-50 py-4 mx-auto xl:max-w-7xl">
             <div>
-                <h1 class="text-3xl font-bold text-gray-900">Units</h1>
-                <p class="mt-2 text-gray-600">Manage all units in the system</p>
+                <h1 class="text-3xl font-bold text-gray-900">Мерни единици</h1>
+                <p class="mt-2 text-gray-600">Управлявайте всички мерни единици в системата</p>
             </div>
             <a href="{{ route('admin.units.create') }}"
                 class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition duration-200">
-                + ADD UNIT
+                + ДОБАВИ МЕРНА ЕДИНИЦА
             </a>
         </div>
 
@@ -21,14 +21,20 @@
             </div>
         @endif
 
+        @if ($errors->has('delete'))
+            <div class="mb-6 bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg">
+                {{ $errors->first('delete') }}
+            </div>
+        @endif
+
         <!-- Units Table -->
         <div class="overflow-x-auto bg-white rounded shadow mx-auto xl:max-w-7xl">
             <table class="w-full">
                 <thead class="bg-gray-200">
                     <tr>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Name (EN/BG)</th>
-                        <th class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Services</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-right text-xs lg:text-sm">Actions</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Наименование (EN/BG)</th>
+                        <th class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Услуги</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-right text-xs lg:text-sm">Действия</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,20 +56,20 @@
                                 'editRoute' => 'admin.units.edit',
                                 'deleteRoute' => 'admin.units.destroy',
                                 'model' => $unit,
-                                'confirmMessage' => 'Are you sure you want to delete this unit?'
+                                'confirmMessage' => 'Сигурни ли сте, че искате да изтриете тази мерна единица?',
                             ])
                         </tr>
                     @empty
                         <tr>
                             <td colspan="3" class="px-6 py-8 text-center text-gray-500">
-                                No units found. <a href="{{ route('admin.units.create') }}"
-                                    class="text-blue-600 hover:underline">Create one now</a>
+                                Няма намерени мерни единици. <a href="{{ route('admin.units.create') }}"
+                                    class="text-blue-600 hover:underline">Създай една сега</a>
                             </td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
-            </div>
         </div>
+    </div>
     </div>
 @endsection

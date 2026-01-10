@@ -4,8 +4,8 @@
 <div class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-2xl mx-auto">
         <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-900">Edit Client</h1>
-            <p class="mt-2 text-gray-600">Update client details</p>
+            <h1 class="text-3xl font-bold text-gray-900">Редактирай клиент</h1>
+            <p class="mt-2 text-gray-600">Актуализирай информацията на клиента</p>
         </div>
 
         <div class="bg-white rounded-lg shadow-md p-8">
@@ -16,7 +16,7 @@
                 <!-- Image Upload Field (Drag & Drop) -->
                 <div>
                     @include('partials.single-image-dropzone', [
-                        'label' => 'Client Image',
+                        'label' => 'Изображение към клиент',
                         'existingImage' => $client->image_src,
                         'deleteUrl' => route('admin.clients.deleteImage', $client),
                     ])
@@ -37,7 +37,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label for="first_name" class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                        <label for="first_name" class="block text-sm font-medium text-gray-700 mb-2">Име</label>
                         <input type="text" id="first_name" name="first_name" value="{{ old('first_name', $client->first_name) }}"
                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 @error('first_name') border-red-500 @enderror" required>
                         @error('first_name')
@@ -46,7 +46,7 @@
                     </div>
 
                     <div>
-                        <label for="last_name" class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                        <label for="last_name" class="block text-sm font-medium text-gray-700 mb-2">Фамилия</label>
                         <input type="text" id="last_name" name="last_name" value="{{ old('last_name', $client->last_name) }}"
                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 @error('last_name') border-red-500 @enderror" required>
                         @error('last_name')
@@ -66,7 +66,7 @@
                     </div>
 
                     <div>
-                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone</label>
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Телефон</label>
                         <input type="text" id="phone" name="phone" value="{{ old('phone', $client->phone) }}"
                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 @error('phone') border-red-500 @enderror">
                         @error('phone')
@@ -76,7 +76,7 @@
                 </div>
 
                 <div>
-                    <label for="company" class="block text-sm font-medium text-gray-700 mb-2">Company</label>
+                    <label for="company" class="block text-sm font-medium text-gray-700 mb-2">Компания</label>
                     <input type="text" id="company" name="company" value="{{ old('company', $client->company) }}"
                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 @error('company') border-red-500 @enderror">
                     @error('company')
@@ -85,7 +85,7 @@
                 </div>
 
                 <div>
-                    <label for="address" class="block text-sm font-medium text-gray-700 mb-2">Address</label>
+                    <label for="address" class="block text-sm font-medium text-gray-700 mb-2">Адрес</label>
                     <textarea id="address" name="address" rows="3"
                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 @error('address') border-red-500 @enderror">{{ old('address', $client->address) }}</textarea>
                     @error('address')
@@ -95,22 +95,22 @@
 
                 <div class="border-t pt-6 flex gap-4">
                     <button type="submit" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200">
-                        Save Changes
+                        Запази изменения
                     </button>
                     <a href="{{ route('admin.clients.index') }}" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-900 font-medium py-2 px-4 rounded-lg transition duration-200 text-center">
-                        Cancel
+                        Откажи
                     </a>
                 </div>
             </form>
 
             <!-- Delete Button (Separate Form) -->
             <form action="{{ route('admin.clients.destroy', $client) }}" method="POST" class="mt-6 pt-6 border-t border-gray-200"
-                onsubmit="return confirm('Are you sure you want to delete this client?');">
+                onsubmit="return confirm('Сигурни ли сте, че искате да изтриете този клиент?');">
                 @csrf
                 @method('DELETE')
                 <button type="submit"
                     class="w-full inline-flex items-center justify-center px-3 py-2 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium">
-                    Delete Client
+                    Изтрий клиент
                 </button>
             </form>
         </div>

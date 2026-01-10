@@ -3,9 +3,9 @@
 @section('content')
     <div class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center mb-6 sticky top-16 z-40 bg-gray-50 py-4 mx-auto xl:max-w-7xl">
-            <h1 class="text-3xl font-bold">Services</h1>
+            <h1 class="text-3xl font-bold">Услуги</h1>
             <a href="{{ route('admin.services.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
-                + ADD SERVICE
+                + ДОБАВИ УСЛУГА
             </a>
         </div>
 
@@ -19,11 +19,11 @@
             <table class="w-full">
                 <thead class="bg-gray-200">
                     <tr>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Image</th>
-                        <th class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Category</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Name (EN/BG)</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Price</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-right text-xs lg:text-sm">Actions</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Изображение</th>
+                        <th class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Категория</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Име (EN/BG)</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Цена</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-right text-xs lg:text-sm">Действия</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,10 +34,10 @@
                                     <img src="{{ $service->image_src }}" alt="{{ $service->name }}"
                                         class="h-12 w-12 object-cover rounded">
                                 @else
-                                    <span class="text-gray-400">No</span>
+                                    <span class="text-gray-400">Няма</span>
                                 @endif
                             </td>
-                            <td class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">{{ $service->category->name ?? 'N/A' }}</td>
+                            <td class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">{{ $service->category->name ?? 'Няма' }}</td>
                             <td class="px-4 sm:px-6 py-2 sm:py-3">
                                 <div class="text-xs lg:text-sm">
                                     <div class="text-blue-600">EN: {{ $service->getTranslation('name', 'en') }}</div>
@@ -52,14 +52,14 @@
                                         <div class="text-gray-500 text-xs lg:text-sm">{{ $service->unit }}</div>
                                     @endif
                                 @else
-                                    <span class="text-gray-400">N/A</span>
+                                    <span class="text-gray-400">Няма</span>
                                 @endif
                             </td>
                             @include('partials.action-buttons', [
                                 'editRoute' => 'admin.services.edit',
                                 'deleteRoute' => 'admin.services.destroy',
                                 'model' => $service,
-                                'confirmMessage' => 'Are you sure you want to delete this service?'
+                                'confirmMessage' => 'Сигурни ли сте, че искате да изтриете тази услуга?'
                             ])
                         </tr>
                     @empty
@@ -72,9 +72,8 @@
                                             d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4">
                                         </path>
                                     </svg>
-                                    <p class="font-medium">No services found</p>
-                                    <p class="text-sm mt-1">Create your first service by clicking the ADD SERVICE button
-                                        above</p>
+                                    <p class="font-medium">Няма намерени услуги</p>
+                                    <p class="text-sm mt-1">Създайте първата услуга чрез бутона ДОБАВИ УСЛУГА по-горе</p>
                                 </div>
                             </td>
                         </tr>

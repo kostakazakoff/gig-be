@@ -24,7 +24,8 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreign('unit_id')->references('id')->on('units')->onDelete('set null');
+            // Avoid deleting unit if referenced in services
+            $table->foreign('unit_id')->references('id')->on('units')->restrictOnDelete();
         });
     }
 

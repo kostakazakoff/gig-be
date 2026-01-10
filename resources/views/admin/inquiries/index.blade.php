@@ -4,12 +4,12 @@
     <div class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div class="mb-8 flex items-center justify-between sticky top-16 z-40 bg-gray-50 py-4 mx-auto xl:max-w-7xl">
             <div>
-                <h1 class="text-3xl font-bold text-gray-900">Inquiries</h1>
-                <p class="mt-2 text-gray-600">Manage all inquiries</p>
+                <h1 class="text-3xl font-bold text-gray-900">Запитвания</h1>
+                <p class="mt-2 text-gray-600">Управляйте всички запитвания</p>
             </div>
             <a href="{{ route('admin.inquiries.create') }}"
                class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition duration-200">
-                + ADD INQUIRY
+                + ДОБАВИ ЗАПИТВАНЕ
             </a>
         </div>
 
@@ -23,11 +23,11 @@
             <table class="w-full">
                 <thead class="bg-gray-200">
                     <tr>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Client</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Service</th>
-                        <th class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Message</th>
-                        <th class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Created</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-right text-xs lg:text-sm">Actions</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Клиент</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Услуга</th>
+                        <th class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Съобщение</th>
+                        <th class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Създадено</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-right text-xs lg:text-sm">Действия</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,8 +56,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                           d="M8 10h.01M12 10h.01M16 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
-                                <p class="font-medium">No inquiries found</p>
-                                <p class="text-sm mt-1">Create your first inquiry by clicking the ADD INQUIRY button above</p>
+                                <p class="font-medium">Няма намерени запитвания</p>
+                                <p class="text-sm mt-1">Създайте първото запитване, като кликнете на бутона ДОБАВИ ЗАПИТВАНЕ по-горе</p>
                             </div>
                         </td>
                     </tr>

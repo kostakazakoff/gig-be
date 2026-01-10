@@ -5,12 +5,12 @@
         <!-- Header with Add Button -->
         <div class="mb-8 flex items-center justify-between sticky top-16 z-40 bg-gray-50 py-4 mx-auto xl:max-w-7xl">
             <div>
-                <h1 class="text-3xl font-bold text-gray-900">News</h1>
-                <p class="mt-2 text-gray-600">Manage all news articles in the system</p>
+                <h1 class="text-3xl font-bold text-gray-900">Новини</h1>
+                <p class="mt-2 text-gray-600">Управлявайте всички новини в системата</p>
             </div>
             <a href="{{ route('admin.news.create') }}"
                 class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition duration-200">
-                + ADD NEWS
+                + ДОБАВИ НОВИНА
             </a>
         </div>
 
@@ -26,9 +26,9 @@
             <table class="w-full">
                 <thead class="bg-gray-200">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs lg:text-sm">Image</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Title (EN/BG)</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-right text-xs lg:text-sm">Actions</th>
+                        <th class="px-6 py-3 text-left text-xs lg:text-sm">Снимка</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Заглавие (EN/BG)</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-right text-xs lg:text-sm">Действия</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -52,14 +52,14 @@
                                 'editRoute' => 'admin.news.edit',
                                 'deleteRoute' => 'admin.news.destroy',
                                 'model' => $article,
-                                'confirmMessage' => 'Are you sure you want to delete this article?',
+                                'confirmMessage' => 'Сигурни ли сте, че искате да изтриете тази новина?',
                             ])
                         </tr>
                     @empty
                         <tr>
                             <td colspan="3" class="px-6 py-8 text-left text-gray-500">
-                                No news articles found. <a href="{{ route('admin.news.create') }}"
-                                    class="text-blue-600 hover:text-blue-900 font-medium">Create one</a>
+                                Няма намерени новини. <a href="{{ route('admin.news.create') }}"
+                                    class="text-blue-600 hover:text-blue-900 font-medium">Създай една</a>
                             </td>
                         </tr>
                     @endforelse

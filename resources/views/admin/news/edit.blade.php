@@ -5,8 +5,8 @@
     <div class="max-w-2xl mx-auto">
         <!-- Header -->
         <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-900">Edit News Article</h1>
-            <p class="mt-2 text-gray-600">Update news article information</p>
+            <h1 class="text-3xl font-bold text-gray-900">Редактирай новина</h1>
+            <p class="mt-2 text-gray-600">Актуализирай информация за новината</p>
         </div>
 
         <!-- Form Card -->
@@ -19,38 +19,38 @@
                 <div>
                     @if ($news->image_src)
                         <div class="mb-4">
-                            <p class="text-sm text-gray-600 mb-2">Current image:</p>
+                            <p class="text-sm text-gray-600 mb-2">Текуща снимка:</p>
                             <img src="{{ $news->image_src }}" alt="{{ $news->translation_key }}" class="max-w-xs rounded-lg" />
                         </div>
                     @endif
-                    @include('partials.single-image-dropzone', ['label' => 'News Image'])
+                    @include('partials.single-image-dropzone', ['label' => 'Основна снимка'])
                 </div>
 
                 <!-- Display Key (read-only) -->
                 <div>
                     <label for="key" class="block text-sm font-medium text-gray-700 mb-2">
-                        Article Key
+                        Ключ на статия
                     </label>
                     <div class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-100 text-gray-600 font-medium">
                         {{ $news->translation_key }}
                     </div>
-                    <p class="mt-1 text-xs text-gray-500">This key cannot be changed</p>
+                    <p class="mt-1 text-xs text-gray-500">Този ключ не може да бъде променен</p>
                 </div>
 
                 <!-- Title Fields Section -->
                 <div>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Article Titles</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Заглавие на статия</h3>
 
                     <!-- Title EN -->
                     <div class="mb-4">
                         <label for="title_en" class="block text-sm font-medium text-gray-700 mb-2">
-                            Title (English)
+                            Заглавие (Английски)
                         </label>
                         <input
                             type="text"
                             id="title_en"
                             name="title_en"
-                            placeholder="Enter news title in English"
+                            placeholder="Въведете наслов на новината на английски"
                             value="{{ old('title_en', $news->title) }}"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('title_en') border-red-500 @enderror"
                             required
@@ -63,13 +63,13 @@
                     <!-- Title BG -->
                     <div>
                         <label for="title_bg" class="block text-sm font-medium text-gray-700 mb-2">
-                            Title (Bulgarian)
+                            Заглавие (Български)
                         </label>
                         <input
                             type="text"
                             id="title_bg"
                             name="title_bg"
-                            placeholder="Въведете заглавие на български"
+                            placeholder="Въведете наслов на български"
                             value="{{ old('title_bg', $news->getTranslation('title', 'bg')) }}"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('title_bg') border-red-500 @enderror"
                             required
@@ -82,17 +82,17 @@
 
                 <!-- Content Fields Section -->
                 <div class="border-t pt-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Article Content</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Съдържание</h3>
 
                     <!-- Content EN -->
                     <div class="mb-4">
                         <label for="content_en" class="block text-sm font-medium text-gray-700 mb-2">
-                            Content (English)
+                            Съдържание (Английски)
                         </label>
                         <textarea
                             id="content_en"
                             name="content_en"
-                            placeholder="Enter news content in English"
+                            placeholder="Въведете съдържание на новината на английски"
                             rows="6"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('content_en') border-red-500 @enderror"
                             required
@@ -105,7 +105,7 @@
                     <!-- Content BG -->
                     <div>
                         <label for="content_bg" class="block text-sm font-medium text-gray-700 mb-2">
-                            Content (Bulgarian)
+                            Съдържание (Български)
                         </label>
                         <textarea
                             id="content_bg"
@@ -127,25 +127,25 @@
                         type="submit"
                         class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200"
                     >
-                        Update News
+                        Актуализирай новина
                     </button>
                     <a
                         href="{{ route('admin.news.index') }}"
                         class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-900 font-medium py-2 px-4 rounded-lg transition duration-200 text-center"
                     >
-                        Cancel
+                        Откажи
                     </a>
                 </div>
             </form>
 
             <!-- Delete Button (Separate Form) -->
             <form action="{{ route('admin.news.destroy', $news) }}" method="POST" class="mt-6 pt-6 border-t border-gray-200"
-                onsubmit="return confirm('Are you sure you want to delete this news article?');">
+                onsubmit="return confirm('Сигурни ли сте, че искате да изтриете тази новина?');">
                 @csrf
                 @method('DELETE')
                 <button type="submit"
                     class="w-full inline-flex items-center justify-center px-3 py-2 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium">
-                    Delete News Article
+                    Изтрий новина
                 </button>
             </form>
         </div>

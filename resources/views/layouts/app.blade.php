@@ -9,8 +9,8 @@
 </head>
 <body class="bg-gray-100">
     <!-- Navigation -->
-    <nav class="bg-white shadow-md sticky top-0 z-60">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav class="bg-white shadow-md px-6 sticky top-0 z-60">
+        <div class="xl:max-w-7xl mx-auto">
             <div class="flex justify-between h-16">
                 <!-- Logo -->
                 <div class="flex items-center">

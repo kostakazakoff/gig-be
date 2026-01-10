@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center mb-6 sticky top-16 z-40 bg-gray-50 py-4 mx-auto" style="max-width: 65%;">
+        <div class="flex justify-between items-center mb-6 sticky top-16 z-40 bg-gray-50 py-4 mx-auto xl:max-w-7xl">
             <h1 class="text-3xl font-bold">Services</h1>
             <a href="{{ route('admin.services.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
                 + ADD SERVICE
@@ -15,7 +15,7 @@
             </div>
         @endif
 
-        <div class="overflow-x-auto bg-white rounded shadow mx-auto" style="max-width: 65%;">
+        <div class="overflow-x-auto bg-white rounded shadow mx-auto xl:max-w-7xl">
             <table class="w-full">
                 <thead class="bg-gray-200">
                     <tr>

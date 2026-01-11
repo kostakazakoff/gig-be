@@ -13,7 +13,7 @@
             <!-- Logo/Header -->
             <div>
                 <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-                    Вход в Admin панел
+                    Вход в Админ панел
                 </h2>
             </div>
 

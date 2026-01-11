@@ -16,7 +16,7 @@
 
         <!-- Success Message -->
         @if (session('success'))
-            <div class="mb-6 bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg">
+            <div class="mb-6 bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg xl:max-w-7xl mx-auto">
                 <p class="font-medium">{{ session('success') }}</p>
             </div>
         @endif

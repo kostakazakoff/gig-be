@@ -17,10 +17,11 @@ class DatabaseSeeder extends Seeder
     {
         // TODO: Uncomment if you want to create a default user
 
-        // User::factory()->create([
-        //     'name' => 'Admin',
-        //     'email' => 'admin@example.com',
-        // ]);
+        User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@example.com',
+            'password' => bcrypt('password'),
+        ]);
 
         // TODO: Remove for production
         

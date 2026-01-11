@@ -41,7 +41,7 @@ class ProjectController extends Controller
         $storeProject->handle($request->validated());
 
         return redirect()->route('admin.projects.index')
-            ->with('success', 'Project created successfully');
+            ->with('success', 'Проектът е създаден успешно');
     }
 
     /**
@@ -68,7 +68,7 @@ class ProjectController extends Controller
         $updateProject->handle($project, $request->validated());
 
         return redirect()->route('admin.projects.index')
-            ->with('success', 'Project updated successfully');
+            ->with('success', 'Проектът е обновен успешно');
     }
 
     /**
@@ -79,7 +79,7 @@ class ProjectController extends Controller
         $destroyProject->handle($project);
 
         return redirect()->route('admin.projects.index')
-            ->with('success', 'Project deleted successfully');
+            ->with('success', 'Проектът е изтрит успешно');
     }
 
     /**

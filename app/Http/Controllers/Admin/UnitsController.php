@@ -41,7 +41,7 @@ class UnitsController extends Controller
 
         return redirect()
             ->route('admin.units.index')
-            ->with('success', 'Unit created successfully.');
+            ->with('success', 'Мерната единица е създадена успешно.');
     }
 
     /**
@@ -71,7 +71,7 @@ class UnitsController extends Controller
 
         return redirect()
             ->route('admin.units.index')
-            ->with('success', 'Unit updated successfully.');
+            ->with('success', 'Мерната единица е обновена успешно.');
     }
 
     /**
@@ -85,8 +85,10 @@ class UnitsController extends Controller
             ]);
         }
 
+        $unit->delete();
+
         return redirect()
             ->route('admin.units.index')
-            ->with('success', 'Unit deleted successfully.');
+            ->with('success', 'Мерната единица е изтрита успешно.');
     }
 }

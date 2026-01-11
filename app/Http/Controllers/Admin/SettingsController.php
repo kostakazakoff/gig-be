@@ -31,7 +31,7 @@ class SettingsController extends Controller
         $newPassword = $request->input('password');
 
         if (!Hash::check($request->current_password, auth()->user()->password)) {
-            return redirect()->back()->withErrors(['current_password' => 'The current password is incorrect.']);
+            return redirect()->back()->withErrors(['current_password' => 'Текущата парола е неправилна']);
         }
 
         auth()->user()->update([

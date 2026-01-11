@@ -40,7 +40,7 @@ class ClientController extends Controller
         $service->handle($request->validated());
 
         return redirect()->route('admin.clients.index')
-            ->with('success', 'Client created successfully');
+            ->with('success', 'Клиентът е създаден успешно');
     }
 
     /**
@@ -59,7 +59,7 @@ class ClientController extends Controller
         $service->handle($client, $request->validated());
 
         return redirect()->route('admin.clients.index')
-            ->with('success', 'Client updated successfully');
+            ->with('success', 'Клиентът е обновен успешно');
     }
 
     /**
@@ -70,7 +70,7 @@ class ClientController extends Controller
         $client->delete();
 
         return redirect()->route('admin.clients.index')
-            ->with('success', 'Client deleted successfully');
+            ->with('success', 'Клиентът е изтрит успешно');
     }
 
     /**

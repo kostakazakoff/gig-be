@@ -42,7 +42,7 @@ class InquiryController extends Controller
         Inquiry::create($request->validated());
 
         return redirect()->route('admin.inquiries.index')
-            ->with('success', 'Inquiry created successfully');
+            ->with('success', 'Заявката е създадена успешно');
     }
 
     /**
@@ -63,7 +63,7 @@ class InquiryController extends Controller
         $inquiry->update($request->validated());
 
         return redirect()->route('admin.inquiries.index')
-            ->with('success', 'Inquiry updated successfully');
+            ->with('success', 'Заявката е обновена успешно');
     }
 
     /**
@@ -74,6 +74,6 @@ class InquiryController extends Controller
         $inquiry->delete();
 
         return redirect()->route('admin.inquiries.index')
-            ->with('success', 'Inquiry deleted successfully');
+            ->with('success', 'Заявката е изтрита успешно');
     }
 }

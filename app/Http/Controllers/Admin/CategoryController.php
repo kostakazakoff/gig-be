@@ -44,7 +44,7 @@ class CategoryController extends Controller
         $service->handle($request->all());
 
         return redirect()->route('admin.categories.index')
-            ->with('success', 'Category created successfully');
+            ->with('success', 'Категорията е създадена успешно');
     }
 
     /**
@@ -65,7 +65,7 @@ class CategoryController extends Controller
         $service->handle($category, $request->all());
 
         return redirect()->route('admin.categories.index')
-            ->with('success', 'Category updated successfully');
+            ->with('success', 'Категорията е обновена успешно');
     }
 
     /**
@@ -77,7 +77,7 @@ class CategoryController extends Controller
         $service->handle($category);
 
         return redirect()->route('admin.categories.index')
-            ->with('success', 'Category deleted successfully');
+            ->with('success', 'Категорията е изтрита успешно');
     }
 
     /**

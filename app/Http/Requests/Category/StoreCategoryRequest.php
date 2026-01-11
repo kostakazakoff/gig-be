@@ -36,11 +36,11 @@ class StoreCategoryRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'key.regex' => 'Key must contain only lowercase letters, numbers and underscores (a-z, 0-9, _)',
-            'key.unique' => 'This key already exists',
-            'key.required' => 'Key is required',
-            'name_en.required' => 'English name is required',
-            'name_bg.required' => 'Bulgarian name is required',
+            'key.regex' => 'Ключът може да съдържа само малки букви, цифри и долни черти',
+            'key.unique' => 'Този ключ вече съществува',
+            'key.required' => 'Ключът е задължителен',
+            'name_en.required' => 'Името на английски е задължително',
+            'name_bg.required' => 'Името на български е задължително',
         ];
     }
 }

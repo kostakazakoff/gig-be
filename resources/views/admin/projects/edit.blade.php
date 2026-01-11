@@ -166,11 +166,11 @@
                 <!-- Form Actions -->
                 <div class="flex items-center justify-end gap-4 pt-6 border-t">
                     <a href="{{ route('admin.projects.index') }}"
-                        class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition font-medium">
+                        class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition font-medium flex-1 text-center">
                         Откажи
                     </a>
                     <button type="submit"
-                        class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium">
+                        class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium flex-1 text-center">
                         Актуализирай проект
                     </button>
                 </div>

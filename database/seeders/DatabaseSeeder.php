@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // TODO: Uncomment if you want to create a default user
+        // Uncomment if you want to create a default user
 
         User::factory()->create([
             'name' => 'Admin',

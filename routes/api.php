@@ -32,4 +32,6 @@ Route::middleware('locale')->group(function () {
         Route::get('/', [\App\Http\Controllers\Api\NewsController::class, 'index']);
         Route::get('/{id}', [\App\Http\Controllers\Api\NewsController::class, 'show']);
     });
+
+    Route::post('/inquiry', [\App\Http\Controllers\Api\InquiryController::class, 'store']);
 });

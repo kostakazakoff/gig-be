@@ -48,7 +48,7 @@
                             </td>
                             <td class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">
                                 @php
-                                    $serviceNames = $unit->services->map(fn($s) => $s->name)->filter()->values();
+                                    $serviceNames = $unit->services->map(fn($s) => $s->getTranslation('name', 'bg'))->filter()->values();
                                 @endphp
                                 {{ $serviceNames->isNotEmpty() ? $serviceNames->implode(', ') : 'N/A' }}
                             </td>

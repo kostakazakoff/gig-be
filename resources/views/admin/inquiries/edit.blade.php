@@ -36,7 +36,7 @@
                         <option value="">— Необязателно —</option>
                         @foreach($categories as $category)
                             <option value="{{ $category->id }}" @selected(old('service_id', $inquiry->service_id) == $category->id)>
-                                {{ $category->name }}
+                                {{ $category->getTranslation('name', 'bg') }}
                             </option>
                         @endforeach
                     </select>

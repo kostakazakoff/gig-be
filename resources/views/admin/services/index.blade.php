@@ -37,7 +37,7 @@
                                     <span class="text-gray-400">Няма</span>
                                 @endif
                             </td>
-                            <td class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">{{ $service->category->name ?? 'Няма' }}</td>
+                            <td class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">{{ $service->category->getTranslation('name', 'bg') ?? 'Няма' }}</td>
                             <td class="px-4 sm:px-6 py-2 sm:py-3">
                                 <div class="text-xs lg:text-sm">
                                     <div class="text-blue-600">EN: {{ $service->getTranslation('name', 'en') }}</div>

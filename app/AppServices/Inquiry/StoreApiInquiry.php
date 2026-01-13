@@ -18,6 +18,7 @@ class StoreApiInquiry
     {
         $this->language = config('app.locale', 'en') ?? $this->language;
     }
+    
 
     public function handle(StoreInquiryRequest $request): array
     {
@@ -31,12 +32,6 @@ class StoreApiInquiry
             $newClient = 'Ваш клиент';
         }
 
-        // $request->validate([
-        //     'message' => 'required|string',
-        //     'language' => 'required|string|max:2',
-        // ]);
-
-
         $message = $this->language === 'bg'
             ? 'Уважаеми клиенти, благодарим Ви, че се свързахте с нас! Нашият екип ще се свърже с Вас, възможно най-скоро.'
             : 'Dear Customers, thank you for the inquiry! Our team will get back to you as soon as possible.';
@@ -46,7 +41,7 @@ class StoreApiInquiry
         $successMessage = $this->language === 'bg'
             ? 'Информацията за клиента е получена успешно.'
             : 'Client information received successfully.';
-
+        
         $inquiry = Inquiry::create([
             'client_id' => $client->id,
             'message' => $request->message,

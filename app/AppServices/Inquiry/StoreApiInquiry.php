@@ -23,24 +23,15 @@ class StoreApiInquiry
     public function handle(StoreInquiryRequest $request): array
     {
         $client = $this->checkExistingClient->handle($request->email);
-        $newClient = null;
+        $isNewClient = !$client;
 
-        if (! $client) {
+        if ($isNewClient) {
             $client = $this->storeClient->handle($request);
-            $newClient = 'Нов клиент';
-        } else {
-            $newClient = 'Ваш клиент';
         }
 
-        $message = $this->language === 'bg'
-            ? 'Уважаеми клиенти, благодарим Ви, че се свързахте с нас! Нашият екип ще се свърже с Вас, възможно най-скоро.'
-            : 'Dear Customers, thank you for the inquiry! Our team will get back to you as soon as possible.';
-
-        $adminMessage = $newClient.' е изпратил съобщение чрез формата за контакт.';
-
-        $successMessage = $this->language === 'bg'
-            ? 'Информацията за клиента е получена успешно.'
-            : 'Client information received successfully.';
+        $message = __('inquiry.client_success_message');
+        $adminMessage = ($isNewClient ? __('inquiry.admin_new_client_message') : __('inquiry.admin_existing_client_message'));
+        $successMessage = __('inquiry.success_response');
         
         $inquiry = Inquiry::create([
             'client_id' => $client->id,

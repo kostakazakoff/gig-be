@@ -16,7 +16,7 @@ class StoreApiInquiry
         private $language = 'en',
     )
     {
-        $this->language = config('app.locale', 'en') ?? $this->language;
+        $this->language = config('app.locale', 'en');
     }
     
 

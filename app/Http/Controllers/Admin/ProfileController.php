@@ -11,17 +11,23 @@ class ProfileController extends Controller
 {
     public function edit()
     {
-        return view('admin.settings');
+        return view('admin.profile');
     }
+
 
     public function update(UpdateProfileRequest $request)
     {
         $profileData = $request->validated();
 
-        auth()->user()->update([
-            'name' => $profileData['name'],
-            'email' => $profileData['email'],
-        ]);
+        $user = auth()->user();
+        if ($user) {
+            $user->update([
+                'name' => $profileData['name'],
+                'email' => $profileData['email'],
+            ]);
+        } else {
+            return redirect()->back()->withErrors(['user' => 'Потребителят не е намерен']);
+        }
 
         return redirect()->back()->with('status', 'profile-updated');
     }
@@ -38,6 +44,6 @@ class ProfileController extends Controller
             'password' => bcrypt($newPassword),
         ]);
 
-        return redirect()->route('admin.settings.edit')->with('status', 'password-updated');
+        return redirect()->route('admin.profile.edit')->with('status', 'password-updated');
     }
 }

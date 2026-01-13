@@ -6,7 +6,6 @@ use App\AppServices\Inquiry\StoreApiInquiry;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Inquiry\StoreInquiryRequest;
 use App\Traits\HttpResponses;
-use Illuminate\Http\Request;
 
 class InquiryController extends Controller
 {

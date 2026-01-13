@@ -41,7 +41,7 @@ class ProjectController extends Controller
         $storeProject->handle($request->validated());
 
         return redirect()->route('admin.projects.index')
-            ->with('success', 'Проектът е създаден успешно');
+            ->with('success', __('messages.project_created_successfully'));
     }
 
     /**
@@ -68,7 +68,7 @@ class ProjectController extends Controller
         $updateProject->handle($project, $request->validated());
 
         return redirect()->route('admin.projects.index')
-            ->with('success', 'Проектът е обновен успешно');
+            ->with('success', __('messages.project_updated_successfully'));
     }
 
     /**
@@ -79,7 +79,7 @@ class ProjectController extends Controller
         $destroyProject->handle($project);
 
         return redirect()->route('admin.projects.index')
-            ->with('success', 'Проектът е изтрит успешно');
+            ->with('success', __('messages.project_deleted_successfully'));
     }
 
     /**
@@ -93,13 +93,13 @@ class ProjectController extends Controller
             $media->delete();
             return response()->json([
                 'success' => true,
-                'message' => 'Image deleted successfully'
+                'message' => __('messages.image_deleted_successfully')
             ]);
         }
 
         return response()->json([
             'success' => false,
-            'message' => 'Image not found'
+            'message' => __('messages.image_not_found')
         ], 404);
     }
 }

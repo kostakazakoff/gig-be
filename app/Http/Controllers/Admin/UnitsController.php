@@ -41,7 +41,7 @@ class UnitsController extends Controller
 
         return redirect()
             ->route('admin.units.index')
-            ->with('success', 'Мерната единица е създадена успешно.');
+            ->with('success', __('messages.unit_created_successfully'));
     }
 
     /**
@@ -71,7 +71,7 @@ class UnitsController extends Controller
 
         return redirect()
             ->route('admin.units.index')
-            ->with('success', 'Мерната единица е обновена успешно.');
+            ->with('success', __('messages.unit_updated_successfully'));
     }
 
     /**
@@ -81,7 +81,7 @@ class UnitsController extends Controller
     {
         if ($unit->services()->exists()) {
             return back()->withErrors([
-                'delete' => 'Мерната единица е използвана в услуга и не може да бъде изтрита.',
+                'delete' => __('messages.unit_in_use_cannot_be_deleted'),
             ]);
         }
 
@@ -89,6 +89,6 @@ class UnitsController extends Controller
 
         return redirect()
             ->route('admin.units.index')
-            ->with('success', 'Мерната единица е изтрита успешно.');
+            ->with('success', __('messages.unit_deleted_successfully'));
     }
 }

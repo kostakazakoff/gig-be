@@ -29,9 +29,9 @@ class StoreApiInquiry
             $client = $this->storeClient->handle($request);
         }
 
-        $message = __('inquiry.client_success_message');
-        $adminMessage = ($isNewClient ? __('inquiry.admin_new_client_message') : __('inquiry.admin_existing_client_message'));
-        $successMessage = __('inquiry.success_response');
+        $message = __('messages.client_success_message');
+        $adminMessage = ($isNewClient ? __('messages.admin_new_client_message') : __('messages.admin_existing_client_message'));
+        $successMessage = __('messages.success_response');
         
         $inquiry = Inquiry::create([
             'client_id' => $client->id,

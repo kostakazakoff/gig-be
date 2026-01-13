@@ -3,7 +3,7 @@
         <!-- Edit Button -->
         <a href="{{ route($editRoute, $model) }}"
             class="inline-flex items-center px-3 py-1 my-1 bg-yellow-50 text-yellow-700 border border-yellow-300 rounded hover:bg-yellow-100 transition text-sm font-medium">
-            Редактирай
+            {{ $editLabel ?? 'Редактирай' }}
         </a>
 
         <!-- Delete Button -->

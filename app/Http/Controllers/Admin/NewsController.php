@@ -44,7 +44,7 @@ class NewsController extends Controller
         $service->handle($request->all());
 
         return redirect()->route('admin.news.index')
-            ->with('success', 'Новината е създадена успешно');
+            ->with('success', __('messages.news_created_successfully'));
     }
 
     /**
@@ -65,7 +65,7 @@ class NewsController extends Controller
         $service->handle($news, $request->all());
 
         return redirect()->route('admin.news.index')
-            ->with('success', 'Новината е обновена успешно');
+            ->with('success', __('messages.news_updated_successfully'));
     }
 
     /**
@@ -77,7 +77,7 @@ class NewsController extends Controller
         $service->handle($news);
 
         return redirect()->route('admin.news.index')
-            ->with('success', 'Новината е изтрита успешно');
+            ->with('success', __('messages.news_deleted_successfully'));
     }
 }
 

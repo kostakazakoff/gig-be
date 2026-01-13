@@ -20,6 +20,6 @@ class ProjectController extends Controller
     public function show($id): \Illuminate\Http\JsonResponse
     {
         $project = Project::findOrFail($id);
-        return $this->success($project, 'Project retrieved successfully');
+        return $this->success($project, __('messages.project_retrieved_successfully'));
     }
 }

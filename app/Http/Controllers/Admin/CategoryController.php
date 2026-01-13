@@ -89,13 +89,13 @@ class CategoryController extends Controller
             $category->clearMediaCollection('category_thumbs');
             return response()->json([
                 'success' => true,
-                'message' => 'Image deleted successfully'
+                'message' => __('messages.image_deleted_successfully')
             ]);
         }
 
         return response()->json([
             'success' => false,
-            'message' => 'Image not found'
+            'message' => __('messages.image_not_found')
         ], 404);
     }
 }

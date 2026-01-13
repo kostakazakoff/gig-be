@@ -47,7 +47,7 @@ class ServiceController extends Controller
         $service->handle($request->all());
 
         return redirect()->route('admin.services.index')
-            ->with('success', 'Услугата е създадена успешно');
+            ->with('success', __('messages.service_created_successfully'));
     }
 
     /**
@@ -71,7 +71,7 @@ class ServiceController extends Controller
         $updateService->handle($service, $request->all());
 
         return redirect()->route('admin.services.index')
-            ->with('success', 'Услугата е обновена успешно');
+            ->with('success', __('messages.service_updated_successfully'));
     }
 
     /**
@@ -83,7 +83,7 @@ class ServiceController extends Controller
         $service->delete();
 
         return redirect()->route('admin.services.index')
-            ->with('success', 'Услугата е изтрита успешно');
+            ->with('success', __('messages.service_deleted_successfully'));
     }
 
     /**
@@ -95,13 +95,13 @@ class ServiceController extends Controller
             $service->clearMediaCollection('service_thumbs');
             return response()->json([
                 'success' => true,
-                'message' => 'Изображението е изтрито успешно'
+                'message' => __('messages.image_deleted_successfully')
             ]);
         }
 
         return response()->json([
             'success' => false,
-            'message' => 'Изображението не е намерено'
+            'message' => __('messages.image_not_found')
         ], 404);
     }
 }

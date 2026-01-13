@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Inquiry;
 use App\Models\Client;
-use App\Http\Requests\Inquiry\UpdateInquiryRequest;
 use App\Models\Category;
 
 class InquiryController extends Controller
@@ -24,24 +23,13 @@ class InquiryController extends Controller
     }
 
     /**
-     * Show the form for editing the specified inquiry.
+     * Display the specified inquiry (read-only preview).
      */
-    public function edit(Inquiry $inquiry)
+    public function show(Inquiry $inquiry)
     {
-        $clients = Client::orderBy('first_name')->orderBy('last_name')->get();
-        $categories = Category::orderBy('translation_key')->get();
-        return view('admin.inquiries.edit', compact('inquiry', 'clients', 'categories'));
-    }
+        $inquiry->load(['client', 'category']);
 
-    /**
-     * Update the specified inquiry in storage.
-     */
-    public function update(UpdateInquiryRequest $request, Inquiry $inquiry)
-    {
-        $inquiry->update($request->validated());
-
-        return redirect()->route('admin.inquiries.index')
-            ->with('success', 'Заявката е обновена успешно');
+        return view('admin.inquiries.preview', compact('inquiry'));
     }
 
     /**
@@ -52,6 +40,6 @@ class InquiryController extends Controller
         $inquiry->delete();
 
         return redirect()->route('admin.inquiries.index')
-            ->with('success', 'Заявката е изтрита успешно');
+            ->with('success', __('messages.inquiry_deleted_successfully'));
     }
 }

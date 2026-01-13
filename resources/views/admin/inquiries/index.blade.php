@@ -42,10 +42,11 @@
                         <td class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">{{ Str::limit($inquiry->message, 80) }}</td>
                         <td class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">{{ $inquiry->created_at->format('Y-m-d H:i') }}</td>
                         @include('partials.action-buttons', [
-                            'editRoute' => 'admin.inquiries.edit',
+                            'editRoute' => 'admin.inquiries.show',
+                            'editLabel' => 'Преглед',
                             'deleteRoute' => 'admin.inquiries.destroy',
                             'model' => $inquiry,
-                            'confirmMessage' => 'Are you sure you want to delete this inquiry?'
+                            'confirmMessage' => 'Сигурни ли сте, че искате да изтриете това запитване?'
                         ])
                     </tr>
                 @empty

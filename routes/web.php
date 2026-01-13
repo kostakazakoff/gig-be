@@ -4,15 +4,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     if (auth()->check()) {
-        return redirect('/admin/categories');
+        return redirect()->route('admin.categories.index');
     }
-    return redirect('/login');
+    return redirect()->route('login');
 });
 
 Route::middleware(['auth'])->prefix('admin/settings')->name('admin.settings.')->group(function () {
-    Route::get('/', [\App\Http\Controllers\Admin\SettingsController::class, 'edit'])->name('edit');
-    Route::post('/', [\App\Http\Controllers\Admin\SettingsController::class, 'update'])->name('update');
-    Route::post('/password', [\App\Http\Controllers\Admin\SettingsController::class, 'updatePassword'])->name('update-password');
+    Route::get('/', [\App\Http\Controllers\Admin\ProfileController::class, 'edit'])->name('edit');
+    Route::post('/', [\App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('update');
+    Route::post('/password', [\App\Http\Controllers\Admin\ProfileController::class, 'updatePassword'])->name('update-password');
 });
 // TODO: Reset password routes (forgot password, reset password) за Laravel Fortify
 

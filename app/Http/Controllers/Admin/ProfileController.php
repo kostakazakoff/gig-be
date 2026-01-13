@@ -7,7 +7,7 @@ use App\Http\Requests\Settings\UpdatePasswordRequest;
 use App\Http\Requests\Settings\UpdateProfileRequest;
 use Illuminate\Support\Facades\Hash;
 
-class SettingsController extends Controller
+class ProfileController extends Controller
 {
     public function edit()
     {

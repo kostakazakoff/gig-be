@@ -37,7 +37,7 @@
                             {{ optional($inquiry->client)->first_name }} {{ optional($inquiry->client)->last_name }}
                         </td>
                         <td class="px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">
-                            {{ optional($inquiry->service)->name ?? '—' }}
+                            {{ optional($inquiry->category)->getTranslation('name', 'bg') ?? '—' }}
                         </td>
                         <td class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">{{ Str::limit($inquiry->message, 80) }}</td>
                         <td class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">{{ $inquiry->created_at->format('Y-m-d H:i') }}</td>

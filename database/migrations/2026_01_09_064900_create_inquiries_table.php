@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('inquiries', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('client_id')->nullable();
-            $table->unsignedBigInteger('service_id')->nullable();
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->text('message');
             $table->timestamps();
 
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('set null');
-            $table->foreign('service_id')->references('id')->on('services')->onDelete('set null');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
         });
     }
 

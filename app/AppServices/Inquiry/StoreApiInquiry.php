@@ -49,8 +49,8 @@ class StoreApiInquiry
 
         $inquiry = Inquiry::create([
             'client_id' => $client->id,
-            'message' => $request->input('message'),
-            'category' => $request->input('category') ?? null,
+            'message' => $request->message,
+            'category_id' => $request->category ?? null,
         ]);
 
         // Respond to client and notify admin

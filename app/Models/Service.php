@@ -69,9 +69,4 @@ class Service extends Model implements HasMedia
     {
         return $this->belongsTo(Units::class, 'unit_id');
     }
-
-    public function inquiries()
-    {
-        return $this->hasMany(Inquiry::class);
-    }
 }

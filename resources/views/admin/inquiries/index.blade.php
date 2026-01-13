@@ -7,10 +7,10 @@
                 <h1 class="text-3xl font-bold text-gray-900">Запитвания</h1>
                 <p class="mt-2 text-gray-600">Управляйте всички запитвания</p>
             </div>
-            <a href="{{ route('admin.inquiries.create') }}"
+            {{-- <a href="{{ route('admin.inquiries.create') }}"
                class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition duration-200">
                 + ДОБАВИ ЗАПИТВАНЕ
-            </a>
+            </a> --}}
         </div>
 
         @if (session('success'))
@@ -57,7 +57,7 @@
                                           d="M8 10h.01M12 10h.01M16 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
                                 <p class="font-medium">Няма намерени запитвания</p>
-                                <p class="text-sm mt-1">Създайте първото запитване, като кликнете на бутона ДОБАВИ ЗАПИТВАНЕ по-горе</p>
+                                <p class="text-sm mt-1">Запитванията се създават автоматично от клиентите чрез уебсайта</p>
                             </div>
                         </td>
                     </tr>

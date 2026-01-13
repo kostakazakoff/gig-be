@@ -78,8 +78,6 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     Route::prefix('inquiries')->name('inquiries.')->group(function () {
         Route::get('/', [\App\Http\Controllers\Admin\InquiryController::class, 'index'])->name('index');
-        Route::get('/create', [\App\Http\Controllers\Admin\InquiryController::class, 'create'])->name('create');
-        Route::post('/', [\App\Http\Controllers\Admin\InquiryController::class, 'store'])->name('store');
         Route::get('/{inquiry}/edit', [\App\Http\Controllers\Admin\InquiryController::class, 'edit'])->name('edit');
         Route::put('/{inquiry}', [\App\Http\Controllers\Admin\InquiryController::class, 'update'])->name('update');
         Route::delete('/{inquiry}', [\App\Http\Controllers\Admin\InquiryController::class, 'destroy'])->name('destroy');

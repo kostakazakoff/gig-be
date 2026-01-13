@@ -8,7 +8,7 @@ class Inquiry extends Model
 {
     protected $fillable = [
         'client_id',
-        'service_id',
+        'category_id',
         'message',
     ];
 
@@ -17,8 +17,8 @@ class Inquiry extends Model
         return $this->belongsTo(Client::class);
     }
 
-    public function service()
+    public function category()
     {
-        return $this->belongsTo(Service::class);
+        return $this->belongsTo(Category::class);
     }
 }

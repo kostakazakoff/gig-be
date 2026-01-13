@@ -5,9 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Inquiry;
 use App\Models\Client;
-use App\Models\Service;
-use App\Http\Requests\Inquiry\StoreInquiryRequest;
 use App\Http\Requests\Inquiry\UpdateInquiryRequest;
+use App\Models\Category;
 
 class InquiryController extends Controller
 {
@@ -17,32 +16,11 @@ class InquiryController extends Controller
     public function index()
     {
         $inquiries = Inquiry::query()
-            ->with(['client', 'service'])
+            ->with(['client', 'category'])
             ->latest()
             ->get();
 
         return view('admin.inquiries.index', compact('inquiries'));
-    }
-
-    /**
-     * Show the form for creating a new inquiry.
-     */
-    public function create()
-    {
-        $clients = Client::orderBy('first_name')->orderBy('last_name')->get();
-        $services = Service::orderBy('translation_key')->get();
-        return view('admin.inquiries.create', compact('clients', 'services'));
-    }
-
-    /**
-     * Store a newly created inquiry in storage.
-     */
-    public function store(StoreInquiryRequest $request)
-    {
-        Inquiry::create($request->validated());
-
-        return redirect()->route('admin.inquiries.index')
-            ->with('success', 'Заявката е създадена успешно');
     }
 
     /**
@@ -51,8 +29,8 @@ class InquiryController extends Controller
     public function edit(Inquiry $inquiry)
     {
         $clients = Client::orderBy('first_name')->orderBy('last_name')->get();
-        $services = Service::orderBy('translation_key')->get();
-        return view('admin.inquiries.edit', compact('inquiry', 'clients', 'services'));
+        $categories = Category::orderBy('translation_key')->get();
+        return view('admin.inquiries.edit', compact('inquiry', 'clients', 'categories'));
     }
 
     /**

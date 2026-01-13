@@ -63,4 +63,9 @@ class Category extends Model implements HasMedia
     {
         return $this->hasMany(Service::class);
     }
+
+    public function inquiries()
+    {
+        return $this->hasMany(Inquiry::class);
+    }
 }

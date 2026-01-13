@@ -34,9 +34,9 @@
                     <select id="service_id" name="service_id"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 @error('service_id') border-red-500 @enderror">
                         <option value="">— Необязателно —</option>
-                        @foreach($services as $service)
-                            <option value="{{ $service->id }}" @selected(old('service_id', $inquiry->service_id) == $service->id)>
-                                {{ $service->name }}
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}" @selected(old('service_id', $inquiry->service_id) == $category->id)>
+                                {{ $category->name }}
                             </option>
                         @endforeach
                     </select>

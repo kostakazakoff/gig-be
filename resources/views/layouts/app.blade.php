@@ -56,7 +56,7 @@
                 <!-- Desktop User Menu -->
                 <div class="hidden lg:flex items-center relative" id="user-menu">
                     <button type="button"
-                        class="flex items-center space-x-2 text-gray-700 hover:text-blue-600 font-medium transition focus:outline-none"
+                        class="flex items-center space-x-2 text-gray-700 hover:text-blue-600 font-medium transition focus:outline-none cursor-pointer"
                         onclick="toggleUserMenu()">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             aria-hidden="true">
@@ -72,7 +72,7 @@
 
                     {{-- User Dropdown Menu --}}
                     <div id="user-menu-dropdown"
-                        class="hidden absolute right-0 mt-30 w-48 bg-white rounded-md shadow-lg py-2 border border-gray-100">
+                        class="hidden absolute right-0 mt-30 w-48 bg-white rounded-md shadow-lg py-2 border border-gray-100 cursor-pointer">
                         <a href="{{ route('admin.profile.edit') }}"
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600">
                             Профил
@@ -80,7 +80,7 @@
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit"
-                                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600">
+                                class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600 cursor-pointer">
                                 Изход
                             </button>
                         </form>

@@ -63,7 +63,7 @@
                     <!-- Action Buttons -->
                     <div class="flex gap-4 pt-4">
                         <button type="submit"
-                            class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition duration-200">
+                            class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition duration-200 cursor-pointer">
                             Актуализирай мерна единица
                         </button>
                         <a href="{{ route('admin.units.index') }}"
@@ -80,7 +80,7 @@
                     @csrf
                     @method('DELETE')
                     <button type="submit"
-                        class="w-full inline-flex items-center justify-center px-3 py-2 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium">
+                        class="w-full inline-flex items-center justify-center px-3 py-2 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium cursor-pointer">
                         Изтрий мерна единица
                     </button>
                 </form>

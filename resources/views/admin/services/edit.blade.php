@@ -121,7 +121,7 @@
 
         <!-- Buttons -->
         <div class="flex gap-4">
-            <button type="submit" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded">Обнови услуга</button>
+            <button type="submit" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded cursor-pointer">Обнови услуга</button>
             <a href="{{ route('admin.services.index') }}" class="flex-1 bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded text-center">Откажи</a>
         </div>
     </form>
@@ -132,7 +132,7 @@
         @csrf
         @method('DELETE')
         <button type="submit"
-            class="w-full inline-flex items-center justify-center px-3 py-2 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium">
+            class="w-full inline-flex items-center justify-center px-3 py-2 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium cursor-pointer">
             Изтрий услуга
         </button>
     </form>

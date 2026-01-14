@@ -31,7 +31,7 @@
 
             <div class="flex justify-between text-sm text-gray-500">
                 <span>Създадено: {{ $inquiry->created_at?->format('Y-m-d H:i') }}</span>
-                <span>Обновено: {{ $inquiry->updated_at?->format('Y-m-d H:i') }}</span>
+                <!-- <span>Обновено: {{ $inquiry->updated_at?->format('Y-m-d H:i') }}</span> -->
             </div>
         </div>
 
@@ -40,7 +40,7 @@
             @csrf
             @method('DELETE')
             <button type="submit"
-                class="w-full inline-flex items-center justify-center px-4 py-2 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium">
+                class="w-full inline-flex items-center justify-center px-4 py-2 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium cursor-pointer">
                 Изтрий запитване
             </button>
         </form>

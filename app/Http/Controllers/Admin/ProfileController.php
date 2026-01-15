@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actions\Fortify\UpdateUserProfileInformation;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\UpdatePasswordRequest;
 use App\Http\Requests\Settings\UpdateProfileRequest;
@@ -15,21 +16,16 @@ class ProfileController extends Controller
         return view('auth.profile');
     }
 
-    public function update(UpdateProfileRequest $request)
+    public function update(UpdateProfileRequest $request, UpdateUserProfileInformation $updater)
     {
         $profileData = $request->validated();
 
-        $user = auth()->user();
-        if ($user) {
-            $user->update([
-                'name' => $profileData['name'],
-                'email' => $profileData['email'],
-            ]);
-        } else {
-            return redirect()->back()->withErrors(['user' => __('messages.user_not_found')]);
+        try {
+            $updater->update(auth()->user(), $profileData);
+            return redirect()->back()->with('status', 'profile-updated');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => 'Грешка при актуализиране на профила.']);
         }
-
-        return redirect()->back()->with('status', 'profile-updated');
     }
 
     public function updatePassword(UpdatePasswordRequest $request)

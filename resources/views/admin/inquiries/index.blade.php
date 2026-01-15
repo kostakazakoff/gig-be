@@ -6,6 +6,17 @@
             <div>
                 <h1 class="text-3xl font-bold text-gray-900">Запитвания</h1>
                 <p class="mt-2 text-gray-600">Управляйте всички запитвания</p>
+                <div class="mt-4">
+                    <label for="client_filter" class="text-sm font-medium text-gray-700">Филтрирай по: Клиент</label>
+                    <select id="client_filter" name="client_filter"
+                            class="mt-1 px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            onchange="filterByClient()">
+                        <option value="">-- Всички клиенти --</option>
+                        @foreach($clients ?? [] as $client)
+                            <option value="{{ $client->id }}">{{ $client->first_name }} {{ $client->last_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
             {{-- <a href="{{ route('admin.inquiries.create') }}"
                class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition duration-200">
@@ -68,4 +79,30 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        function filterByClient() {
+            const clientId = document.getElementById('client_filter').value;
+            const url = new URL(window.location);
+            
+            if (clientId) {
+                url.searchParams.set('client', clientId);
+            } else {
+                url.searchParams.delete('client');
+            }
+            
+            window.location = url.toString();
+        }
+
+        // Set the dropdown value if there's a client in the URL
+        window.addEventListener('DOMContentLoaded', function() {
+            const params = new URLSearchParams(window.location.search);
+            const clientId = params.get('client');
+            if (clientId) {
+                document.getElementById('client_filter').value = clientId;
+            }
+        });
+    </script>
 @endsection

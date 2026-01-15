@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Filters\InquiryFilter;
 use App\Models\Inquiry;
 use App\Models\Client;
 use App\Models\Category;
@@ -12,14 +13,17 @@ class InquiryController extends Controller
     /**
      * Display a listing of inquiries.
      */
-    public function index()
+    public function index(InquiryFilter $filter)
     {
-        $inquiries = Inquiry::query()
+        // dd(Inquiry::with(['client', 'category'])->latest()->get());
+        $inquiries = Inquiry::filter($filter)
             ->with(['client', 'category'])
             ->latest()
             ->get();
 
-        return view('admin.inquiries.index', compact('inquiries'));
+        $clients = Client::get();
+
+        return view('admin.inquiries.index', compact('inquiries', 'clients'));
     }
 
     /**

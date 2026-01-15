@@ -18,7 +18,7 @@
             </div>
 
             <!-- Form -->
-            <form class="mt-8 space-y-6" action="{{ route('password.update') }}" method="POST">
+            <form class="mt-8 space-y-6" action="{{ route('password.email') }}" method="POST">
                 @csrf
                 <input type="hidden" name="token" value="{{ $request->route('token') }}">
 

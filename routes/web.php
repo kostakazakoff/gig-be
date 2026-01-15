@@ -11,11 +11,10 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->prefix('admin/profile')->name('admin.profile.')->group(function () {
     Route::get('/', [\App\Http\Controllers\Admin\ProfileController::class, 'edit'])->name('edit');
-    // Route::post('/', [\App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('update');
     Route::put('/', [\App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('update');
     Route::post('/password', [\App\Http\Controllers\Admin\ProfileController::class, 'updatePassword'])->name('update-password');
 });
-// TODO: Reset password routes (forgot password, reset password) за Laravel Fortify
+// TODO: Password reset
 
 // Admin маршрути - POST, UPDATE, DELETE заявки от Blade форми
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {

@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
+    // TODO: Use Action Classes for handling profile and password updates
     public function edit()
     {
         return view('auth.profile');
     }
-
 
     public function update(UpdateProfileRequest $request)
     {

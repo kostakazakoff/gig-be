@@ -37,7 +37,7 @@ class ProfileController extends Controller
         $newPassword = $request->input('password');
 
         if (!Hash::check($request->current_password, auth()->user()->password)) {
-            return redirect()->back()->withErrors(['current_password' => __('messages.password_incorrect')]);
+            return redirect()->back()->withErrors(['current_password' => __('auth.password')]);
         }
 
         if ($request->current_password === $newPassword) {

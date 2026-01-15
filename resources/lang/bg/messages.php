@@ -18,7 +18,6 @@ return [
     'user_not_found' => 'Потребителят не е намерен.',
     'invalid_credentials' => 'Невалидни данни за вход.',
     'password_updated_successfully' => 'Паролата е обновена успешно.',
-    'password_incorrect' => 'Паролата е неправилна.',
     'new_password_must_be_different' => 'Новата парола трябва да е различна от текущата.',
     'password_confirmation_must_match' => 'Потвърждението на паролата трябва да съвпада.',
     'project_created_successfully' => 'Проектът е създаден успешно.',

@@ -18,7 +18,6 @@ return [
     'user_not_found' => 'User not found.',
     'invalid_credentials' => 'Invalid credentials.',
     'password_updated_successfully' => 'Password updated successfully.',
-    'password_incorrect' => 'The password is incorrect.',
     'new_password_must_be_different' => 'The new password must be different from the current password.',
     'password_confirmation_must_match' => 'The password confirmation must match.',
     'project_created_successfully' => 'Project created successfully.',

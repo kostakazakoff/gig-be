@@ -13,8 +13,11 @@ class InquiryFilter extends Filter
      * @param  string|null  $value
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function client(string $value): Builder
+    public function client(?string $value = null): Builder
     {
+        if (! $value) {
+            return $this->builder;
+        }
         return $this->builder->where('client_id', $value);
     }
 
@@ -24,8 +27,11 @@ class InquiryFilter extends Filter
      * @param  string|null  $value
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function category(string $value): Builder
+    public function category(?string $value = null): Builder
     {
+        if (! $value) {
+            return $this->builder;
+        }
         return $this->builder->where('category', $value);
     }
 

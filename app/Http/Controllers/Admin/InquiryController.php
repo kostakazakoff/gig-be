@@ -7,18 +7,19 @@ use App\Http\Filters\InquiryFilter;
 use App\Models\Inquiry;
 use App\Models\Client;
 use App\Models\Category;
+use Illuminate\Http\Request;
 
 class InquiryController extends Controller
 {
     /**
      * Display a listing of inquiries.
      */
-    public function index(InquiryFilter $filter)
+    public function index(Request $request, InquiryFilter $filter)
     {
         // dd(Inquiry::with(['client', 'category'])->latest()->get());
-        $inquiries = Inquiry::filter($filter)
-            ->with(['client', 'category'])
+        $inquiries = Inquiry::with(['client', 'category'])
             ->latest()
+            ->filter($filter)
             ->get();
 
         $clients = Client::get();

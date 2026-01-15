@@ -16,18 +16,15 @@ class InquiryController extends Controller
      */
     public function index(Request $request, InquiryFilter $filter)
     {
-        // dd(Inquiry::with(['client', 'category'])->latest()->get());
         $inquiries = Inquiry::with(['client', 'category'])
             ->when($request->filled('client'), fn($q) => $q->where('client_id', $request->input('client')))
             ->when($request->filled('category'), fn($q) => $q->where('category_id', $request->input('category')))
-            // ->when($request->filled('date'), fn($q) => $q->whereDate('created_at', $request->input('date')))
-            // ->latest()
+            ->when($request->filled('date'), fn($q) => $q->where('created_at', '>=' , $request->input('date')))
             ->paginate(10)
             ->withQueryString();
     
         $clients = Client::get();
         $categories = Category::get();
-        // dd($inquiries->first()->created_at);
 
         return view('admin.inquiries.index', compact('inquiries', 'clients', 'categories'));
     }

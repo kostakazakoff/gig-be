@@ -36,7 +36,7 @@ class InquiryFilter extends Filter
     }
 
     /**
-     * Filter the products by the given date.
+     * Filter the inquiries by the given date.
      *
      * @param  string|null  $value
      * @return \Illuminate\Database\Eloquent\Builder
@@ -46,7 +46,7 @@ class InquiryFilter extends Filter
         if (! $value) {
             return $this->builder;
         }
-        return $this->builder->where('created_at', $value);
+        return $this->builder->where('created_at', '>=', $value);
     }
 
     /**

@@ -18,7 +18,7 @@
                 @method('PUT')
 
                 <!-- Validation Errors -->
-                @if ($errors->any())
+                {{-- @if ($errors->any())
                     <div class="rounded-md bg-red-50 p-4 mb-6">
                         <div class="text-sm text-red-800">
                             @foreach ($errors->all() as $error)
@@ -26,7 +26,7 @@
                             @endforeach
                         </div>
                     </div>
-                @endif
+                @endif --}}
 
                 <!-- Success Message -->
                 @if (session('status') === 'profile-updated')
@@ -46,9 +46,9 @@
                         <input type="text" name="name" id="name" value="{{ old('name', auth()->user()->name) }}"
                             class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('name') border-red-500 @enderror"
                             required>
-                        {{-- @error('name')
+                        @error('name')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror --}}
+                    @enderror
                     </div>
 
                     <!-- Email -->
@@ -60,9 +60,9 @@
                             value="{{ old('email', auth()->user()->email) }}"
                             class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('email') border-red-500 @enderror"
                             required>
-                        {{-- @error('email')
+                        @error('email')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror --}}
+                    @enderror
                     </div>
                 </div>
 
@@ -89,7 +89,7 @@
                 @method('POST')
 
                 <!-- Password Validation Errors -->
-                @if ($errors->has('current_password') || $errors->has('password'))
+                {{-- @if ($errors->has('current_password') || $errors->has('password'))
                     <div class="rounded-md bg-red-50 p-4 mb-6">
                         <div class="text-sm text-red-800">
                             @if ($errors->has('current_password'))
@@ -100,7 +100,7 @@
                             @endif
                         </div>
                     </div>
-                @endif
+                @endif --}}
 
                 <!-- Password Success Message -->
                 @if (session('status') === 'password-updated')

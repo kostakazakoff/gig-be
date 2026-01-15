@@ -13,7 +13,7 @@
     <div class="bg-white shadow rounded-lg p-6 mb-8">
         <h2 class="text-xl font-semibold text-gray-900 mb-6">Профилни данни</h2>
 
-        <form action="{{ route('admin.profile.update') }}" method="POST">
+        <form action="{{ route('auth.update') }}" method="POST">
             @csrf
             @method('PUT')
 
@@ -90,7 +90,7 @@
     <div class="bg-white shadow rounded-lg p-6">
         <h2 class="text-xl font-semibold text-gray-900 mb-6">Смяна на парола</h2>
 
-        <form action="{{ route('admin.profile.update-password') }}" method="POST">
+        <form action="{{ route('auth.update-password') }}" method="POST">
             @csrf
             @method('POST')
 

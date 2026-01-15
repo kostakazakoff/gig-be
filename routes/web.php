@@ -9,7 +9,7 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Route::middleware(['auth'])->prefix('admin/profile')->name('admin.profile.')->group(function () {
+Route::middleware(['auth'])->prefix('admin/profile')->name('auth.')->group(function () {
     Route::get('/', [\App\Http\Controllers\Admin\ProfileController::class, 'edit'])->name('edit');
     Route::put('/', [\App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('update');
     Route::post('/password', [\App\Http\Controllers\Admin\ProfileController::class, 'updatePassword'])->name('update-password');

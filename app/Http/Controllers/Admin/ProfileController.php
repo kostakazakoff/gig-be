@@ -11,7 +11,7 @@ class ProfileController extends Controller
 {
     public function edit()
     {
-        return view('admin.profile');
+        return view('auth.profile');
     }
 
 
@@ -52,6 +52,6 @@ class ProfileController extends Controller
             'password' => bcrypt($newPassword),
         ]);
 
-        return redirect()->route('admin.profile.edit')->with('status', 'password-updated');
+        return redirect()->route('auth.edit')->with('status', 'password-updated');
     }
 }

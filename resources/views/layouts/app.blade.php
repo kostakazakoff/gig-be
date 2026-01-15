@@ -73,7 +73,7 @@
                     {{-- User Dropdown Menu --}}
                     <div id="user-menu-dropdown"
                         class="hidden absolute right-0 mt-30 w-48 bg-white rounded-md shadow-lg py-2 border border-gray-100 cursor-pointer">
-                        <a href="{{ route('admin.profile.edit') }}"
+                        <a href="{{ route('auth.edit') }}"
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600">
                             Профил
                         </a>
@@ -142,7 +142,7 @@
                     <span>{{ auth()->user()->name }}</span>
                     </div>
 
-                    <a href="{{ route('admin.profile.edit') }}"
+                    <a href="{{ route('auth.edit') }}"
                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600">
                         Профил
                     </a>

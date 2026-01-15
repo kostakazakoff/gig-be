@@ -19,10 +19,13 @@ class FortifyServiceProvider extends ServiceProvider
     /**
      * Register any application services.
      */
-    public function register(): void
-    {
-        //
-    }
+
+    // There will be no user registration in this application
+    
+    // public function register(): void
+    // {
+    //     //
+    // }
 
     /**
      * Bootstrap any application services.

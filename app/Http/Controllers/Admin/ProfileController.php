@@ -21,7 +21,7 @@ class ProfileController extends Controller
         $profileData = $request->validated();
 
         try {
-            $updater->update(auth()->user(), $profileData);
+            $updater->update($request->user(), $profileData);
             return redirect()->back()->with('status', 'profile-updated');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => 'Грешка при актуализиране на профила.']);
@@ -33,7 +33,7 @@ class ProfileController extends Controller
         $passwordData = $request->validated();
 
         try {
-            $updater->update(auth()->user(), $passwordData);
+            $updater->update($request->user(), $passwordData);
             return redirect()->back()->with('status', 'password-updated');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => 'Грешка при актуализиране на паролата.']);

@@ -24,7 +24,7 @@ class UpdateProfileRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255|regex:/^[a-zа-я\s]+$/ui',
-            'email' => ['required', 'email', Rule::unique('users')->ignore(auth()->id())],
+            'email' => ['required', 'email', Rule::unique('users')->ignore(request()->user()->id)],
         ];
     }
 

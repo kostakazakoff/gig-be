@@ -3,35 +3,61 @@
 @section('content')
     <div class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div class="mb-8 flex items-center justify-between sticky top-16 z-40 bg-gray-50 py-4 mx-auto xl:max-w-7xl">
-            <div>
+            <div class="w-full">
                 <h1 class="text-3xl font-bold text-gray-900">Запитвания</h1>
                 <p class="mt-2 text-gray-600">Управляйте всички запитвания</p>
-                <form method="GET" action="{{ route('admin.inquiries.index') }}" class="mt-4">
-                    <label for="client_filter" class="text-sm font-medium text-gray-700">
+
+                {{-- Filters --}}
+                <div class="flex justify-start items-center gap-4 mt-4">
+                    <div class="text-gray-700">
                         <svg class="w-5 h-5 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z">
+                            </path>
                         </svg>
-                    </label>
-                    <select id="client" name="client"
-                        class="mt-1 px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                        onchange="this.form.submit()">
-                        <option value="">Kлиенти</option>
-                        @foreach ($clients ?? [] as $client)
-                            <option value="{{ $client->id }}">
-                                {{ $client->first_name }} {{ $client->last_name }}
-                                @selected(request('client') === $client->id)
-                            </option>
-                        @endforeach
-                        <option value="">
-                            Всички
-                        </option>
-                    </select>
-                </form>
+                    </div>
+
+                    <form method="GET" action="{{ route('admin.inquiries.index') }}" class="flex items-center gap-4">
+
+                        {{-- Client Filter --}}
+                        <select id="client" name="client"
+                            class="px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            onchange="this.form.submit()">
+                            <option value="">Всички клиенти</option>
+                            {{-- <option value="">Всички</option> --}}
+                            @foreach ($clients ?? [] as $client)
+                                <option value="{{ $client->id }}" @selected(request('client') == $client->id)>
+                                    {{ $client->first_name }} {{ $client->last_name }}
+                                </option>
+                            @endforeach
+                        </select>
+
+                        {{-- Category Filter --}}
+                        <select id="category" name="category"
+                            class="px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            onchange="this.form.submit()">
+                            <option value="">Всички категории</option>
+                            {{-- <option value="">Всички</option> --}}
+                            @foreach ($categories ?? [] as $category)
+                                <option value="{{ $category->id }}" @selected(request('category') == $category->id)>
+                                    {{ $category->name }}
+                                </option>
+                            @endforeach
+                        </select>
+
+                    </form>
+
+
+                    {{-- Reset Filters --}}
+                    <a href="{{ route('admin.inquiries.index') }}" class="p-2 text-gray-600 hover:text-gray-900 transition-colors" title="Изчисти филтрите">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                            </path>
+                        </svg>
+                    </a>
+                </div>
             </div>
-            {{-- <a href="{{ route('admin.inquiries.create') }}"
-               class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition duration-200">
-                + ДОБАВИ ЗАПИТВАНЕ
-            </a> --}}
         </div>
 
         @if (session('success'))

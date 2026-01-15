@@ -32,7 +32,21 @@ class InquiryFilter extends Filter
         if (! $value) {
             return $this->builder;
         }
-        return $this->builder->where('category', $value);
+        return $this->builder->where('category_id', $value);
+    }
+
+    /**
+     * Filter the products by the given date.
+     *
+     * @param  string|null  $value
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function date(?string $value = null): Builder
+    {
+        if (! $value) {
+            return $this->builder;
+        }
+        return $this->builder->where('created_at', $value);
     }
 
     /**

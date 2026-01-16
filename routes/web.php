@@ -64,6 +64,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
         Route::get('/{news}/edit', [\App\Http\Controllers\Admin\NewsController::class, 'edit'])->name('edit');
         Route::put('/{news}', [\App\Http\Controllers\Admin\NewsController::class, 'update'])->name('update');
         Route::delete('/{news}', [\App\Http\Controllers\Admin\NewsController::class, 'destroy'])->name('destroy');
+        Route::delete('/{news}/media/{media}', [\App\Http\Controllers\Admin\NewsController::class, 'deleteMedia'])->name('delete-media');
     });
 
     Route::prefix('clients')->name('clients.')->group(function () {

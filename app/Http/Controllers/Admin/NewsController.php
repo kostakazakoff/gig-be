@@ -79,5 +79,21 @@ class NewsController extends Controller
         return redirect()->route('admin.news.index')
             ->with('success', __('messages.news_deleted_successfully'));
     }
+
+    /**
+     * Delete media file from news.
+     * DELETE - AJAX request
+     */
+    public function deleteMedia(News $news, $media)
+    {
+        try {
+            $mediaItem = $news->media()->where('id', $media)->firstOrFail();
+            $mediaItem->delete();
+
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Error deleting media'], 500);
+        }
+    }
 }
 

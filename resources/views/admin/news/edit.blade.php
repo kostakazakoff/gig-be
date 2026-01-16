@@ -15,16 +15,16 @@
                 @csrf
                 @method('PUT')
 
-                <!-- Image Upload Field (Drag & Drop) -->
-                <div>
-                    @if ($news->image_src)
-                        <div class="mb-4">
-                            <p class="text-sm text-gray-600 mb-2">Текуща снимка:</p>
-                            <img src="{{ $news->image_src }}" alt="{{ $news->translation_key }}" class="max-w-xs rounded-lg" />
-                        </div>
-                    @endif
-                    @include('partials.single-image-dropzone', ['label' => 'Основна снимка'])
-                </div>
+                <!-- Image Upload Field (Drag & Drop) with Delete -->
+                @php
+                    $newsMedia = $news->getFirstMedia('news_thumbs');
+                @endphp
+                @include('partials.single-image-dropzone', [
+                    'label' => 'Основна снимка',
+                    'name' => 'image',
+                    'existingImage' => $newsMedia ? $newsMedia->getUrl() : null,
+                    'deleteUrl' => $newsMedia ? route('admin.news.delete-media', ['news' => $news->id, 'media' => $newsMedia->id]) : null
+                ])
 
                 <!-- Display Key (read-only) -->
                 <div>

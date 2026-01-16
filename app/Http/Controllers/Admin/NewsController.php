@@ -22,7 +22,7 @@ class NewsController extends Controller
      */
     public function index(IndexNews $indexNews)
     {
-        $news = $indexNews->handle();
+        $news = $indexNews->handle()->sortByDesc('created_at');
         return view('admin.news.index', compact('news'));
     }
 

@@ -28,6 +28,7 @@
                     <tr>
                         <th class="px-6 py-3 text-left text-xs lg:text-sm">Снимка</th>
                         <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Заглавие (EN/BG)</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Дата</th>
                         <th class="px-4 sm:px-6 py-2 sm:py-3 text-right text-xs lg:text-sm">Действия</th>
                     </tr>
                 </thead>
@@ -48,6 +49,9 @@
                                     <div class="text-red-600">BG: {{ $article->getTranslation('title', 'bg') }}</div>
                                 </div>
                             </td>
+                            <td class="px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">
+                                {{ $article->created_at->format('d.m.Y') }}
+                            </td>
                             @include('partials.action-buttons', [
                                 'editRoute' => 'admin.news.edit',
                                 'deleteRoute' => 'admin.news.destroy',
@@ -57,7 +61,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="3" class="px-6 py-8 text-left text-gray-500">
+                            <td colspan="4" class="px-6 py-8 text-left text-gray-500">
                                 Няма намерени новини. <a href="{{ route('admin.news.create') }}"
                                     class="text-blue-600 hover:text-blue-900 font-medium">Създай една</a>
                             </td>

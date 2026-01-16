@@ -21,7 +21,7 @@ class ProjectController extends Controller
      */
     public function index(IndexProjects $indexProjects)
     {
-        $projects = $indexProjects->handle();
+        $projects = $indexProjects->handle()->sortByDesc('created_at');
         return view('admin.projects.index', compact('projects'));
     }
 

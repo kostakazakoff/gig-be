@@ -19,7 +19,8 @@ class InquiryController extends Controller
             ->with(['client', 'category'])
             ->latest()
             ->paginate(10)
-            ->withQueryString();
+            ->withQueryString()
+            ->sortByDesc('created_at');
     
         $clients = Client::get();
         $categories = Category::get();

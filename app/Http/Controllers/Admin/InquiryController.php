@@ -7,19 +7,17 @@ use App\Http\Filters\InquiryFilter;
 use App\Models\Inquiry;
 use App\Models\Client;
 use App\Models\Category;
-use Illuminate\Http\Request;
 
 class InquiryController extends Controller
 {
     /**
      * Display a listing of inquiries.
      */
-    public function index(Request $request, InquiryFilter $filter)
+    public function index(InquiryFilter $filter)
     {
-        $inquiries = Inquiry::with(['client', 'category'])
-            ->when($request->filled('client'), fn($q) => $q->where('client_id', $request->input('client')))
-            ->when($request->filled('category'), fn($q) => $q->where('category_id', $request->input('category')))
-            ->when($request->filled('date'), fn($q) => $q->where('created_at', '>=' , $request->input('date')))
+        $inquiries = Inquiry::filter($filter)
+            ->with(['client', 'category'])
+            ->latest()
             ->paginate(10)
             ->withQueryString();
     

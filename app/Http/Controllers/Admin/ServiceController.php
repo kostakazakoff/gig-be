@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Service\StoreServiceRequest;
 use App\Http\Requests\Service\UpdateServiceRequest;
 use App\Models\Service;
+use App\Models\Category;
+use App\Http\Filters\ServiceFilter;
 use App\Traits\HttpResponses;
 use App\AppServices\Service\IndexServices;
 use App\AppServices\Category\GetCategories;
@@ -21,10 +23,16 @@ class ServiceController extends Controller
      * Display a listing of all services.
      * GET - връща view със таблица
      */
-    public function index(IndexServices $indexServices)
+    public function index(ServiceFilter $filter)
     {
-        $services = $indexServices->handle();
-        return view('admin.services.index', compact('services'));
+        $services = Service::filter($filter)
+            ->with('category')
+            ->latest()
+            ->get();
+        
+        $categories = Category::orderBy('translation_key')->get();
+        
+        return view('admin.services.index', compact('services', 'categories'));
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Filterable;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -9,7 +10,7 @@ use Spatie\TranslationLoader\LanguageLine;
 
 class Service extends Model implements HasMedia
 {
-    use InteractsWithMedia;
+    use InteractsWithMedia, Filterable;
 
     protected $fillable = ['category_id', 'translation_group', 'translation_key', 'price_from', 'price_to', 'unit_id'];
 

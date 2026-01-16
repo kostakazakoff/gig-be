@@ -3,7 +3,43 @@
 @section('content')
     <div class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center mb-6 sticky top-16 z-40 bg-gray-50 py-4 mx-auto xl:max-w-7xl">
-            <h1 class="text-3xl font-bold">Услуги</h1>
+            <div>
+                <h1 class="text-3xl font-bold">Услуги</h1>
+                
+                {{-- Filters --}}
+                <div class="flex justify-start items-center gap-4 mt-4">
+                    <div class="text-gray-700">
+                        <svg class="w-5 h-5 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z">
+                            </path>
+                        </svg>
+                    </div>
+
+                    <form method="GET" action="{{ route('admin.services.index') }}" class="flex items-center gap-4">
+                        {{-- Category Filter --}}
+                        <select id="category" name="category"
+                            class="px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            onchange="this.form.submit()">
+                            <option value="">Всички категории</option>
+                            @foreach ($categories ?? [] as $category)
+                                <option value="{{ $category->id }}" @selected(request('category') == $category->id)>
+                                    {{ $category->getTranslation('name', 'bg') }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </form>
+
+                    {{-- Reset Filters --}}
+                    <a href="{{ route('admin.services.index') }}" class="p-2 text-gray-600 hover:text-gray-900 transition-colors" title="Изчисти филтрите">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                            </path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
             <a href="{{ route('admin.services.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
                 + ДОБАВИ УСЛУГА
             </a>

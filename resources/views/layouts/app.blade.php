@@ -15,11 +15,11 @@
         <div class="xl:max-w-7xl mx-auto">
             <div class="flex justify-between h-16">
                 <!-- Logo -->
-                <div class="flex items-center">
+                <div class="flex items-center overflow-hidden">
                     {{-- <a href="{{ route('admin.categories.index') }}" class="text-2xl font-bold text-blue-600">
                         Админ Панел
                     </a> --}}
-                    <img src="{{ asset('GIG_960x480.jpg') }}" class="mx-auto h-12 object-contain" alt="GIG Logo">
+                    <img src="{{ asset('GIG_960x480.jpg') }}" class="mx-auto h-24 object-contain" alt="GIG Logo">
                 </div>
 
                 <!-- Desktop Menu -->

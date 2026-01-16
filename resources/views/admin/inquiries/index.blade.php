@@ -8,7 +8,7 @@
                 <p class="mt-2 text-gray-600">Управляйте всички запитвания</p>
 
                 {{-- Filters --}}
-                <div class="flex justify-start items-center gap-4 mt-4">
+                <div class="flex justify-start items-center gap-4 mt-8">
                     <div class="text-gray-700">
                         <svg class="w-5 h-5 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -45,7 +45,7 @@
                             @endforeach
                         </select>
 
-                        <p>Дата от</p>
+                        <p>От дата</p>
 
                         {{-- Date Filter --}}
                         <input type="date" id="date_from" name="date_from" value="{{ request('date_from') }}"
@@ -53,7 +53,7 @@
                             onchange="this.form.submit()"
                             placeholder="От дата">
 
-                        <p>до</p>
+                        <p>До дата</p>
 
                         <input type="date" id="date_to" name="date_to" value="{{ request('date_to') }}"
                             class="px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"

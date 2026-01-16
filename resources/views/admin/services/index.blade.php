@@ -2,12 +2,12 @@
 
 @section('content')
     <div class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center mb-6 sticky top-16 z-40 bg-gray-50 py-4 mx-auto xl:max-w-7xl">
+        <div class="flex justify-between items-start mb-6 sticky top-16 z-40 bg-gray-50 py-4 mx-auto xl:max-w-7xl">
             <div>
                 <h1 class="text-3xl font-bold">Услуги</h1>
                 
                 {{-- Filters --}}
-                <div class="flex justify-start items-center gap-4 mt-4">
+                <div class="flex justify-start items-center gap-4 mt-8">
                     <div class="text-gray-700">
                         <svg class="w-5 h-5 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

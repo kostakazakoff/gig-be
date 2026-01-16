@@ -29,9 +29,9 @@ class ServiceController extends Controller
             ->with('category')
             ->latest()
             ->get();
-        
-        $categories = Category::orderBy('translation_key')->get();
-        
+
+        $categories = Category::get();
+
         return view('admin.services.index', compact('services', 'categories'));
     }
 
@@ -66,7 +66,7 @@ class ServiceController extends Controller
     {
         $categories = $getCategories->handle();
         $units = $getUnits->handle();
-        
+
         return view('admin.services.edit', compact('service', 'categories', 'units'));
     }
 

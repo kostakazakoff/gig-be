@@ -8,20 +8,15 @@
     <title>@yield('title', 'Админ Панел')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script>
-        // Детектиране и приложение на темата
+        // Инициализация на тема: уважава системните предпочитания, без да презаписва localStorage
         (function() {
             const htmlElement = document.documentElement;
             const stored = localStorage.getItem('theme');
-            const isDark = stored 
-                ? stored === 'dark' 
-                : window.matchMedia('(prefers-color-scheme: dark)').matches;
-            
-            if (isDark) {
-                htmlElement.classList.add('dark');
-            } else {
-                htmlElement.classList.remove('dark');
-            }
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const isDark = stored ? (stored === 'dark') : prefersDark;
+
+            htmlElement.classList.toggle('dark', isDark);
+            // Не записваме в localStorage, ако няма потребителски избор.
         })();
     </script>
 </head>

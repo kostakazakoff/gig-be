@@ -272,9 +272,11 @@
         });
     </script>
 
-    <!-- Main Content --><main class="dark:bg-slate-900 shadow-md dark:shadow-slate-900 mt-12 transition-colors duration-300">
+    <!-- Main Content -->
+    <main class="dark:bg-slate-900 shadow-md dark:shadow-slate-900 mt-12 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <p class="text-center text-gray-600 dark:text-gray-4
+            @yield('content')
+        </div>
     </main>
 
     <!-- Footer -->

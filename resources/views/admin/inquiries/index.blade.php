@@ -45,11 +45,20 @@
                             @endforeach
                         </select>
 
+                        <p>Дата от</p>
+
                         {{-- Date Filter --}}
-                        <input type="date" id="date" name="date" value="{{ request('date') }}"
+                        <input type="date" id="date_from" name="date_from" value="{{ request('date_from') }}"
                             class="px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                             onchange="this.form.submit()"
-                            placeholder="Филтрирай по дата">
+                            placeholder="От дата">
+
+                        <p>до</p>
+
+                        <input type="date" id="date_to" name="date_to" value="{{ request('date_to') }}"
+                            class="px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            onchange="this.form.submit()"
+                            placeholder="До дата">
 
                     </form>
 

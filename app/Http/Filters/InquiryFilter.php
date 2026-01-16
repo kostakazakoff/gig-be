@@ -41,12 +41,26 @@ class InquiryFilter extends Filter
      * @param  string|null  $value
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function date(?string $value = null): Builder
+    public function date_from(?string $value = null): Builder
     {
         if (! $value) {
             return $this->builder;
         }
         return $this->builder->where('created_at', '>=', $value);
+    }
+
+    /**
+     * Filter the inquiries by the given date.
+     *
+     * @param  string|null  $value
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function date_to(?string $value = null): Builder
+    {
+        if (! $value) {
+            return $this->builder;
+        }
+        return $this->builder->where('created_at', '<=', $value);
     }
 
     /**

@@ -17,7 +17,7 @@
                         </svg>
                     </div>
 
-                    <form method="GET" action="{{ route('admin.inquiries.index') }}" class="flex items-center gap-4">
+                    <form method="GET" action="{{ route('admin.inquiries.index') }}" class="flex items-center gap-4 mr-auto flex-wrap">
 
                         {{-- Client Filter --}}
                         <select id="client" name="client"
@@ -59,7 +59,6 @@
                             class="px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                             onchange="this.form.submit()"
                             placeholder="До дата">
-
                     </form>
 
 

@@ -9,7 +9,7 @@ trait CreateAvatar
     public function createAvatar($model, array $images, string $collectionName): void
     {
         foreach ($images as $image) {
-            $optimizedImage = $this->optimizeImage($image, 48, 48);
+            $optimizedImage = $this->optimizeImage($image, 96, 96);
 
             $model  ->addMedia($optimizedImage)
                     ->toMediaCollection($collectionName);

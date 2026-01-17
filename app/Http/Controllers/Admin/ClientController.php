@@ -78,8 +78,8 @@ class ClientController extends Controller
      */
     public function deleteImage(Client $client)
     {
-        if ($client->hasMedia('client_thumbs')) {
-            $client->clearMediaCollection('client_thumbs');
+        if ($client->hasMedia('client_avatars')) {
+            $client->clearMediaCollection('client_avatars');
 
             return response()->json([
                 'success' => true,

@@ -18,7 +18,7 @@ class UpdateClientRequest extends FormRequest
 
         return [
             'first_name' => ['required', 'string', 'max:255'],
-            'last_name'  => ['required', 'string', 'max:255'],
+            'last_name'  => ['nullable', 'string', 'max:255'],
             'email'      => [
                 'required',
                 'email',
@@ -39,7 +39,6 @@ class UpdateClientRequest extends FormRequest
             'first_name.string' => 'First name must be a string',
             'first_name.max' => 'First name must not exceed 255 characters',
             
-            'last_name.required' => 'Last name is required',
             'last_name.string' => 'Last name must be a string',
             'last_name.max' => 'Last name must not exceed 255 characters',
             

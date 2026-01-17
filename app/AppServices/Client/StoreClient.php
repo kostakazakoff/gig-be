@@ -10,19 +10,19 @@ class StoreClient
 {
     use CreateAvatar;
 
-    public function handle(Request $request): Client
+    public function handle($clientData): Client
     {
         $client = Client::create([
-            'first_name' => $request->first_name,
-            'last_name'  => $request->last_name ?? null,
-            'email'      => $request->email,
-            'phone'      => $request->phone ?? null,
-            'address'    => $request->address ?? null,
-            'company'    => $request->company ?? null,
+            'first_name' => $clientData['first_name'],
+            'last_name'  => $clientData['last_name'] ?? null,
+            'email'      => $clientData['email'],
+            'phone'      => $clientData['phone'] ?? null,
+            'address'    => $clientData['address'] ?? null,
+            'company'    => $clientData['company'] ?? null,
         ]);
 
-        if ($request->image ?? null) {
-            $this->createAvatar($client, [$request->image], 'client_avatars');
+        if ($clientData['image'] ?? null) {
+            $this->createAvatar($client, [$clientData['image']], 'client_avatars');
         }
 
         return $client;

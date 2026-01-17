@@ -3,11 +3,11 @@
 namespace App\AppServices\Client;
 
 use App\Models\Client;
-use App\Traits\CreateThumbnail;
+use App\Traits\CreateAvatar;
 
 class UpdateClient
 {
-    use CreateThumbnail;
+    use CreateAvatar;
 
     public function handle(Client $client, array $data): Client
     {
@@ -30,7 +30,7 @@ class UpdateClient
         $client->update($updateData);
 
         if ($data['image'] ?? null) {
-            $this->createThumbnail($client, [$data['image']], 'client_thumbs');
+            $this->createAvatar($client, [$data['image']], 'client_avatars');
         }
 
         return $client;

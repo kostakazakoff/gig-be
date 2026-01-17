@@ -69,6 +69,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     Route::prefix('clients')->name('clients.')->group(function () {
         Route::get('/', [\App\Http\Controllers\Admin\ClientController::class, 'index'])->name('index');
+        Route::post('/broadcast', [\App\Http\Controllers\Admin\ClientController::class, 'messageBroadcast'])->name('broadcast');
         Route::get('/create', [\App\Http\Controllers\Admin\ClientController::class, 'create'])->name('create');
         Route::post('/', [\App\Http\Controllers\Admin\ClientController::class, 'store'])->name('store');
         Route::get('/{client}/edit', [\App\Http\Controllers\Admin\ClientController::class, 'edit'])->name('edit');

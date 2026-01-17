@@ -7,10 +7,17 @@
                 <h1 class="text-3xl font-bold text-gray-900">Клиенти</h1>
                 <p class="mt-2 text-gray-600">Управлявайте всички клиенти</p>
             </div>
-            <a href="{{ route('admin.clients.create') }}"
-               class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition duration-200">
-                + ДОБАВИ КЛИЕНТ
-            </a>
+            <div class="flex gap-3">
+                <button id="send-message-btn" 
+                        class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded-lg transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                        disabled>
+                    ✉ НАПИШИ СЪОБЩЕНИЕ
+                </button>
+                <a href="{{ route('admin.clients.create') }}"
+                   class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition duration-200">
+                    + ДОБАВИ КЛИЕНТ
+                </a>
+            </div>
         </div>
 
         @if (session('success'))
@@ -86,13 +93,74 @@
         </div>
     </div>
 
+    <!-- Message Modal -->
+    <div id="message-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+        <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-2/3 lg:w-1/2 shadow-lg rounded-lg bg-white">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-gray-900">Изпрати съобщение до клиенти</h3>
+                <button id="close-modal" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="mb-4">
+                <p class="text-sm text-gray-600 mb-2">Избрани клиенти: <span id="selected-count" class="font-semibold"></span></p>
+            </div>
+
+            <div class="mb-4">
+                <label for="message-text" class="block text-sm font-medium text-gray-700 mb-2">Съобщение</label>
+                <textarea id="message-text" 
+                          rows="6" 
+                          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          placeholder="Въведете вашето съобщение..."></textarea>
+            </div>
+
+            <div class="flex justify-end gap-3">
+                <button id="cancel-btn" 
+                        class="px-6 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium rounded-lg transition duration-200">
+                    Откажи
+                </button>
+                <button id="send-btn" 
+                        class="px-6 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition duration-200">
+                    Изпрати
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Save selected clients to sessionStorage
+        function saveSelectedClients() {
+            const selected = getSelectedClients();
+            sessionStorage.setItem('selectedClients', JSON.stringify(selected));
+            console.log('Selected clients saved to sessionStorage:', selected);
+        }
+
+        // Load selected clients from sessionStorage on page load
+        function loadSelectedClients() {
+            const saved = sessionStorage.getItem('selectedClients');
+            if (saved) {
+                const selectedClients = JSON.parse(saved);
+                selectedClients.forEach(client => {
+                    const checkbox = document.querySelector(`.client-checkbox[value="${client.id}"]`);
+                    if (checkbox) {
+                        checkbox.checked = true;
+                    }
+                });
+                updateMessageButton();
+            }
+        }
+
         // Select/Deselect all checkboxes
         document.getElementById('select-all').addEventListener('change', function() {
             const checkboxes = document.querySelectorAll('.client-checkbox');
             checkboxes.forEach(checkbox => {
                 checkbox.checked = this.checked;
             });
+            updateMessageButton();
+            saveSelectedClients();
         });
 
         // Update select-all checkbox state when individual checkboxes change
@@ -101,8 +169,17 @@
                 const allCheckboxes = document.querySelectorAll('.client-checkbox');
                 const checkedCheckboxes = document.querySelectorAll('.client-checkbox:checked');
                 document.getElementById('select-all').checked = allCheckboxes.length === checkedCheckboxes.length;
+                updateMessageButton();
+                saveSelectedClients();
             });
         });
+
+        // Enable/disable message button based on selection
+        function updateMessageButton() {
+            const checkedCheckboxes = document.querySelectorAll('.client-checkbox:checked');
+            const messageBtn = document.getElementById('send-message-btn');
+            messageBtn.disabled = checkedCheckboxes.length === 0;
+        }
 
         // Get selected clients (helper function for future use)
         function getSelectedClients() {
@@ -116,5 +193,92 @@
             });
             return selected;
         }
+
+        // Modal functionality
+        const modal = document.getElementById('message-modal');
+        const messageText = document.getElementById('message-text');
+        const selectedCount = document.getElementById('selected-count');
+
+        // Open modal when send message button is clicked
+        document.getElementById('send-message-btn').addEventListener('click', function() {
+            const selected = getSelectedClients();
+            if (selected.length === 0) {
+                alert('Моля, изберете поне един клиент');
+                return;
+            }
+            
+            selectedCount.textContent = selected.length;
+            modal.classList.remove('hidden');
+            messageText.value = '';
+            messageText.focus();
+        });
+
+        // Close modal
+        function closeModal() {
+            modal.classList.add('hidden');
+            messageText.value = '';
+        }
+
+        document.getElementById('close-modal').addEventListener('click', closeModal);
+        document.getElementById('cancel-btn').addEventListener('click', closeModal);
+
+        // Close modal when clicking outside
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Send message
+        document.getElementById('send-btn').addEventListener('click', function() {
+            const message = messageText.value.trim();
+            const selected = getSelectedClients();
+
+            if (!message) {
+                alert('Моля, въведете съобщение');
+                return;
+            }
+
+            if (selected.length === 0) {
+                alert('Няма избрани клиенти');
+                return;
+            }
+
+            // Send to backend
+            fetch('{{ route('admin.clients.broadcast') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    message: message,
+                    clients: selected
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    closeModal();
+                    // Clear selections
+                    document.querySelectorAll('.client-checkbox:checked').forEach(cb => cb.checked = false);
+                    document.getElementById('select-all').checked = false;
+                    updateMessageButton();
+                    saveSelectedClients();
+                } else {
+                    alert('Грешка: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Възникна грешка при изпращането');
+            });
+        });
+
+        // Load saved selections on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            loadSelectedClients();
+        });
     </script>
 @endsection

@@ -21,19 +21,6 @@
                         'deleteUrl' => route('admin.clients.deleteImage', $client),
                     ])
                 </div>
-                {{-- @include('partials.single-image-dropzone', [
-                    'label' => 'Client Image',
-                    'imageSrc' => $client->getFirstMedia('category_thumbs')?->getUrl()])
-
-                @php
-                    $existingImageSrc = $client->getFirstMedia('category_thumbs')?->getUrl();
-                @endphp
-                @if($existingImageSrc)
-                    <div class="mt-4">
-                        <p class="text-sm font-medium text-gray-700 mb-2">Current Image:</p>
-                        <img src="{{ $existingImageSrc }}" alt="Current client image" class="w-32 h-32 object-cover rounded border border-gray-300">
-                    </div>
-                @endif --}}
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>

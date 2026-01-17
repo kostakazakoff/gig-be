@@ -3,12 +3,12 @@
 namespace App\AppServices\Client;
 
 use App\Models\Client;
-use App\Traits\CreateThumbnail;
+use App\Traits\CreateAvatar;
 use Illuminate\Http\Request;
 
 class StoreClient
 {
-    use CreateThumbnail;
+    use CreateAvatar;
 
     public function handle(Request $request): Client
     {
@@ -22,7 +22,7 @@ class StoreClient
         ]);
 
         if ($request->image ?? null) {
-            $this->createThumbnail($client, [$request->image], 'client_thumbs');
+            $this->createAvatar($client, [$request->image], 'client_avatars');
         }
 
         return $client;

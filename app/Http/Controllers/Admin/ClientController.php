@@ -103,7 +103,6 @@ class ClientController extends Controller
         $result = $service->handle(
             $request->input('messages'),
             $request->input('clientsByLanguage'),
-            // $request->input('clients')
         );
 
         return response()->json($result);

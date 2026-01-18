@@ -41,7 +41,7 @@
                 <div>
                     <h3 class="text-lg font-semibold text-gray-900 mb-4">Заглавие на статия</h3>
 
-                    <!-- Title EN -->
+                    <!-- Title en -->
                     <div class="mb-4">
                         <label for="title_en" class="block text-sm font-medium text-gray-700 mb-2">
                             Заглавие (Английски)
@@ -60,7 +60,7 @@
                         @enderror
                     </div>
 
-                    <!-- Title BG -->
+                    <!-- Title bg -->
                     <div>
                         <label for="title_bg" class="block text-sm font-medium text-gray-700 mb-2">
                             Заглавие (Български)
@@ -84,7 +84,7 @@
                 <div class="border-t pt-6">
                     <h3 class="text-lg font-semibold text-gray-900 mb-4">Съдържание</h3>
 
-                    <!-- Content EN -->
+                    <!-- Content en -->
                     <div class="mb-4">
                         <label for="content_en" class="block text-sm font-medium text-gray-700 mb-2">
                             Съдържание (Английски)
@@ -102,7 +102,7 @@
                         @enderror
                     </div>
 
-                    <!-- Content BG -->
+                    <!-- Content bg -->
                     <div>
                         <label for="content_bg" class="block text-sm font-medium text-gray-700 mb-2">
                             Съдържание (Български)

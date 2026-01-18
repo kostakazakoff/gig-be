@@ -32,7 +32,7 @@
 
                     <!-- No service selection here; Services choose Unit -->
 
-                    <!-- Name (EN) -->
+                    <!-- Name (en) -->
                     <div class="mb-6">
                         <label for="name_en" class="block text-sm font-medium text-gray-700 mb-2">
                             Наименование (Английски) <span class="text-red-500">*</span>
@@ -46,7 +46,7 @@
                         @enderror
                     </div>
 
-                    <!-- Name (BG) -->
+                    <!-- Name (bg) -->
                     <div class="mb-6">
                         <label for="name_bg" class="block text-sm font-medium text-gray-700 mb-2">
                             Наименование (Български) <span class="text-red-500">*</span>

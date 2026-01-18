@@ -41,7 +41,7 @@
                 <div class="border-t pt-6">
                     <h3 class="text-lg font-semibold text-gray-900 mb-4">Имена на категория</h3>
 
-                    <!-- Name EN -->
+                    <!-- Name en -->
                     <div class="mb-4">
                         <label for="name_en" class="block text-sm font-medium text-gray-700 mb-2">
                             Име (Английски)
@@ -60,7 +60,7 @@
                         @enderror
                     </div>
 
-                    <!-- Name BG -->
+                    <!-- Name bg -->
                     <div>
                         <label for="name_bg" class="block text-sm font-medium text-gray-700 mb-2">
                             Име (Български)
@@ -84,7 +84,7 @@
                 <div class="border-t pt-6">
                     <h3 class="text-lg font-semibold text-gray-900 mb-4">Описания</h3>
 
-                    <!-- Description EN -->
+                    <!-- Description en -->
                     <div class="mb-4">
                         <label for="description_en" class="block text-sm font-medium text-gray-700 mb-2">
                             Описание (Английски)
@@ -102,7 +102,7 @@
                         @enderror
                     </div>
 
-                    <!-- Description BG -->
+                    <!-- Description bg -->
                     <div>
                         <label for="description_bg" class="block text-sm font-medium text-gray-700 mb-2">
                             Описание (Български)

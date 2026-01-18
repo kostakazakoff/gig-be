@@ -66,15 +66,15 @@
         </div>
 
         <div class="content">
-            <p>{{ $language === 'BG' ? 'Здравейте,' : 'Hello,' }}</p>
+            <p>{{ $language === 'bg' ? 'Здравейте,' : 'Hello,' }}</p>
 
             <div class="message">
                 {!! nl2br(e($messageContent)) !!}
             </div>
 
             <p>
-                {{ $language === 'BG' ? 'С уважение,' : 'Best regards,' }}<br>
-                {{ $language === 'BG' ? 'Екипът на GIG Construct' : 'The GIG Construct Team' }}
+                {{ $language === 'bg' ? 'С уважение,' : 'Best regards,' }}<br>
+                {{ $language === 'bg' ? 'Екипът на GIG Construct' : 'The GIG Construct Team' }}
             </p>
         </div>
 
@@ -83,7 +83,7 @@
                 <p>
                     <strong>{{ config('mail.from.name') }}</strong><br>
                     Email: <a href="mailto:{{ config('mail.from.address') }}">{{ config('mail.from.address') }}</a><br>
-                    {{ $language === 'BG' 
+                    {{ $language === 'bg' 
                         ? 'Този имейл е изпратен автоматично, моля не отговаряйте директно.' 
                         : 'This email was sent automatically, please do not reply directly.' 
                     }}

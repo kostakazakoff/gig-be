@@ -57,7 +57,7 @@
                     <tr>
                         <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Изображение</th>
                         <th class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Категория</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Име (EN/BG)</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Име (en/bg)</th>
                         <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Цена</th>
                         <th class="px-4 sm:px-6 py-2 sm:py-3 text-right text-xs lg:text-sm">Действия</th>
                     </tr>
@@ -76,8 +76,8 @@
                             <td class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">{{ $service->category->getTranslation('name', 'bg') ?? 'Няма' }}</td>
                             <td class="px-4 sm:px-6 py-2 sm:py-3">
                                 <div class="text-xs lg:text-sm">
-                                    <div class="text-blue-600">EN: {{ $service->getTranslation('name', 'en') }}</div>
-                                    <div class="text-red-600">BG: {{ $service->getTranslation('name', 'bg') }}</div>
+                                    <div class="text-blue-600">en: {{ $service->getTranslation('name', 'en') }}</div>
+                                    <div class="text-red-600">bg: {{ $service->getTranslation('name', 'bg') }}</div>
                                 </div>
                             </td>
                             <td class="px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">

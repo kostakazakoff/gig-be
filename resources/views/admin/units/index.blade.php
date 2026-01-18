@@ -32,7 +32,7 @@
             <table class="w-full">
                 <thead class="bg-gray-200">
                     <tr>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Наименование (EN/BG)</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Наименование (en/bg)</th>
                         <th class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Услуги</th>
                         <th class="px-4 sm:px-6 py-2 sm:py-3 text-right text-xs lg:text-sm">Действия</th>
                     </tr>
@@ -42,8 +42,8 @@
                         <tr class="border-t hover:bg-gray-50">
                             <td class="px-4 sm:px-6 py-2 sm:py-3">
                                 <div class="text-xs lg:text-sm">
-                                    <div class="text-blue-600">EN: {{ $unit->getTranslation('name', 'en') }}</div>
-                                    <div class="text-red-600">BG: {{ $unit->getTranslation('name', 'bg') }}</div>
+                                    <div class="text-blue-600">en: {{ $unit->getTranslation('name', 'en') }}</div>
+                                    <div class="text-red-600">bg: {{ $unit->getTranslation('name', 'bg') }}</div>
                                 </div>
                             </td>
                             <td class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">

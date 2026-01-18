@@ -27,7 +27,7 @@
                 <thead class="bg-gray-200">
                     <tr>
                         <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Снимка</th>
-                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Заглавие (EN/BG)</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Заглавие (en/bg)</th>
                         <th class="px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Цена</th>
                         <th class="hidden sm:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Дата</th>
                         <th class="px-4 sm:px-6 py-2 sm:py-3 text-right text-xs lg:text-sm">Действия</th>
@@ -46,8 +46,8 @@
                             </td>
                             <td class="px-4 sm:px-6 py-2 sm:py-3">
                                 <div class="text-xs lg:text-sm">
-                                    <div class="text-blue-600">EN: {{ $project->title }}</div>
-                                    <div class="text-red-600">BG: {{ $project->getTranslation('title', 'bg') ?? '—' }}</div>
+                                    <div class="text-blue-600">en: {{ $project->title }}</div>
+                                    <div class="text-red-600">bg: {{ $project->getTranslation('title', 'bg') ?? '—' }}</div>
                                 </div>
                             </td>
                             <td class="px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">

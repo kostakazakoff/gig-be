@@ -24,7 +24,7 @@ class SendEmail implements ShouldQueue
      */
     public function handle(): void
     {
-        $defaultMessage = $this->language === 'BG'
+        $defaultMessage = $this->language === 'bg'
             ? 'Това е стандартно съобщение.'
             : 'This is a generic message.';
 

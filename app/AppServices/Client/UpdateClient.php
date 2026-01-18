@@ -26,6 +26,9 @@ class UpdateClient
         if (array_key_exists('company', $data)) {
             $updateData['company'] = $data['company'];
         }
+        if (array_key_exists('site', $data)) {
+            $updateData['site'] = $data['site'];
+        }
 
         $client->update($updateData);
 

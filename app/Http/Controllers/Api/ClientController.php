@@ -11,9 +11,9 @@ use Illuminate\Http\Request;
 class ClientController extends Controller
 {
     use HttpResponses;
-    public function getClients(): JsonResponse
+    public function getPartners(): JsonResponse
     {
-        $clients = Client::all();
+        $clients = Client::whereNotNull('site')->get();
         return $this->success($clients, 'Clients retrieved successfully');
     }
 }

@@ -18,6 +18,7 @@ class StoreClient
             'phone'      => $clientData['phone'] ?? null,
             'address'    => $clientData['address'] ?? null,
             'company'    => $clientData['company'] ?? null,
+            'site'       => $clientData['site'] ?? null,
             'language'   => $clientData['language'] ?? 'bg',
         ]);
 

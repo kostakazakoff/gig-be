@@ -40,6 +40,7 @@
                         <th class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Компания</th>
                         <th class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Адрес</th>
                         <th class="hidden sm:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Език</th>
+                        <th class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Сайт</th>
                         <th class="px-4 sm:px-6 py-2 sm:py-3 text-right text-xs lg:text-sm">Действия</th>
                     </tr>
                 </thead>
@@ -67,6 +68,13 @@
                         <td class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">{{ $client->company ?? '—' }}</td>
                         <td class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">{{ $client->address ?? '—' }}</td>
                         <td class="hidden sm:table-cell px-4 sm:px-6 py-2 sm:py-3 text-center text-xs lg:text-sm">{{ $client->language ?? '—' }}</td>
+                        <td class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-xs lg:text-sm">
+                            @if($client->site)
+                                <a href="{{ $client->site }}" target="_blank" class="text-blue-600 hover:text-blue-800 underline">Посети</a>
+                            @else
+                                <span class="text-gray-400">—</span>
+                            @endif
+                        </td>
                         @include('partials.action-buttons', [
                             'editRoute' => 'admin.clients.edit',
                             'deleteRoute' => 'admin.clients.destroy',

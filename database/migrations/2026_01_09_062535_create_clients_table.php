@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('address')->nullable();
             $table->string('company')->nullable();
             $table->string('language')->default('bg');
-            $table->boolean('partner')->default(false);
+            $table->string('site')->nullable();
             $table->timestamps();
         });
     }

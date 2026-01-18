@@ -4,7 +4,6 @@ namespace App\AppServices\Client;
 
 use App\Models\Client;
 use App\Traits\CreateAvatar;
-use Illuminate\Http\Request;
 
 class StoreClient
 {
@@ -19,6 +18,7 @@ class StoreClient
             'phone'      => $clientData['phone'] ?? null,
             'address'    => $clientData['address'] ?? null,
             'company'    => $clientData['company'] ?? null,
+            'language'   => $clientData['language'] ?? 'bg',
         ]);
 
         if ($clientData['image'] ?? null) {

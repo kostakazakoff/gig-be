@@ -34,4 +34,6 @@ Route::middleware('locale')->group(function () {
     });
 
     Route::post('/inquiry', [\App\Http\Controllers\Api\InquiryController::class, 'store']);
+
+    Route::get('/clients', [\App\Http\Controllers\Api\ClientController::class, 'getClients']);
 });

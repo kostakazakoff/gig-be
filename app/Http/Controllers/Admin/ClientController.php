@@ -8,8 +8,8 @@ use App\Http\Requests\Client\StoreClientRequest;
 use App\Http\Requests\Client\UpdateClientRequest;
 use App\AppServices\Client\StoreClient;
 use App\AppServices\Client\UpdateClient;
+use App\AppServices\Client\MessageClient;
 use App\Http\Requests\Client\MessageBroadcastRequest;
-use Illuminate\Support\Facades\Log;
 
 class ClientController extends Controller
 {
@@ -98,26 +98,13 @@ class ClientController extends Controller
     /**
      * Broadcast message to selected clients.
      */
-    public function messageBroadcast(MessageBroadcastRequest $request)
+    public function messageBroadcast(MessageBroadcastRequest $request, MessageClient $service)
     {
-        $message = $request->input('message');
-        $clients = $request->input('clients');
+        $result = $service->handle(
+            $request->input('message'),
+            $request->input('clients')
+        );
 
-        // TODO: Implement actual email sending logic here
-        // For now, just log the action
-        foreach ($clients as $clientData) {
-            $client = Client::find($clientData['id']);
-            if ($client) {
-                Log::info('Broadcasting message to clients', [
-                    'message' => $message,
-                    'client' => $client->first_name . ' ' . $client->last_name
-                ]);
-            }
-        }
-
-        return response()->json([
-            'success' => true,
-            'message' => "Съобщението е изпратено успешно до " . count($clients) . " клиент(и)!"
-        ]);
+        return response()->json($result);
     }
 }

@@ -12,6 +12,8 @@ class MessageClient
         private $language = 'bg',
         private $successCount = 0,
         private $clientEmailList = [],
+        private $clients = [],
+        private $messages = [],
     ) {
         //
     }
@@ -24,42 +26,23 @@ class MessageClient
      */
     public function handle(array $messages, array $clientsByLanguage): array
     {
+        $this->messages = $messages;
+        $this->clients = $clientsByLanguage;
 
         // Send Bulgarian messages
-        if (!empty($clientsByLanguage['bg'])) {
-            foreach ($clientsByLanguage['bg'] as $clientData) {
-                $client = Client::find($clientData['id']);
-                if ($client) {
+        if (!empty($this->clients['en'])) {
 
-                    // Send email to client
-                    SendEmail::dispatch($client->email, $messages['bg'], 'bg', 'client');
-                    $this->successCount++;
-                    $this->clientEmailList[] = $client->email;
-                } else {
-
-                    Log::warning('Client not found for messaging', [
-                        'client_id' => $clientData['id']
-                    ]);
-                }
-            }
+            $this->sendEmailToClient('en');
         }
+        
+        if (!empty($this->clients['bg'])) {
 
-        // Send English messages
-        if (!empty($clientsByLanguage['en'])) {
-            foreach ($clientsByLanguage['en'] as $clientData) {
-                $client = Client::find($clientData['id']);
-                if ($client) {
-                    // Send email to client
-                    SendEmail::dispatch($client->email, $messages['en'], 'en', 'client');
-                    $this->successCount++;
-                    $this->clientEmailList[] = $client->email;
-                } else {
+            $this->sendEmailToClient('bg');
+        } 
+        
+        if ($this->successCount === 0) {
 
-                    Log::warning('Client not found for messaging', [
-                        'client_id' => $clientData['id']
-                    ]);
-                }
-            }
+            Log::warning('No clients found for messaging');
         }
 
         $message = "Съобщението е изпратено успешно до {$this->successCount} клиент(и)!";
@@ -75,5 +58,25 @@ class MessageClient
             'count' => $this->successCount,
             'message' => $message
         ];
+    }
+
+    private function sendEmailToClient(string $clientLanguage): void
+    {
+        foreach ($this->clients[$clientLanguage] as $clientData) {
+            $client = Client::find($clientData['id']);
+
+            if ($client) {
+
+                // Send email to client
+                SendEmail::dispatch($client->email, $this->messages[$clientLanguage], $clientLanguage, 'client');
+                $this->successCount++;
+                $this->clientEmailList[] = $client->email;
+            } else {
+
+                Log::warning('Client not found for messaging', [
+                    'client_id' => $clientData['id']
+                ]);
+            }
+        }
     }
 }

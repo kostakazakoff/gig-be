@@ -15,10 +15,10 @@ class LocaleController extends Controller
             'locale' => 'required|in:bg,en',
         ]);
 
-        app()->setLocale($request->locale);
+        app()->setLocale($request->input('locale'));
 
-        return $this->success(['locale' => $request->locale])
-            ->cookie('locale', $request->locale, 60 * 24 * 365); // 1 year
+        return $this->success(['locale' => $request->input('locale')])
+            ->cookie('locale', $request->input('locale'), 60 * 24 * 365); // 1 year
     }
 
     public function getLocale(Request $request)

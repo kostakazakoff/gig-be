@@ -47,9 +47,6 @@ class StoreInquiryRequest extends FormRequest
 
             'phone.string' => 'Phone must be a string',
             'phone.max' => 'Phone must not exceed 20 characters',
-
-            'service_id.exists' => 'Selected service does not exist',
-            'service_id.integer' => 'Service ID must be an integer',
         ];
     }
 }

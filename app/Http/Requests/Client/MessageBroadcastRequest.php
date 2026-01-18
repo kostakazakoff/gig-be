@@ -22,7 +22,12 @@ class MessageBroadcastRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'message' => 'required|string',
+            'messages' => 'required|array',
+            'messages.bg' => 'required|string',
+            'messages.en' => 'required|string',
+            'clientsByLanguage' => 'required|array',
+            'clientsByLanguage.bg' => 'array',
+            'clientsByLanguage.en' => 'array',
             'clients' => 'required|array',
             'clients.*.id' => 'required|exists:clients,id',
             'clients.*.email' => 'required|email',
@@ -32,7 +37,9 @@ class MessageBroadcastRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'message.required' => 'Съобщението е задължително.',
+            'messages.required' => 'Съобщенията са задължителни.',
+            'messages.bg.required' => 'Съобщението на български е задължително.',
+            'messages.en.required' => 'Съобщението на английски е задължително.',
             'clients.required' => 'Трябва да изберете поне един клиент.',
             'clients.array' => 'Невалиден формат за клиентите.',
             'clients.*.id.exists' => 'Избраният клиент не съществува.',

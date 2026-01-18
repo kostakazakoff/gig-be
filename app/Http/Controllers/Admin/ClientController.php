@@ -101,8 +101,9 @@ class ClientController extends Controller
     public function messageBroadcast(MessageBroadcastRequest $request, MessageClient $service)
     {
         $result = $service->handle(
-            $request->input('message'),
-            $request->input('clients')
+            $request->input('messages'),
+            $request->input('clientsByLanguage'),
+            // $request->input('clients')
         );
 
         return response()->json($result);

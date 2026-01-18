@@ -39,8 +39,8 @@
                         <th class="hidden md:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Телефон</th>
                         <th class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Компания</th>
                         <th class="hidden lg:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Адрес</th>
-                    <th class="hidden sm:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Език</th>
-                    <th class="px-4 sm:px-6 py-2 sm:py-3 text-right text-xs lg:text-sm">Действия</th>
+                        <th class="hidden sm:table-cell px-4 sm:px-6 py-2 sm:py-3 text-left text-xs lg:text-sm">Език</th>
+                        <th class="px-4 sm:px-6 py-2 sm:py-3 text-right text-xs lg:text-sm">Действия</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,7 +50,8 @@
                             <input type="checkbox" class="client-checkbox w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" 
                                    value="{{ $client->id }}" 
                                    data-email="{{ $client->email }}"
-                                   data-name="{{ $client->first_name }} {{ $client->last_name }}">
+                                   data-name="{{ $client->first_name }} {{ $client->last_name }}"
+                                   data-language="{{ $client->language ?? 'bg' }}">
                         </td>
                         <td class="px-6 py-3">
                             @if ($client->getFirstMedia('client_avatars'))
@@ -89,7 +90,6 @@
                 @endforelse
                 </tbody>
             </table>
-            </div>
         </div>
     </div>
 
@@ -109,12 +109,21 @@
                 <p class="text-sm text-gray-600 mb-2">Избрани клиенти: <span id="selected-count" class="font-semibold"></span></p>
             </div>
 
-            <div class="mb-4">
-                <label for="message-text" class="block text-sm font-medium text-gray-700 mb-2">Съобщение</label>
-                <textarea id="message-text" 
-                          rows="6" 
-                          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                          placeholder="Въведете вашето съобщение..."></textarea>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label for="message-bg" class="block text-sm font-medium text-gray-700 mb-2">Съобщение (Български)</label>
+                    <textarea id="message-bg" 
+                              rows="6" 
+                              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              placeholder="Въведете съобщението на български..."></textarea>
+                </div>
+                <div>
+                    <label for="message-en" class="block text-sm font-medium text-gray-700 mb-2">Message (English)</label>
+                    <textarea id="message-en" 
+                              rows="6" 
+                              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              placeholder="Enter the message in English..."></textarea>
+                </div>
             </div>
 
             <div class="flex justify-end gap-3">
@@ -131,14 +140,41 @@
     </div>
 
     <script>
-        // Save selected clients to sessionStorage
-        function saveSelectedClients() {
-            const selected = getSelectedClients();
-            sessionStorage.setItem('selectedClients', JSON.stringify(selected));
-            console.log('Selected clients saved to sessionStorage:', selected);
+        // Get selected clients with language info
+        function getSelectedClientsWithLanguage() {
+            const selected = [];
+            document.querySelectorAll('.client-checkbox:checked').forEach(checkbox => {
+                selected.push({
+                    id: checkbox.value,
+                    email: checkbox.dataset.email,
+                    name: checkbox.dataset.name,
+                    language: checkbox.dataset.language || 'bg'
+                });
+            });
+            return selected;
         }
 
-        // Load selected clients from sessionStorage on page load
+        // Get selected clients without language info
+        function getSelectedClients() {
+            const selected = [];
+            document.querySelectorAll('.client-checkbox:checked').forEach(checkbox => {
+                selected.push({
+                    id: checkbox.value,
+                    email: checkbox.dataset.email,
+                    name: checkbox.dataset.name
+                });
+            });
+            return selected;
+        }
+
+        // Save selected clients to sessionStorage
+        function saveSelectedClients() {
+            const selected = getSelectedClientsWithLanguage();
+            sessionStorage.setItem('selectedClients', JSON.stringify(selected));
+            console.log('Selected clients saved:', selected);
+        }
+
+        // Load selected clients from sessionStorage
         function loadSelectedClients() {
             const saved = sessionStorage.getItem('selectedClients');
             if (saved) {
@@ -149,8 +185,15 @@
                         checkbox.checked = true;
                     }
                 });
-                updateMessageButton();
             }
+        }
+
+        // Enable/disable message button based on selection
+        function updateMessageButton() {
+            const checkedCheckboxes = document.querySelectorAll('.client-checkbox:checked');
+            const messageBtn = document.getElementById('send-message-btn');
+            messageBtn.disabled = checkedCheckboxes.length === 0;
+            console.log('Message button disabled:', messageBtn.disabled, 'Checked:', checkedCheckboxes.length);
         }
 
         // Select/Deselect all checkboxes
@@ -174,32 +217,13 @@
             });
         });
 
-        // Enable/disable message button based on selection
-        function updateMessageButton() {
-            const checkedCheckboxes = document.querySelectorAll('.client-checkbox:checked');
-            const messageBtn = document.getElementById('send-message-btn');
-            messageBtn.disabled = checkedCheckboxes.length === 0;
-        }
-
-        // Get selected clients (helper function for future use)
-        function getSelectedClients() {
-            const selected = [];
-            document.querySelectorAll('.client-checkbox:checked').forEach(checkbox => {
-                selected.push({
-                    id: checkbox.value,
-                    email: checkbox.dataset.email,
-                    name: checkbox.dataset.name
-                });
-            });
-            return selected;
-        }
-
-        // Modal functionality
+        // Modal elements
         const modal = document.getElementById('message-modal');
-        const messageText = document.getElementById('message-text');
+        const messageBg = document.getElementById('message-bg');
+        const messageEn = document.getElementById('message-en');
         const selectedCount = document.getElementById('selected-count');
 
-        // Open modal when send message button is clicked
+        // Open modal
         document.getElementById('send-message-btn').addEventListener('click', function() {
             const selected = getSelectedClients();
             if (selected.length === 0) {
@@ -209,14 +233,16 @@
             
             selectedCount.textContent = selected.length;
             modal.classList.remove('hidden');
-            messageText.value = '';
-            messageText.focus();
+            messageBg.value = '';
+            messageEn.value = '';
+            messageBg.focus();
         });
 
         // Close modal
         function closeModal() {
             modal.classList.add('hidden');
-            messageText.value = '';
+            messageBg.value = '';
+            messageEn.value = '';
         }
 
         document.getElementById('close-modal').addEventListener('click', closeModal);
@@ -231,11 +257,12 @@
 
         // Send message
         document.getElementById('send-btn').addEventListener('click', function() {
-            const message = messageText.value.trim();
-            const selected = getSelectedClients();
+            const messageBgText = messageBg.value.trim();
+            const messageEnText = messageEn.value.trim();
+            const selected = getSelectedClientsWithLanguage();
 
-            if (!message) {
-                alert('Моля, въведете съобщение');
+            if (!messageBgText || !messageEnText) {
+                alert('Моля, въведете съобщения на двата езика');
                 return;
             }
 
@@ -243,6 +270,21 @@
                 alert('Няма избрани клиенти');
                 return;
             }
+
+            // Organize messages by language
+            const clientsByLanguage = {
+                bg: [],
+                en: []
+            };
+
+            selected.forEach(client => {
+                const language = client.language || 'bg';
+                if (language === 'en') {
+                    clientsByLanguage.en.push(client);
+                } else {
+                    clientsByLanguage.bg.push(client);
+                }
+            });
 
             // Send to backend
             fetch('{{ route('admin.clients.broadcast') }}', {
@@ -252,7 +294,11 @@
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
                 body: JSON.stringify({
-                    message: message,
+                    messages: {
+                        bg: messageBgText,
+                        en: messageEnText
+                    },
+                    clientsByLanguage: clientsByLanguage,
                     clients: selected
                 })
             })
@@ -276,9 +322,10 @@
             });
         });
 
-        // Load saved selections on page load
+        // Initialize on page load
         window.addEventListener('DOMContentLoaded', function() {
             loadSelectedClients();
+            updateMessageButton();
         });
     </script>
 @endsection

@@ -13,35 +13,57 @@ class MessageClient
         private $successCount = 0,
         private $clientEmailList = [],
     ) {
-        $this->language = config('app.locale', 'bg');
+        //
     }
     /**
-     * Broadcast message to selected clients.
+     * Broadcast message to selected clients based on their language.
      *
-     * @param string $message
-     * @param array $clients
+     * @param array $messages Array with 'bg' and 'en' keys
+     * @param array $clientsByLanguage Array organized by language
      * @return array
      */
-    public function handle(string $message, array $clients): array
+    public function handle(array $messages, array $clientsByLanguage): array
     {
-        foreach ($clients as $clientData) {
-            $client = Client::find($clientData['id']);
 
-            if ($client) {
+        // Send Bulgarian messages
+        if (!empty($clientsByLanguage['bg'])) {
+            foreach ($clientsByLanguage['bg'] as $clientData) {
+                $client = Client::find($clientData['id']);
+                if ($client) {
 
-                // Send email to client
-                SendEmail::dispatch($client->email, $message, $this->language, 'client');
-                $this->successCount++;
-                $this->clientEmailList[] = $client->email;
-            } else {
+                    // Send email to client
+                    SendEmail::dispatch($client->email, $messages['bg'], 'bg', 'client');
+                    $this->successCount++;
+                    $this->clientEmailList[] = $client->email;
+                } else {
 
-                Log::warning('Client not found for messaging', [
-                    'client_id' => $clientData['id']
-                ]);
+                    Log::warning('Client not found for messaging', [
+                        'client_id' => $clientData['id']
+                    ]);
+                }
             }
         }
 
-        // Send report message to admin
+        // Send English messages
+        if (!empty($clientsByLanguage['en'])) {
+            foreach ($clientsByLanguage['en'] as $clientData) {
+                $client = Client::find($clientData['id']);
+                if ($client) {
+                    // Send email to client
+                    SendEmail::dispatch($client->email, $messages['en'], 'en', 'client');
+                    $this->successCount++;
+                    $this->clientEmailList[] = $client->email;
+                } else {
+
+                    Log::warning('Client not found for messaging', [
+                        'client_id' => $clientData['id']
+                    ]);
+                }
+            }
+        }
+
+        $message = "Съобщението е изпратено успешно до {$this->successCount} клиент(и)!";
+
         $adminMessage = $this->language === 'bg'
             ? "Администраторско известие: Изпратено е съобщение до {$this->successCount} клиент(и): " . implode(', ', $this->clientEmailList)
             : "Admin Notice: Message sent to {$this->successCount} client(s): " . implode(', ', $this->clientEmailList);
@@ -51,7 +73,7 @@ class MessageClient
         return [
             'success' => true,
             'count' => $this->successCount,
-            'message' => "Съобщението е изпратено успешно до {$this->successCount} клиент(и)!"
+            'message' => $message
         ];
     }
 }

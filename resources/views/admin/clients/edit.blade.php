@@ -73,7 +73,7 @@
 
                 <div>
                     <label for="site" class="block text-sm font-medium text-gray-700 mb-2">Сайт</label>
-                    <input type="url" id="site" name="site" value="{{ old('site', $client->site) }}"
+                    <input type="text" id="site" name="site" value="{{ old('site', $client->site) }}"
                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 @error('site') border-red-500 @enderror" placeholder="https://example.com">
                     @error('site')
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>

@@ -112,5 +112,50 @@ return [
         'password' => 'password',
         'password_confirmation' => 'password confirmation',
         'name' => 'name',
+        'first_name' => 'first name',
+        'last_name' => 'last name',
+        'phone' => 'phone',
+        'address' => 'address',
+        'company' => 'company',
+        'site' => 'site',
+        'image' => 'image',
+    ],
+
+    'messages' => [
+        'first_name' => [
+            'required' => 'First name is required.',
+            'string' => 'First name must be a string.',
+            'max' => 'First name must not exceed 255 characters.',
+        ],
+        'last_name' => [
+            'string' => 'Last name must be a string.',
+            'max' => 'Last name must not exceed 255 characters.',
+        ],
+        'email' => [
+            'required' => 'Email is required.',
+            'email' => 'Email must be a valid email address.',
+            'max' => 'Email must not exceed 255 characters.',
+            'unique' => 'This email address is already registered.',
+        ],
+        'phone' => [
+            'string' => 'Phone must be a valid phone number.',
+            'max' => 'Phone must not exceed 255 characters.',
+        ],
+        'address' => [
+            'string' => 'Address must be a string.',
+        ],
+        'company' => [
+            'string' => 'Company must be a string.',
+            'max' => 'Company must not exceed 255 characters.',
+        ],
+        'site' => [
+            'url' => 'Site must be a valid URL.',
+            'max' => 'Site must not exceed 255 characters.',
+        ],
+        'image' => [
+            'image' => 'File must be an image.',
+            'mimes' => 'Image must be jpeg, jpg, png or webp.',
+            'max' => 'Image must not exceed 2MB.',
+        ],
     ],
 ];

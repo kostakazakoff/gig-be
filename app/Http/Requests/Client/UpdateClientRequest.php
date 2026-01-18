@@ -35,29 +35,6 @@ class UpdateClientRequest extends FormRequest
 
     public function messages(): array
     {
-        return [
-            'first_name.required' => 'First name is required',
-            'first_name.string' => 'First name must be a string',
-            'first_name.max' => 'First name must not exceed 255 characters',
-            
-            'last_name.string' => 'Last name must be a string',
-            'last_name.max' => 'Last name must not exceed 255 characters',
-            
-            'email.required' => 'Email is required',
-            'email.email' => 'Email must be a valid email address',
-            'email.max' => 'Email must not exceed 255 characters',
-            'email.unique' => 'This email address is already registered',
-            
-            'phone.string' => 'Phone must be a valid phone number',
-            'phone.max' => 'Phone must not exceed 255 characters',
-            
-            'address.string' => 'Address must be a string',
-            
-            'company.string' => 'Company must be a string',
-            'company.max' => 'Company must not exceed 255 characters',
-            'image.image' => 'File must be an image',
-            'image.mimes' => 'Image must be jpeg, jpg, png or webp',
-            'image.max' => 'Image must not exceed 2MB',
-        ];
+        return trans('validation.messages');
     }
 }

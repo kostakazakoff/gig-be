@@ -11,6 +11,7 @@ class MessageClient
     public function __construct(
         private $language = 'bg',
         private $successCount = 0,
+        private $clientEmailList = [],
     ) {
         $this->language = config('app.locale', 'bg');
     }
@@ -23,25 +24,29 @@ class MessageClient
      */
     public function handle(string $message, array $clients): array
     {
-
         foreach ($clients as $clientData) {
             $client = Client::find($clientData['id']);
-            if ($client) {
-                // Log::info('Broadcasting message to clients', [
-                //     'message' => $message,
-                //     'client' => $client->first_name . ' ' . $client->last_name
-                // ]);
 
+            if ($client) {
+
+                // Send email to client
                 SendEmail::dispatch($client->email, $message, $this->language, 'client');
                 $this->successCount++;
-            }
-            
-            $adminMessage = $this->language === 'bg'
-                ? "Администраторско известие: Изпратено е съобщение до {$this->successCount} клиент(и)."
-                : "Admin Notice: Message sent to {$this->successCount} client(s).";
+                $this->clientEmailList[] = $client->email;
+            } else {
 
-            SendEmail::dispatch(config('mail.admin_email'), $adminMessage, $this->language, 'admin');
+                Log::warning('Client not found for messaging', [
+                    'client_id' => $clientData['id']
+                ]);
+            }
         }
+
+        // Send report message to admin
+        $adminMessage = $this->language === 'bg'
+            ? "Администраторско известие: Изпратено е съобщение до {$this->successCount} клиент(и): " . implode(', ', $this->clientEmailList)
+            : "Admin Notice: Message sent to {$this->successCount} client(s): " . implode(', ', $this->clientEmailList);
+
+        SendEmail::dispatch(config('mail.admin_email'), $adminMessage, $this->language, 'admin');
 
         return [
             'success' => true,

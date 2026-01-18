@@ -18,7 +18,7 @@
                     <div>
                         <label for="first_name" class="block text-sm font-medium text-gray-700 mb-2">Име <span class="text-red-600">*</span></label>
                         <input type="text" id="first_name" name="first_name" value="{{ old('first_name') }}"
-                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 @error('first_name') border-red-500 @enderror" required>
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 @error('first_name') border-red-500 @enderror">
                         @error('first_name')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
@@ -38,7 +38,7 @@
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email <span class="text-red-600">*</span></label>
                         <input type="email" id="email" name="email" value="{{ old('email') }}"
-                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 @error('email') border-red-500 @enderror" required>
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 @error('email') border-red-500 @enderror">
                         @error('email')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror

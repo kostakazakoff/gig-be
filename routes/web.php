@@ -10,7 +10,7 @@ Route::middleware('guest')->group(function () {
 
 Route::post('/logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
-Route::get('/', function () {
+Route::get('/admin', function () {
     if (Auth::check()) {
         return redirect()->route('admin.categories.index');
     }

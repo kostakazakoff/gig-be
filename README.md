@@ -24,3 +24,10 @@ API-first Laravel 12 backend for managing projects, media, and client inquiries 
 - Node.js 20+ and npm
 - MySQL/MariaDB
 - Redis (for cache/queues)
+
+## Content & Admin
+- 🖥️ Admin panel controls all frontend content (projects, services, media, copy) — nothing is hardcoded; the site is fully updatable by administrators.
+
+## Inquiries & Communications
+- 📨 Inquiry forms support Bulgarian and English; replies are sent in the customer's chosen language.
+- 📢 Broadcast email campaigns to selected client groups, delivered in each recipient's preferred language.

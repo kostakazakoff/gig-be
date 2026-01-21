@@ -14,9 +14,9 @@ class SendEmail implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(public $email, public $message = null, public $language = 'en')
+    public function __construct(public $email, public $message = null, public $language = 'bg')
     {
-        $this->language = config('app.locale', 'en') ?? $this->language;
+        $this->language = $language;
     }
 
     /**

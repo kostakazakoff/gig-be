@@ -44,7 +44,7 @@
                             </td>
                             <td class="px-4 sm:px-6 py-2 sm:py-3">
                                 <div class="text-xs lg:text-sm">
-                                    <div class="text-blue-600">en: {{ $category->name }}</div>
+                                    <div class="text-blue-600">en: {{ $category->getTranslation('name', 'en') ?? '—' }}</div>
                                     <div class="text-red-600">bg: {{ $category->getTranslation('name', 'bg') ?? '—' }}</div>
                                 </div>
                             </td>

@@ -19,6 +19,8 @@ class UpdateCategory
             $this->createThumbnail($category, [$data['image']], 'category_thumbs');
         }
 
+        $category->save();
+
         return $category;
     }
 }

@@ -19,6 +19,8 @@ class UpdateNews
             $this->createThumbnail($news, [$data['image']], 'news_thumbs');
         }
 
+        $news->save();
+
         return $news;
     }
 }

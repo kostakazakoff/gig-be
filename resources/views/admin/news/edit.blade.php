@@ -51,7 +51,7 @@
                             id="title_en"
                             name="title_en"
                             placeholder="Въведете наслов на новината на английски"
-                            value="{{ old('title_en', $news->title) }}"
+                            value="{{ old('title_en', $news->getTranslation('title', 'en')) }}"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('title_en') border-red-500 @enderror"
                             required
                         >

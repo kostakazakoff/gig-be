@@ -22,6 +22,7 @@ class StoreClientRequest extends FormRequest
             'company'    => ['nullable', 'string', 'max:255'],
             'site'       => ['nullable', 'url', 'max:255'],
             'image'      => ['nullable', 'image', 'mimes:jpeg,jpg,png,webp', 'max:2048'],
+            'language'   => ['required', 'string', 'max:2'],
         ];
     }
 

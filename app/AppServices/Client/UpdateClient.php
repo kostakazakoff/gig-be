@@ -15,6 +15,7 @@ class UpdateClient
             'first_name' => $data['first_name'] ?? $client->first_name,
             'last_name'  => $data['last_name'] ?? $client->last_name,
             'email'      => $data['email'] ?? $client->email,
+            'language'   => $data['language'] ?? $client->language,
         ];
 
         if (array_key_exists('phone', $data)) {
@@ -31,6 +32,8 @@ class UpdateClient
         }
 
         $client->update($updateData);
+
+        $client->save();    
 
         if ($data['image'] ?? null) {
             $this->createAvatar($client, [$data['image']], 'client_avatars');

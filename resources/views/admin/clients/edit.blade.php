@@ -89,6 +89,18 @@
                     @enderror
                 </div>
 
+                <div>
+                    <label for="language" class="block text-sm font-medium text-gray-700 mb-2">Предпочитан език</label>
+                    <select id="language" name="language"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 @error('language') border-red-500 @enderror">
+                        <option value="bg" {{ old('language', $client->language) == 'bg' ? 'selected' : '' }}>Български</option>
+                        <option value="en" {{ old('language', $client->language) == 'en' ? 'selected' : '' }}>English</option>
+                    </select>
+                    @error('language')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
                 <div class="border-t pt-6 flex gap-4">
                     <button type="submit" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200 cursor-pointer">
                         Запази изменения

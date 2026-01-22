@@ -10,11 +10,12 @@ use App\Models\Inquiry;
 
 class StoreApiInquiry
 {
+    private $language;
+    private $adminMessage = '';
+
     public function __construct(
         public CheckExistingClient $checkExistingClient,
         public StoreClient $storeClient,
-        private $language = 'bg',
-        private $adminMessage = '',
     ) {
         $this->language = config('app.locale', 'bg');
     }
@@ -26,8 +27,8 @@ class StoreApiInquiry
 
         switch ($isNewClient) {
             case true:
-                $this->language = $request->language ?? 'bg';
-                $client = $this->storeClient->handle($request);
+                $this->language = $this->language ?? 'bg';
+                $client = $this->storeClient->handle($request, $this->language);
                 $this->adminMessage = __('messages.admin_new_client_message', [], 'bg');
                 break;
             case false:

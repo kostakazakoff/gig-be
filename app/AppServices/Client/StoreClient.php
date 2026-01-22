@@ -9,7 +9,7 @@ class StoreClient
 {
     use CreateAvatar;
 
-    public function handle($clientData): Client
+    public function handle($clientData, $language = 'bg'): Client
     {
         $client = Client::create([
             'first_name' => $clientData['first_name'],
@@ -19,7 +19,7 @@ class StoreClient
             'address'    => $clientData['address'] ?? null,
             'company'    => $clientData['company'] ?? null,
             'site'       => $clientData['site'] ?? null,
-            'language'   => $clientData['language'] ?? 'bg',
+            'language'   => $language,
         ]);
 
         if ($clientData['image'] ?? null) {

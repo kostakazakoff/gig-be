@@ -20,7 +20,6 @@ class StoreInquiryRequest extends FormRequest
             'phone'      => ['nullable', 'string', 'max:20'],
             'service_id' => ['nullable', 'exists:services,id'],
             'message'    => ['required', 'string'],
-            'language'   => ['required', 'string', 'in:bg,en'],
         ];
     }
 

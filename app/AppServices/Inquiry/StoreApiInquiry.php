@@ -14,10 +14,9 @@ class StoreApiInquiry
         public CheckExistingClient $checkExistingClient,
         public StoreClient $storeClient,
         private $language = 'bg',
-        private $adminLanguage = 'bg',
         private $adminMessage = '',
     ) {
-        $this->language = config('app.locale', $language);
+        $this->language = config('app.locale', 'bg');
     }
 
     public function handle(StoreInquiryRequest $request): array
@@ -27,13 +26,13 @@ class StoreApiInquiry
 
         switch ($isNewClient) {
             case true:
-                $this->language = $request->language ?? config('app.locale', 'bg');
+                $this->language = $request->language ?? 'bg';
                 $client = $this->storeClient->handle($request);
-                $this->adminMessage = __('messages.admin_new_client_message', [], $this->adminLanguage);
+                $this->adminMessage = __('messages.admin_new_client_message', [], 'bg');
                 break;
             case false:
-                $this->language = $client->language;
-                $this->adminMessage = __('messages.admin_existing_client_message', [], $this->adminLanguage);
+                $this->language = $client->language ?? 'bg';
+                $this->adminMessage = __('messages.admin_existing_client_message', [], 'bg');
                 break;
         }
 
@@ -51,7 +50,7 @@ class StoreApiInquiry
         SendEmail::dispatch($client->email, $message, $this->language, 'client');
 
         // TODO: fix admin language to be dynamic when Admin Panel with language settings is implemented
-        SendEmail::dispatch(config('mail.admin_email'), $this->adminMessage, $this->adminLanguage, 'admin');
+        SendEmail::dispatch(config('mail.admin_email'), $this->adminMessage, 'bg', 'admin');
 
         return [
             'inquiry' => $inquiry,

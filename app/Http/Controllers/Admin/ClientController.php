@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Filters\ClientFilter;
 use App\Models\Client;
 use App\Http\Requests\Client\StoreClientRequest;
 use App\Http\Requests\Client\UpdateClientRequest;
@@ -16,9 +17,9 @@ class ClientController extends Controller
     /**
      * Display a listing of clients.
      */
-    public function index()
+    public function index(ClientFilter $filter)
     {
-        $clients = Client::query()
+        $clients = Client::filter($filter)
             ->withCount('inquiries')
             ->latest()
             ->get();

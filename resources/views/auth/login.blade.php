@@ -12,7 +12,7 @@
 <body class="bg-gray-100">
     <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-md w-full space-y-8">
-            <img src="GIG_960x480.jpg" class="mx-auto h-18" alt="">
+            <img src="laravel_media/GIG_960x480.jpg" class="mx-auto h-18" alt="">
 
             <!-- Logo/Header -->
             {{-- <div>

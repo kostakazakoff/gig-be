@@ -2,20 +2,67 @@
 
 @section('content')
     <div class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div class="mb-8 flex items-start justify-between sticky top-16 z-40 bg-gray-50 py-4 mx-auto xl:max-w-7xl">
-            <div>
-                <h1 class="text-3xl font-bold text-gray-900">Клиенти</h1>
-                <p class="mt-2 text-gray-600">Управлявайте всички клиенти</p>
+        <div class="mb-8 flex flex-col sticky top-16 z-40 bg-gray-50 py-4 mx-auto xl:max-w-7xl">
+            <div class="flex items-start justify-between mb-6">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">Клиенти</h1>
+                    <p class="mt-2 text-gray-600">Управлявайте всички клиенти</p>
+                </div>
+                <div class="flex gap-3">
+                    <button id="send-message-btn" 
+                            class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded-lg transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                            disabled>
+                        ✉ НАПИШИ СЪОБЩЕНИЕ
+                    </button>
+                    <a href="{{ route('admin.clients.create') }}"
+                       class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition duration-200">
+                        + ДОБАВИ КЛИЕНТ
+                    </a>
+                </div>
             </div>
-            <div class="flex gap-3">
-                <button id="send-message-btn" 
-                        class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded-lg transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                        disabled>
-                    ✉ НАПИШИ СЪОБЩЕНИЕ
-                </button>
-                <a href="{{ route('admin.clients.create') }}"
-                   class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition duration-200">
-                    + ДОБАВИ КЛИЕНТ
+
+            {{-- Filters --}}
+            <div class="flex justify-start items-center gap-4">
+                <div class="text-gray-700">
+                    <svg class="w-5 h-5 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z">
+                        </path>
+                    </svg>
+                </div>
+
+                <form method="GET" action="{{ route('admin.clients.index') }}"
+                    class="flex items-center gap-4 mr-auto flex-wrap">
+
+                    {{-- Search Field Type --}}
+                    <select id="search_field" name="search_field"
+                        class="px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        <option value="name" @selected(request('search_field', 'name') == 'name')>Търсене по име</option>
+                        <option value="email" @selected(request('search_field') == 'email')>Търсене по email</option>
+                        <option value="phone" @selected(request('search_field') == 'phone')>Търсене по телефон</option>
+                        <option value="company" @selected(request('search_field') == 'company')>Търсене по компания</option>
+                    </select>
+
+                    {{-- Search Input --}}
+                    <input type="text" id="search" name="search" value="{{ request('search') }}"
+                        class="px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 min-w-[250px]"
+                        placeholder="Въведете текст за търсене...">
+
+                    {{-- Search Button --}}
+                    <button type="submit" 
+                        class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-sm transition-colors">
+                        Търси
+                    </button>
+                </form>
+
+                {{-- Reset Filters --}}
+                <a href="{{ route('admin.clients.index') }}"
+                    class="p-2 text-gray-600 hover:text-gray-900 transition-colors" title="Изчисти филтрите">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                        </path>
+                    </svg>
                 </a>
             </div>
         </div>

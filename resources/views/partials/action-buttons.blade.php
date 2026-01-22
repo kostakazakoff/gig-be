@@ -7,13 +7,15 @@
         </a>
 
         <!-- Delete Button -->
-        <form method="POST" action="{{ route($deleteRoute, $model) }}" class="inline">
+        <form method="POST" action="{{ route($deleteRoute, $model) }}" class="inline delete-form">
             @csrf
             @method('DELETE')
-            <button type="submit" onclick="return confirm('{{ $confirmMessage }}')"
-                class="inline-flex items-center px-3 py-1 my-1 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium cursor-pointer">
+            <button type="button" 
+                data-confirm-message="{{ $confirmMessage }}"
+                class="delete-btn inline-flex items-center px-3 py-1 my-1 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium cursor-pointer">
                 Изтрий
             </button>
         </form>
     </div>
 </td>
+

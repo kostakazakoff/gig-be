@@ -73,3 +73,4 @@
     </div>
     </div>
 @endsection
+@include('partials.delete-form-handler')

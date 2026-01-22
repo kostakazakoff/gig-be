@@ -75,12 +75,12 @@
 
                 <!-- Delete Button (Separate Form) -->
                 @if (!$unit->services()->exists())
-                <form action="{{ route('admin.units.destroy', $unit) }}" method="POST" class="mt-6 pt-6 border-t border-gray-200"
-                    onsubmit="return confirm('Сигурни ли сте, че искате да изтриете тази мерна единица?');">
+                <form action="{{ route('admin.units.destroy', $unit) }}" method="POST" class="mt-6 pt-6 border-t border-gray-200 delete-form">
                     @csrf
                     @method('DELETE')
-                    <button type="submit"
-                        class="w-full inline-flex items-center justify-center px-3 py-2 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium cursor-pointer">
+                    <button type="button" 
+                        class="delete-btn w-full inline-flex items-center justify-center px-3 py-2 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium cursor-pointer"
+                        data-confirm-message="Сигурни ли сте, че искате да изтриете тази мерна единица?">
                         Изтрий мерна единица
                     </button>
                 </form>
@@ -89,3 +89,5 @@
         </div>
     </div>
 @endsection
+
+@include('partials.delete-form-handler')

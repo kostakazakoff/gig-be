@@ -35,11 +35,14 @@
 (function() {
     // Delete image function
     window.deleteExistingImage = function(modelId, mediaId, confirmMessage) {
-        if (!confirm(confirmMessage)) {
-            return;
-        }
-
         const imageElement = document.querySelector('[data-media-id="' + mediaId + '"]');
+        
+        showConfirmModal(confirmMessage, function() {
+            performImageDelete(modelId, mediaId, imageElement);
+        });
+    };
+    
+    function performImageDelete(modelId, mediaId, imageElement) {
         if (imageElement) {
             imageElement.style.opacity = '0.5';
             imageElement.style.pointerEvents = 'none';

@@ -177,16 +177,19 @@
             </form>
 
             <!-- Delete Button (Separate Form) -->
-            <form action="{{ route('admin.projects.destroy', $project) }}" method="POST" class="mt-6 pt-6 border-t border-gray-200"
-                onsubmit="return confirm('Сигурни ли сте, че искате да изтриете този проект?');">
+            <form action="{{ route('admin.projects.destroy', $project) }}" method="POST" class="mt-6 pt-6 border-t border-gray-200 delete-form">
                 @csrf
                 @method('DELETE')
-                <button type="submit"
-                    class="w-full inline-flex items-center justify-center px-3 py-2 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium">
+                <button type="button" 
+                    class="delete-btn w-full inline-flex items-center justify-center px-3 py-2 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium"
+                    data-confirm-message="Сигурни ли сте, че искате да изтриете този проект?">
                     Изтрий проект
                 </button>
             </form>
         </div>
     </div>
 </div>
+
 @endsection
+
+@include('partials.delete-form-handler')

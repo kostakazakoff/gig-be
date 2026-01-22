@@ -107,17 +107,14 @@
 
     if (deleteBtn) {
         deleteBtn.addEventListener('click', () => {
-            if (!confirm('Сигурни ли сте, че искате да изтриете това изображение?')) {
-                return;
-            }
+            showConfirmModal('Сигурни ли сте, че искате да изтриете това изображение?', function() {
+                if (imageWrapper) {
+                    imageWrapper.style.opacity = '0.5';
+                    imageWrapper.style.pointerEvents = 'none';
+                }
 
-            if (imageWrapper) {
-                imageWrapper.style.opacity = '0.5';
-                imageWrapper.style.pointerEvents = 'none';
-            }
-
-            fetch('{{ $deleteUrl }}', {
-                method: 'DELETE',
+                fetch('{{ $deleteUrl }}', {
+                    method: 'DELETE',
                 headers: {
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                     'Accept': 'application/json',
@@ -152,6 +149,7 @@
                     imageWrapper.style.opacity = '1';
                     imageWrapper.style.pointerEvents = 'auto';
                 }
+            });
             });
         });
     }

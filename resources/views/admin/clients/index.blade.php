@@ -337,3 +337,5 @@
         });
     </script>
 @endsection
+
+@include('partials.delete-form-handler')

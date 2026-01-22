@@ -194,6 +194,9 @@
             </p>
         </div>
     </footer>
+
+    <!-- Confirm Modal -->
+    @include('partials.confirm-modal')
 </body>
 
 </html>

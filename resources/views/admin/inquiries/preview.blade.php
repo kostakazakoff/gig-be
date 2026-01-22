@@ -35,15 +35,18 @@
             </div>
         </div>
 
-        <form action="{{ route('admin.inquiries.destroy', $inquiry) }}" method="POST" class="mt-6"
-            onsubmit="return confirm('Сигурни ли сте, че искате да изтриете това запитване?');">
+        <form action="{{ route('admin.inquiries.destroy', $inquiry) }}" method="POST" class="mt-6 delete-form">
             @csrf
             @method('DELETE')
-            <button type="submit"
-                class="w-full inline-flex items-center justify-center px-4 py-2 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium cursor-pointer">
+            <button type="button" 
+                class="delete-btn w-full inline-flex items-center justify-center px-4 py-2 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium cursor-pointer"
+                data-confirm-message="Сигурни ли сте, че искате да изтриете това запитване?">
                 Изтрий запитване
             </button>
         </form>
     </div>
 </div>
+
 @endsection
+
+@include('partials.delete-form-handler')

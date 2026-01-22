@@ -135,12 +135,12 @@
             </form>
 
             <!-- Delete Button (Separate Form) -->
-            <form action="{{ route('admin.categories.destroy', $category) }}" method="POST" class="mt-6 pt-6 border-t border-gray-200"
-                onsubmit="return confirm('Сигурни ли сте, че искате да изтриете тази категория?');">
+            <form action="{{ route('admin.categories.destroy', $category) }}" method="POST" class="mt-6 pt-6 border-t border-gray-200 delete-form">
                 @csrf
                 @method('DELETE')
-                <button type="submit"
-                    class="w-full inline-flex items-center justify-center px-3 py-2 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium cursor-pointer">
+                <button type="button" 
+                    class="delete-btn w-full inline-flex items-center justify-center px-3 py-2 bg-red-50 text-red-700 border border-red-300 rounded hover:bg-red-100 transition text-sm font-medium cursor-pointer"
+                    data-confirm-message="Сигурни ли сте, че искате да изтриете тази категория?">
                     Изтрий категория
                 </button>
             </form>
@@ -149,3 +149,5 @@
 </div>
 
 @endsection
+
+@include('partials.delete-form-handler')

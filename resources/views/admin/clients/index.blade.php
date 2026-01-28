@@ -219,7 +219,7 @@
                 alert('Моля, въведете съобщение на български');
                 return;
             }
-            fetch('{{ route('translate') }}', {
+            fetch('{{ route('admin.translate') }}', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

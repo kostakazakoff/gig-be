@@ -17,7 +17,6 @@ Route::get('/admin', function () {
     return redirect()->route('login');
 });
 
-Route::post('/translate', [\App\Http\Controllers\TranslationController::class, 'translate'])->name('translate');
 
 Route::middleware(['auth'])->prefix('admin/profile')->name('auth.')->group(function () {
     Route::get('/', [\App\Http\Controllers\Admin\ProfileController::class, 'edit'])->name('edit');
@@ -93,4 +92,5 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
         Route::get('/{inquiry}', [\App\Http\Controllers\Admin\InquiryController::class, 'show'])->name('show');
         Route::delete('/{inquiry}', [\App\Http\Controllers\Admin\InquiryController::class, 'destroy'])->name('destroy');
     });
+    Route::post('/translate', [\App\Http\Controllers\TranslationController::class, 'translate'])->name('translate');
 });

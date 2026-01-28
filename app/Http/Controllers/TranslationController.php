@@ -18,7 +18,7 @@ class TranslationController extends Controller
         $translatedText = $deeplClient->translateText($text, null, 'en-US');
 
         return response()->json([
-            'translatedText' => $translatedText
+            'translatedText' => $translatedText->text,
         ]);
     }
 }

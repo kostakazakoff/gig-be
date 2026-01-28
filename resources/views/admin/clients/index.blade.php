@@ -233,7 +233,7 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.translatedText) {
-                        messageEn.value = data.translatedText.text;
+                        messageEn.value = data.translatedText;
                     } else {
                         alert('Грешка при превода');
                     }

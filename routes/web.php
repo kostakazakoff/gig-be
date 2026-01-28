@@ -17,6 +17,8 @@ Route::get('/admin', function () {
     return redirect()->route('login');
 });
 
+Route::post('/translate', [\App\Http\Controllers\TranslationController::class, 'translate'])->name('translate');
+
 Route::middleware(['auth'])->prefix('admin/profile')->name('auth.')->group(function () {
     Route::get('/', [\App\Http\Controllers\Admin\ProfileController::class, 'edit'])->name('edit');
     Route::put('/', [\App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('update');

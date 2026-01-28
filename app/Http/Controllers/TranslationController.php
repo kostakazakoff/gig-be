@@ -13,7 +13,10 @@ class TranslationController extends Controller
         $text = $request->input('text');
 
         $authKey = env('DEEPL_API_KEY');
-        $deeplClient = new DeepLClient($authKey);
+        $deeplClient = new DeepLClient(
+            $authKey,
+            ['base_uri' => env('DEEPL_URI'),]
+        );
 
         $translatedText = $deeplClient->translateText($text, null, 'en-US');
 

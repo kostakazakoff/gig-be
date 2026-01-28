@@ -18,10 +18,10 @@ class TranslationController extends Controller
             ['base_uri' => env('DEEPL_URI'),]
         );
 
-        $translatedText = $deeplClient->translateText($text, null, 'en-US');
+        $translated = $deeplClient->translateText($text, null, 'en-US');
 
         return response()->json([
-            'translatedText' => $translatedText->text,
+            'translatedText' => $translated->text,
         ]);
     }
 }

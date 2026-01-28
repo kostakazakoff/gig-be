@@ -54,18 +54,25 @@
                     </div>
 
                     <!-- Name en -->
-                    <div class="mb-4">
-                        <label for="name_en" class="block text-sm font-medium text-gray-700 mb-2">
-                            Име (Английски)
-                        </label>
-                        <input type="text" id="name_en" name="name_en"
-                            placeholder="Въведете име на категория на английски" value="{{ old('name_en') }}"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('name_en') border-red-500 @enderror"
-                            required>
-                        @error('name_en')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
+                    <div class="mb-4 flex gap-2 items-end">
+                        <div class="flex-1">
+                            <label for="name_en" class="block text-sm font-medium text-gray-700 mb-2">
+                                Име (Английски)
+                            </label>
+                            <input type="text" id="name_en" name="name_en"
+                                placeholder="Въведете име на категория на английски" value="{{ old('name_en') }}"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('name_en') border-red-500 @enderror"
+                                required>
+                            @error('name_en')
+                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
                     </div>
+
+                    <button type="button" id="translate-name-btn"
+                            class="h-10 px-3 bg-blue-200 hover:bg-blue-300 text-gray-800 font-medium rounded-lg transition duration-200 w-full cursor-pointer">
+                            Преведи
+                        </button>
 
                     <!-- Description Fields Section -->
                     <div class="border-t pt-6">
@@ -86,22 +93,28 @@
                     </div>
 
                     <!-- Description en -->
-                    <div class="mb-4">
-                        <label for="description_en" class="block text-sm font-medium text-gray-700 mb-2">
-                            Описание (Английски)
-                        </label>
-                        <textarea id="description_en" name="description_en" placeholder="Въведете описание на английски" rows="4"
-                            value="{{ old('description_en') }}"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('description_en') border-red-500 @enderror">{{ old('description_en') }}</textarea>
-                        @error('description_en')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
+                    <div class="mb-4 flex gap-2 items-end">
+                        <div class="flex-1">
+                            <label for="description_en" class="block text-sm font-medium text-gray-700 mb-2">
+                                Описание (Английски)
+                            </label>
+                            <textarea id="description_en" name="description_en" placeholder="Въведете описание на английски" rows="4"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('description_en') border-red-500 @enderror">{{ old('description_en') }}</textarea>
+                            @error('description_en')
+                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
                     </div>
+
+                    <button type="button" id="translate-desc-btn"
+                        class="h-10 px-3 bg-blue-200 hover:bg-blue-300 text-gray-800 font-medium rounded-lg transition duration-200 w-full cursor-pointer">
+                        Преведи
+                    </button>
 
                     <!-- Action Buttons -->
                     <div class="border-t pt-6 flex gap-4">
                         <button type="submit"
-                            class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200">
+                            class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200 cursor-pointer">
                             Създай Категория
                         </button>
                         <a href="{{ route('admin.categories.index') }}"
@@ -114,5 +127,18 @@
         </div>
     </div>
 
-    {{-- Drag & drop image script is now initialized globally via resources/js/app.js --}}
+
+    {{-- Translation Script --}}
+
+    @include('partials.translation-script', [
+        'btnSelector' => '#translate-name-btn',
+        'bgFieldSelector' => '#name_bg',
+        'enFieldSelector' => '#name_en',
+    ]);
+
+    @include('partials.translation-script', [
+        'btnSelector' => '#translate-desc-btn',
+        'bgFieldSelector' => '#description_bg',
+        'enFieldSelector' => '#description_en',
+    ]);
 @endsection

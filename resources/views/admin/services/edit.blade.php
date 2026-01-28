@@ -52,7 +52,7 @@
         <!-- Bulgarian Name -->
         <div class="mb-4">
             <label class="block text-gray-700 font-semibold mb-2">Име (Български)</label>
-            <input type="text" name="name_bg" value="{{ old('name_bg', $service->getTranslation('name', 'bg'))}}" class="w-full border rounded px-3 py-2 @error('name_bg') border-red-500 @enderror" required>
+            <input id="name_bg" type="text" name="name_bg" value="{{ old('name_bg', $service->getTranslation('name', 'bg'))}}" class="w-full border rounded px-3 py-2 @error('name_bg') border-red-500 @enderror" required>
             @error('name_bg')
                 <span class="text-red-500 text-sm">{{ $message }}</span>
             @enderror
@@ -61,29 +61,39 @@
         <!-- English Name -->
         <div class="mb-4">
             <label class="block text-gray-700 font-semibold mb-2">Име (Английски)</label>
-            <input type="text" name="name_en" value="{{ old('name_en', $service->getTranslation('name', 'en')) }}" class="w-full border rounded px-3 py-2 @error('name_en') border-red-500 @enderror" required>
+            <input id="name_en" type="text" name="name_en" value="{{ old('name_en', $service->getTranslation('name', 'en')) }}" class="w-full border rounded px-3 py-2 @error('name_en') border-red-500 @enderror" required>
             @error('name_en')
                 <span class="text-red-500 text-sm">{{ $message }}</span>
             @enderror
         </div>
 
+            <button type="button" id="translate-name-btn"
+                class="h-10 px-3 bg-blue-200 hover:bg-blue-300 text-gray-800 font-medium rounded-lg transition duration-200 w-full cursor-pointer">
+                Преведи
+            </button>
+
         <!-- Bulgarian Description -->
         <div class="mb-6">
             <label class="block text-gray-700 font-semibold mb-2">Описание (Български)</label>
-            <textarea name="description_bg" class="w-full border rounded px-3 py-2 @error('description_bg') border-red-500 @enderror" rows="4">{{ old('description_bg', $service->getTranslation('description', 'bg')) }}</textarea>
+            <textarea id="description_bg" name="description_bg" class="w-full border rounded px-3 py-2 @error('description_bg') border-red-500 @enderror" rows="4">{{ old('description_bg', $service->getTranslation('description', 'bg')) }}</textarea>
             @error('description_bg')
                 <span class="text-red-500 text-sm">{{ $message }}</span>
             @enderror
         </div>
-
+        
         <!-- English Description -->
         <div class="mb-4">
             <label class="block text-gray-700 font-semibold mb-2">Описание (Английски)</label>
-            <textarea name="description_en" class="w-full border rounded px-3 py-2 @error('description_en') border-red-500 @enderror" rows="4">{{ old('description_en', $service->getTranslation('description', 'en')) }}</textarea>
+            <textarea id="description_en" name="description_en" class="w-full border rounded px-3 py-2 @error('description_en') border-red-500 @enderror" rows="4">{{ old('description_en', $service->getTranslation('description', 'en')) }}</textarea>
             @error('description_en')
                 <span class="text-red-500 text-sm">{{ $message }}</span>
             @enderror
         </div>
+
+            <button type="button" id="translate-desc-btn"
+                class="h-10 px-3 bg-blue-200 hover:bg-blue-300 text-gray-800 font-medium rounded-lg transition duration-200 w-full cursor-pointer">
+                Преведи
+            </button>
 
         <!-- Price From -->
         <div class="mb-4">
@@ -141,3 +151,17 @@
 @endsection
 
 @include('partials.delete-form-handler')
+
+{{-- Translation Script --}}
+
+@include('partials.translation-script', [
+    'btnSelector' => '#translate-name-btn',
+    'bgFieldSelector' => '#name_bg',
+    'enFieldSelector' => '#name_en',
+]);
+
+@include('partials.translation-script', [
+    'btnSelector' => '#translate-desc-btn',
+    'bgFieldSelector' => '#description_bg',
+    'enFieldSelector' => '#description_en',
+]);

@@ -212,7 +212,6 @@
     </div>
 
     <script>
-        
         // Translate message-bg to message-en
         document.getElementById('translate-btn').addEventListener('click', function() {
             const messageBgText = messageBg.value.trim();

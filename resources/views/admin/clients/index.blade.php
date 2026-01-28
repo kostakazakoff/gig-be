@@ -201,7 +201,7 @@
                 </button>
                 <button id="translate-btn"
                     class="px-6 py-2 bg-blue-200 hover:bg-gray-300 text-gray-800 font-medium rounded-lg transition duration-200">
-                    Преведи
+                    Преведи на английски
                 </button>
                 <button id="send-btn"
                     class="px-6 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition duration-200">
@@ -212,6 +212,7 @@
     </div>
 
     <script>
+        
         // Translate message-bg to message-en
         document.getElementById('translate-btn').addEventListener('click', function() {
             const messageBgText = messageBg.value.trim();
@@ -231,7 +232,6 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Translation response:', data);
                     if (data.translatedText) {
                         messageEn.value = data.translatedText.text;
                     } else {

@@ -75,6 +75,11 @@
                         @enderror
                     </div>
 
+                    <button type="button" id="translate-title-btn"
+                        class="h-10 px-3 bg-blue-200 hover:bg-blue-300 text-gray-800 font-medium rounded-lg transition duration-200 w-full cursor-pointer">
+                        Преведи
+                    </button>
+
                     <!-- Description Fields Section -->
                     <div class="border-t pt-6">
                         <h3 class="text-lg font-semibold text-gray-900 mb-4">Описания</h3>
@@ -104,6 +109,11 @@
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
+
+                    <button type="button" id="translate-desc-btn"
+                        class="h-10 px-3 bg-blue-200 hover:bg-blue-300 text-gray-800 font-medium rounded-lg transition duration-200 w-full cursor-pointer">
+                        Преведи
+                    </button>
 
                     <!-- Additional Fields -->
                     <div class="border-t pt-6">
@@ -166,3 +176,17 @@
 @endsection
 
 @include('partials.delete-form-handler')
+
+{{-- Translation Script --}}
+
+@include('partials.translation-script', [
+    'btnSelector' => '#translate-title-btn',
+    'bgFieldSelector' => '#title_bg',
+    'enFieldSelector' => '#title_en',
+]);
+
+@include('partials.translation-script', [
+    'btnSelector' => '#translate-desc-btn',
+    'bgFieldSelector' => '#description_bg',
+    'enFieldSelector' => '#description_en',
+]);

@@ -70,9 +70,9 @@
                     </div>
 
                     <button type="button" id="translate-name-btn"
-                            class="h-10 px-3 bg-blue-200 hover:bg-blue-300 text-gray-800 font-medium rounded-lg transition duration-200 w-full cursor-pointer">
-                            Преведи
-                        </button>
+                        class="h-10 px-3 bg-blue-200 hover:bg-blue-300 text-gray-800 font-medium rounded-lg transition duration-200 w-full cursor-pointer">
+                        Преведи
+                    </button>
 
                     <!-- Description Fields Section -->
                     <div class="border-t pt-6">
@@ -126,19 +126,18 @@
             </div>
         </div>
     </div>
-
-
-    {{-- Translation Script --}}
-
-    @include('partials.translation-script', [
-        'btnSelector' => '#translate-name-btn',
-        'bgFieldSelector' => '#name_bg',
-        'enFieldSelector' => '#name_en',
-    ]);
-
-    @include('partials.translation-script', [
-        'btnSelector' => '#translate-desc-btn',
-        'bgFieldSelector' => '#description_bg',
-        'enFieldSelector' => '#description_en',
-    ]);
 @endsection
+
+{{-- Translation Script --}}
+
+@include('partials.translation-script', [
+    'btnSelector' => '#translate-name-btn',
+    'bgFieldSelector' => '#name_bg',
+    'enFieldSelector' => '#name_en',
+]);
+
+@include('partials.translation-script', [
+    'btnSelector' => '#translate-desc-btn',
+    'bgFieldSelector' => '#description_bg',
+    'enFieldSelector' => '#description_en',
+]);

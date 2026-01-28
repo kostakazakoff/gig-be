@@ -41,7 +41,7 @@
                     <div>
                         <h3 class="text-lg font-semibold text-gray-900 mb-4">Имена на категория</h3>
 
-                        <!-- Ng -->
+                        <!-- Name bg -->
                         <div>
                             <label for="name_bg" class="block text-sm font-medium text-gray-700 mb-2">
                                 Име (Български)
@@ -72,11 +72,16 @@
                         @enderror
                     </div>
 
+                    <button type="button" id="translate-name-btn"
+                        class="h-10 px-3 bg-blue-200 hover:bg-blue-300 text-gray-800 font-medium rounded-lg transition duration-200 w-full cursor-pointer">
+                        Преведи
+                    </button>
+
                     <!-- Description Fields Section -->
                     <div class="border-t pt-6">
                         <h3 class="text-lg font-semibold text-gray-900 mb-4">Описания</h3>
 
-                        <!-- Dption bg -->
+                        <!-- De bg -->
                         <div>
                             <label for="description_bg" class="block text-sm font-medium text-gray-700 mb-2">
                                 Описание (Български)
@@ -100,6 +105,11 @@
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
+
+                    <button type="button" id="translate-desc-btn"
+                        class="h-10 px-3 bg-blue-200 hover:bg-blue-300 text-gray-800 font-medium rounded-lg transition duration-200 w-full cursor-pointer">
+                        Преведи
+                    </button>
 
                     <!-- Action Buttons -->
                     <div class="border-t pt-6 flex gap-4">
@@ -131,3 +141,17 @@
 @endsection
 
 @include('partials.delete-form-handler')
+
+{{-- Translation Script --}}
+
+@include('partials.translation-script', [
+    'btnSelector' => '#translate-name-btn',
+    'bgFieldSelector' => '#name_bg',
+    'enFieldSelector' => '#name_en',
+]);
+
+@include('partials.translation-script', [
+    'btnSelector' => '#translate-desc-btn',
+    'bgFieldSelector' => '#description_bg',
+    'enFieldSelector' => '#description_en',
+]);

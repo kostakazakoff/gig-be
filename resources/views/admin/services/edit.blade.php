@@ -49,15 +49,6 @@
             ])
         </div>
 
-        <!-- English Name -->
-        <div class="mb-4">
-            <label class="block text-gray-700 font-semibold mb-2">Име (Английски)</label>
-            <input type="text" name="name_en" value="{{ old('name_en', $service->getTranslation('name', 'en')) }}" class="w-full border rounded px-3 py-2 @error('name_en') border-red-500 @enderror" required>
-            @error('name_en')
-                <span class="text-red-500 text-sm">{{ $message }}</span>
-            @enderror
-        </div>
-
         <!-- Bulgarian Name -->
         <div class="mb-4">
             <label class="block text-gray-700 font-semibold mb-2">Име (Български)</label>
@@ -67,11 +58,11 @@
             @enderror
         </div>
 
-        <!-- English Description -->
+        <!-- English Name -->
         <div class="mb-4">
-            <label class="block text-gray-700 font-semibold mb-2">Описание (Английски)</label>
-            <textarea name="description_en" class="w-full border rounded px-3 py-2 @error('description_en') border-red-500 @enderror" rows="4">{{ old('description_en', $service->getTranslation('description', 'en')) }}</textarea>
-            @error('description_en')
+            <label class="block text-gray-700 font-semibold mb-2">Име (Английски)</label>
+            <input type="text" name="name_en" value="{{ old('name_en', $service->getTranslation('name', 'en')) }}" class="w-full border rounded px-3 py-2 @error('name_en') border-red-500 @enderror" required>
+            @error('name_en')
                 <span class="text-red-500 text-sm">{{ $message }}</span>
             @enderror
         </div>
@@ -81,6 +72,15 @@
             <label class="block text-gray-700 font-semibold mb-2">Описание (Български)</label>
             <textarea name="description_bg" class="w-full border rounded px-3 py-2 @error('description_bg') border-red-500 @enderror" rows="4">{{ old('description_bg', $service->getTranslation('description', 'bg')) }}</textarea>
             @error('description_bg')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <!-- English Description -->
+        <div class="mb-4">
+            <label class="block text-gray-700 font-semibold mb-2">Описание (Английски)</label>
+            <textarea name="description_en" class="w-full border rounded px-3 py-2 @error('description_en') border-red-500 @enderror" rows="4">{{ old('description_en', $service->getTranslation('description', 'en')) }}</textarea>
+            @error('description_en')
                 <span class="text-red-500 text-sm">{{ $message }}</span>
             @enderror
         </div>

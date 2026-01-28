@@ -30,7 +30,19 @@
                         <p class="mt-1 text-xs text-gray-500">Уникален идентификатор за тази мерна единица (малки букви, нижни черти)</p>
                     </div>
 
-                    <!-- No service selection here; Services choose Unit -->
+                    <!-- Name (bg) -->
+                    <div class="mb-6">
+                        <label for="name_bg" class="block text-sm font-medium text-gray-700 mb-2">
+                            Наименование (Български) <span class="text-red-500">*</span>
+                        </label>
+                        <input type="text" name="name_bg" id="name_bg"
+                            value="{{ old('name_bg', $unit->getTranslation('name', 'bg')) }}"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('name_bg') border-red-500 @enderror"
+                            placeholder="н.p., На час" required>
+                        @error('name_bg')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
 
                     <!-- Name (en) -->
                     <div class="mb-6">
@@ -42,20 +54,6 @@
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('name_en') border-red-500 @enderror"
                             placeholder="н.p., Per Hour" required>
                         @error('name_en')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <!-- Name (bg) -->
-                    <div class="mb-6">
-                        <label for="name_bg" class="block text-sm font-medium text-gray-700 mb-2">
-                            Наименование (Български) <span class="text-red-500">*</span>
-                        </label>
-                        <input type="text" name="name_bg" id="name_bg"
-                            value="{{ old('name_bg', $unit->getTranslation('name', 'bg')) }}"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('name_bg') border-red-500 @enderror"
-                            placeholder="н.p., На час" required>
-                        @error('name_bg')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
